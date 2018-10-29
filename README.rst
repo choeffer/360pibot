@@ -2,7 +2,7 @@ Python 3 implementation for programming an ActivityBot 360° Robot Kit 360_kit_ 
 a Raspberry Pi. The modules of the implementation are using the pigpio_ module 
 to control the GPIOs of the Raspberry Pi. No other external module is needed.
 
-The documentation is on readthedocs.io Documentation_ .
+The Documentation_ is hosted on `Read the Docs`_ .
 
 The modules also enable remote controling the robots GPIOs. This enables 
 executing the scripts on a laptop/computer and over e.g. WLAN remote controling the Raspberry Pi 
@@ -25,4 +25,4 @@ References
 .. _pigpio: https://pypi.org/project/pigpio/
 .. _VNC: https://www.raspberrypi.org/documentation/remote-access/vnc/
 .. _Documentation: https://360pibot.readthedocs.io/
-
+.. _`Read the Docs`: https://readthedocs.org/

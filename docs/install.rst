@@ -202,7 +202,7 @@ Hotspot and Remote access
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Another step which improves programming the Raspberry Pi is to enable a hotspot on it, 
-see pi_hotpsot_ , so that the Raspberry Pi can be accessed remotely. This is recommended 
+see pi_hotspot_ , so that the Raspberry Pi can be accessed remotely. This is recommended 
 before proceeding using it. This will not be covered here because the offical documentation 
 is good and is updated regularly to match the latest Raspbian changes.
 
@@ -239,7 +239,7 @@ References
 .. _Sphinx: https://www.sphinx-doc.org/
 .. _`Read the Docs`: https://readthedocs.org/
 .. _`pigpio_download`: http://abyz.me.uk/rpi/pigpio/download.html
-.. _pi_hotpsot: https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
+.. _pi_hotspot: https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
 .. _VNC: https://www.raspberrypi.org/documentation/remote-access/vnc/
 .. _remote_pin : http://gpiozero.readthedocs.io/en/stable/remote_gpio.html
 .. _docs1: https://realpython.com/documenting-python-code/
