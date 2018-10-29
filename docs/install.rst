@@ -117,7 +117,7 @@ modified as needed for e.g. documenting own projects based on this or if
 extending functionality of the modules and document them. The standard docstring format 
 (ReStructuredText (reST)) is used. The used theme is from `Read the Docs`_ 
 where also the documentation is hosted. Therefore, two more modules are needed 
-if beeing able to modify or extend the documentation. How to use Sphinx is not 
+for beeing able to modify or extend the documentation. How to use Sphinx is not 
 part of this documentation. But there are good instroductions and tutorials 
 which provide a good starting point, see docs1_ , docs2_ , docs3_ and docs4_ .
 
