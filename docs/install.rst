@@ -126,7 +126,7 @@ which provide a good starting point, see docs1_ , docs2_ , docs3_ and docs4_ .
     For the creation of the docs ``conf.py`` , ``index.rst`` , and folder structure etc. 
     the ``sphinx-quickstart`` command was used.
 
-..note::
+.. note::
 
     The created ``docs/build`` folder is added in the .gitignore file and will therefore 
     not be tracked by git. This folder contains the output after building the docs.
