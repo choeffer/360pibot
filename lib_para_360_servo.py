@@ -218,20 +218,24 @@ class read_pwm:
 
 class calibrate_pwm:
     """
-    Calibrates Parallax Feedback 360° High-Speed servo with the help of the :class:`read_pwm` class.
+    Calibrates Parallax Feedback 360° High-Speed Servo with the help of the :class:`read_pwm` class.
 
     This class helps to find out the min and max duty cycle of the feedback signal
-    of the servo, so that this values can be used in :class:`lib_motion` to have 
+    of the servo. This values are then needed in :class:`lib_motion` to have 
     a more precise measurement of the position. The experience has shown that each
     servo has slightly different min/max duty cycle values, different than the once 
-    provided in the data sheet 360_data_sheet_ .
+    provided in the data sheet 360_data_sheet_ . Values smaller and bigger than the 
+    printed out once as "duty_cycle_min/duty_cycle_max" are outliers and should 
+    therefore not be considered. This can be seen in printout of smallest/biggest 
+    250 values, there are sometimes a few outliers. Compare the printouts to get a 
+    feeling for it, therefore, run it serveral times.
 
     .. note::
         **IMPORTANT** The robot wheels must be able to rotate free in the air for calibration.
         **ALSO IMPORTANT** Rotating forward or backward might sometimes give slightly 
-        different results for min/max duty cycle! Chose the smallest value out of the forward 
-        and backward runs and the biggest value out of the forward and backward runs. 
-        Do both directions three times for each wheel with speed = 0.2 or -0.2 and then
+        different results for min/max duty cycle! Chose the smallest value and the 
+        biggest value out of the forward and backward runs. Do both directions three 
+        times for each wheel, with speed = 0.2 and -0.2, and then 
         chose the values. The speed has to be set manually, see :ref:`Examples`.
 
     :param pigpio.pi pi: 
@@ -241,7 +245,7 @@ class calibrate_pwm:
         To this GPIO the feedback wire of the servo has to be connected.
     :param int,float measurement_time:
         Time in seconds for how long duty cycle values will be collected, so for how long the
-        measurement will run. **Default:** 120.
+        measurement will be done. **Default:** 120.
     :returns: Printouts of different measurements
 
     At the moment, the period for a 910 Hz signal is hardcoded, as in :meth:`read_pwm` .
@@ -271,7 +275,6 @@ class calibrate_pwm:
         #http://abyz.me.uk/rpi/pigpio/python.html#callback
         self.cb = self.pi.callback(user_gpio=self.gpio, edge=pigpio.EITHER_EDGE, func=self.cbf)
         
-        #measurement time
         print('{}{}{}'.format('Starting measurements for: ', measurement_time, ' seconds.'))
         print('----------------------------------------------------------')
         time.sleep(measurement_time)
@@ -293,12 +296,9 @@ class calibrate_pwm:
         print('{} {}'.format('Ascending counted, sorted and rounded distinct differences between duty cycle values:',counted_sorted_list))
         print('----------------------------------------------------------')
 
-        # Median is chosen, because the biggest and smallest values are needed, and not an
-        # avarage of the smallest and biggest values of the selection. 
-        # Values smaller and bigger than the printed out once as "duty_cycle_min/duty_cycle_max"
-        # are outliers and should therefore not be considered. This can be seen in printout
-        # of smallest/biggest 250 values, there are sometimes a few outliers.
-        # Compare the printouts to get a feeling for it and also run it serveral times.
+        #Median and median_high/median_low are chosen, because the biggest 
+        #and smallest values are needed, and not an avarage of the smallest 
+        #and biggest values of the selection. 
         #https://docs.python.org/3/library/statistics.html#statistics.median
         print('{} {}'.format('Smallest 250 values:', self.list_duty_cycles[:250]))
         self.duty_cycle_min = statistics.median_high(self.list_duty_cycles[:20])
@@ -343,21 +343,16 @@ if __name__ == "__main__":
     gpio_l_w = 17
     gpio_r_w = 27
     
-    pi=pigpio.pi()
+    pi = pigpio.pi()
 
     #### Example 1 - Calibrate servos, speed  = 0.2 or -0.2
-    # The measured values are needed in the lib_motion.py for each 360 degree servo.
     # chose gpio_l_w/gpio_l_r (left wheel) accordingly gpio_r_w/gpio_r_r (right wheel)
-    # IMPORTANT, the robot wheels must be able to rotate free in the air for this.
-    # ALSO IMPORTANT rotating forward or backward might sometimes give slightly 
-    # different results! Chose the smallest values of forward and backward runs and the
-    # biggest of forward and backward runs. Do both directions three times for each wheel.
 
     servo = write_pwm(pi = pi, gpio=gpio_r_w, min_pw = 1280, max_pw = 1720)
     #buffer time for initializing everything
     time.sleep(1)
     servo.set_speed(-0.2)
-    wheel=calibrate_pwm(pi = pi, gpio = gpio_r_r)
+    wheel = calibrate_pwm(pi = pi, gpio = gpio_r_r)
     servo.set_speed(0)
     
     # #### Example 2 - How granular speed changes?

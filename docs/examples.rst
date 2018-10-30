@@ -43,21 +43,16 @@ are later needed in :ref:`lib_motion` . For more informations, see
     gpio_l_w = 17
     gpio_r_w = 27
     
-    pi=pigpio.pi()
+    pi = pigpio.pi()
 
     #### Example 1 - Calibrate servos, speed  = 0.2 or -0.2
-    # The measured values are needed in the lib_motion.py for each 360 degree servo.
     # chose gpio_l_w/gpio_l_r (left wheel) accordingly gpio_r_w/gpio_r_r (right wheel)
-    # IMPORTANT, the robot wheels must be able to rotate free in the air for this.
-    # ALSO IMPORTANT rotating forward or backward might sometimes give slightly 
-    # different results! Chose the smallest values of forward and backward runs and the
-    # biggest of forward and backward runs. Do both directions three times for each wheel.
 
     servo = write_pwm(pi = pi, gpio=gpio_r_w, min_pw = 1280, max_pw = 1720)
     #buffer time for initializing everything
     time.sleep(1)
     servo.set_speed(-0.2)
-    wheel=calibrate_pwm(pi = pi, gpio = gpio_r_r)
+    wheel = calibrate_pwm(pi = pi, gpio = gpio_r_r)
     servo.set_speed(0)
 
     #http://abyz.me.uk/rpi/pigpio/python.html#stop
