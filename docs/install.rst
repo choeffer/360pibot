@@ -115,7 +115,7 @@ Installing modules for the documentation
 The whole documentation is done with Sphinx_ and can be extended or 
 modified as needed for e.g. documenting own projects based on this or if 
 extending functionality of the modules and document them. The standard docstring format 
-(ReStructuredText (reST)) is used. The used theme is from `Read the Docs`_ 
+(ReStructuredText_ (reST)) is used. The used theme is from `Read the Docs`_ 
 where also the documentation is hosted. Therefore, two more modules are needed 
 for beeing able to modify or extend the documentation. How to use Sphinx is not 
 part of this documentation. But there are good instroductions and tutorials 
@@ -242,6 +242,7 @@ References
 .. _pi_hotspot: https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
 .. _VNC: https://www.raspberrypi.org/documentation/remote-access/vnc/
 .. _remote_pin : http://gpiozero.readthedocs.io/en/stable/remote_gpio.html
+.. _ReStructuredText: http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
 .. _docs1: https://realpython.com/documenting-python-code/
 .. _docs2: https://docs.python-guide.org/writing/documentation/
 .. _docs3: https://www.youtube.com/watch?v=0ROZRNZkPS8

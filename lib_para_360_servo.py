@@ -66,7 +66,7 @@ class write_pwm:
         This method allows setting the pulsewidth of the PWM directly. This can be used to
         test which ``min_pw`` and ``max_pw`` are appropriate. For this the ``min_pw`` and ``max_pw``
         need to be set very small and big so that they do not limit the set pulsewidth. Because normally
-        they are set to protect the servo, by limiting the pulsewidth to a certain range.
+        they are used to protect the servo, by limiting the pulsewidth to a certain range.
 
         :param int,float pulsewidth:
             Pulsewidth of the PWM signal. Will be limited to ``min_pw`` and ``max_pw``.
@@ -165,9 +165,16 @@ class read_pwm:
 
         #change to low (a falling edge)
         if level == 0:
-            #if first edge is a falling one the following code will not work
+            #if first edge is a falling one the following code will fail
             #a try first time is faster than an if-statement every time 
             try:
+                #http://abyz.me.uk/rpi/pigpio/python.html#callback
+                # tick        32 bit    The number of microseconds since boot
+                #                       WARNING: this wraps around from
+                #                       4294967295 to 0 roughly every 72 minutes
+                #Tested: This is handled by the tickDiff function internally, if t1 (earlier tick)
+                #is smaller than t2 (later tick), which could happen every 72 min. The result will
+                #not be a negative value, the real difference will be properly calculated.
                 self.duty_cycle = self.duty_scale*pigpio.tickDiff(t1=self.tick_high, t2=tick)/self.period
 
             except Exception:
