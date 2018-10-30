@@ -11,12 +11,12 @@ class motion:
     Controls the robot movement.
 
     This class controls the robot movement by controlling the two Parallax Feedback 360° 
-    High-Speed Servo `360_data_sheet`_ . The robots local coordinate system is defined in
-    the following way. X-axis positive is straight forward, y-axes positive perpendicular 
+    High-Speed Servos `360_data_sheet`_ . The robots local coordinate system is defined in
+    the following way. X-axis positive is straight forward, y-axis positive perpendicular 
     to the x-axis in the direction to the left wheel. The center (0/0) is where the middle
     of the robot chassis is cutting across a imaginary line through both wheels/servos.
     Angle phi is the displacement of the local coordinate system to the real world coordinate
-    system. See :ref:`Introduction` page for a picture.
+    system. See :ref:`Introduction` for a picture.
 
     .. warning::
         Be carefull with setting the min and max pulsewidth! Test carefully ``min_pw`` and ``max_pw``
@@ -25,25 +25,31 @@ class motion:
     :param pigpio.pi pi: 
         Instance of a pigpio.pi() object.
     :param int width_robot:
-        Distance between middle right wheel and middle left wheel in mm. **Default:** 102 mm, 
-        measured.
+        Width of the robot in mm, so distance between middle right wheel and middle 
+        left wheel. 
+        **Default:** 102 mm, measured.
     :param diameter_wheels:
-        Diameter of both wheels. **Default:** 66 mm, measured and taken from the product 
-        website `wheel_robot`_ .
+        Diameter of both wheels. 
+        **Default:** 66 mm, measured and taken from the products website `wheel_robot`_ .
     :param int unitsFC:
-        Units in a full circle. **Default:** 360, so each wheel is divided into 360 sections/ticks.
+        Units in a full circle. 
+        **Default:** 360, so each wheel is divided into 360 sections/ticks.
     :param float dcMin_l:
-        Min duty cycle of the left wheel. **Default:** 27.3, measured with the 
-        :meth:`lib_para_360_servo.calibrate_pwm` method, see :ref:`Examples` .
+        Min duty cycle of the left wheel. 
+        **Default:** 27.3, measured with the :meth:`lib_para_360_servo.calibrate_pwm` 
+        method, see :ref:`Examples` .
     :param float dcMax_l:
-        Max duty cycle of the left wheel. **Default:** 969.15, measured with the 
-        :meth:`lib_para_360_servo.calibrate_pwm` method, see :ref:`Examples` .
+        Max duty cycle of the left wheel. 
+        **Default:** 969.15, measured with the :meth:`lib_para_360_servo.calibrate_pwm` 
+        method, see :ref:`Examples` .
     :param float dcMin_r:
-        Min duty cycle of the right wheel. **Default:** 27.3, measured with the 
-        :meth:`lib_para_360_servo.calibrate_pwm` method, see :ref:`Examples` .
+        Min duty cycle of the right wheel. 
+        **Default:** 27.3, measured with the :meth:`lib_para_360_servo.calibrate_pwm` 
+        method, see :ref:`Examples` .
     :param float dcMax_r:
-        Max duty cycle of the left wheel. **Default:** 978.25, measured with the 
-        :meth:`lib_para_360_servo.calibrate_pwm` method, see :ref:`Examples` .
+        Max duty cycle of the left wheel. 
+        **Default:** 978.25, measured with the :meth:`lib_para_360_servo.calibrate_pwm` 
+        method, see :ref:`Examples` .
     :param int l_wheel_gpio:
         GPIO identified by their Broadcom number, see elinux.org_ .
         To this GPIO the feedback wire of the left servo has to be connected.
@@ -78,7 +84,6 @@ class motion:
     .. _elinux.org: https://elinux.org/RPi_Low-level_peripherals#Model_A.2B.2C_B.2B_and_B2
     """
 
-    #default values are measured with the calibrate_pwm function from lib_servo.py
     def __init__(
         self, pi, width_robot = 102, diameter_wheels = 66, unitsFC = 360,
         dcMin_l = 27.3, dcMax_l = 969.15,
@@ -104,7 +109,7 @@ class motion:
         #needed time for initializing the four instances
         time.sleep(1)
 
-    #Angular position in units full circle
+    #angular position in units full circle
     def get_angle_l(self):
 
         #driving forward will increase the angle
@@ -114,7 +119,7 @@ class motion:
 
         return angle_l
 
-    #Angular position in units full circle
+    #angular position in units full circle
     def get_angle_r(self):
 
         #driving forward will increase the angle
@@ -126,6 +131,12 @@ class motion:
 
     def set_speed_l(self, speed):
 
+        #the value of the speed of the left wheel will always be multiplied 
+        #by minus 1 before setting it.
+        #this ensures that e.g. positive passed speed values/arguments
+        #will let the robot drive forward, which means for the left servo 
+        #that it has to rotate counter-clockwise/negative in its local 
+        #orientation system as it is defined in the lib_para_360_servo module.
         self.servo_l.set_speed(-speed)
 
         return None
@@ -138,7 +149,7 @@ class motion:
 
     def get_total_angle(self, angle, unitsFC, prev_angle, turns):
        
-        #for counting number of rotations
+        #### counting number of rotations
         #If 4th to 1st quadrant
         if((angle < (0.25*unitsFC)) and (prev_angle > (0.75*unitsFC))):
             turns += 1
@@ -146,7 +157,7 @@ class motion:
         elif((prev_angle < (0.25*unitsFC)) and (angle > (0.75*unitsFC))):
             turns -= 1
 
-        #total angle measurement from zero
+        ####total angle measurement from zero
         if(turns >= 0):
             total_angle = (turns*unitsFC) + angle
         elif(turns < 0):
@@ -177,10 +188,11 @@ class motion:
         """
         Turns the robot about x degree.
 
-        This method turns the robot. Positive degree value turn the robot to the left,
-        negative degree value to the right, see picture in :ref:`Introduction` where  local 
-        coordinate system of the robot is shown. This method calls :meth:`lib_motion.move` which
-        controlls the movement of the robot.
+        This method turns the robot about x degree to the left or to the right. 
+        Positive degree values turn the robot to the left,
+        negative degree values to the right, see picture in :ref:`Introduction` , where 
+        the local coordinate system of the robot is shown. This method calls 
+        :meth:`lib_motion.move` which controls the movement of the robot.
 
         :param int,float degree:
             Degree the robot has to turn.
@@ -196,11 +208,11 @@ class motion:
         """
         Moves the robot about x mm forward or backward.
 
-        This method moves the robot about x mm forward or backward. Positive distance value move the 
-        robot forward (regarding the local x-axis), negative distance value backward 
-        (regarding the local x-axis), see picture in :ref:`Introduction` where  local 
-        coordinate system of the robot is shown. This method calls :meth:`lib_motion.move` 
-        which controlls the movement of the robot.
+        This method moves the robot about x mm forward or backward. Positive distance 
+        values move the robot forward (regarding the local x-axis), negative distance 
+        values backward (regarding the local x-axis), see picture in :ref:`Introduction` , 
+        where the local coordinate system of the robot is shown. This method calls 
+        :meth:`lib_motion.move` which controls the movement of the robot.
 
         :param int,float distance_in_mm:
             Distance the robot has to move.
@@ -215,58 +227,59 @@ class motion:
     def move(
         self,
         number_ticks = 0,
-        #0.010 seconds:
+        #0.010 seconds sampling time:
         #1. PWM of motor feedback is 910Hz (0,001098901 s), so position changes cannot 
-        #be recognized faster than 1.1 ms, therefore, it is not needed to run the outer control 
+        #be recognized faster than 1.1 ms. therefore, it is not needed to run the outer control 
         #loop more often and update the speed values which have a 50 Hz (20ms) PWM.
         #2. Tests of the runtime of the code including the controller part showed, that
         #writing the pulse_width (pi.set_servo_pulsewidth()) in the lib_para_360_servo.py is 
         #the bottleneck which drastically slows down the code by the factor ~400 
-        #(0,002 seconds ÷ 0,000005 seconds; runtime with / without writing pulsewidth).
+        #(0,002 seconds vs 0,000005 seconds; runtime with vs without writing pulsewidth).
         #3. For recognizing the RPMs of the wheel 10ms is needed to have enough changes in the
         #position, was found out by testing.
         sampling_time = 0.01,
-        # Outer Controller, position
+        #Outer Controller, position
         Kp_p = 0.1, #not too big values, otherwise output of position control would slow down too abrupt
         Ki_p = 0,
         Kd_p = 0,
-        # Inner Controller, speed
+        #Inner Controller, speed
         Kp_s = 0.5,
         Ki_s = 0.1,
         Kd_s = 0,
         straight = False, turn = False):
         """
-        Controlls movement of the robot.
+        Controls movement of the robot.
 
-        This method controlls the movement of the robot. It is called from :meth:`lib_motion.turn` 
-        or :meth:`lib_motion.straight` and is not to ment to be called directly. The parameters
-        of the four used digital PID controllers have to be hardcoded into the modules source code at the moment.
-        The four PID controllers are used to make two cascade controll loops, one cascade control loop
-        for each wheel. Each cascade controol loop has the same parameters (P/I/D values), so that 
-        both wheels are controlled in the same way. Chosen default: Outer controll loop is a pure P 
-        controller, the inner controll loop is a PI controller. The outer loop is a position controller,
+        This method controls the movement of the robot. It is called from :meth:`lib_motion.turn` 
+        or :meth:`lib_motion.straight` and is not ment to be called directly. The parameters
+        of the four digital PID controllers have to be hardcoded into the modules source code at the moment.
+        The four PID controllers are used to make two cascade control loops, one cascade control loop
+        for each wheel. Each cascade control loop has the same parameters (P/I/D values), so that 
+        both wheels are controlled in the same way. Chosen default: Outer control loop is a P 
+        controller, the inner control loop is a PI controller. The outer loop is a position controller,
         the inner loop a speed controller. The I part of each PID controller can be limited, so that 
         the sum of the errors is not integrated till infinity which means to very high or low values 
         which might cause problems. The output value of each inner PID controller is scaled between -1 
-        and 1 and the output values of each outer PID controller is limited to -1 to 1.
+        and 1 and the output value of each outer PID controller is limited to -1 and 1.
         This ensures that no scaling factors are introduced in the P/I/D values and also that
-        the output of the inner loop (speed) matches the range of the speed of the servos, defined in 
+        the output of the inner loop (speed) matches the speed range of the servos, defined in 
         :class:`lib_para_360_servo.write_pwm.set_speed` . A sliding median window is used to filter out
-        the noise of the rotation speed measurement (ticks/s) which is done indirectly by measuring the 
+        the noise in the rotation speed measurement (ticks/s) which is done indirectly by measuring the 
         position of the servo. Also a deadband filter after the error calculation of the outer control
         loop is implemented. This adjustments help to make the controllers more stable, e.g. filter out
         outliers while calculating the rotation speed and therefore avoid high value changes/jumps or
         avoid oscillations after reaching the set-point (position). The sample time of the digital PID
         controllers can also be freely chosen and does not influence the P/I/D values nor the rotation
-        speed measurement. All this can be tuned/adjusted in the source code. This makes the whole method
-        very flexible and customizeable.
+        speed measurement.
 
         :param int,float number_ticks:
             Number of ticks the wheels have to move.
         :param bool straight:
-            True or False, if robot should move straight. **Default:** False.
+            True or False, if robot should move straight. 
+            **Default:** False.
         :param bool turn:
-            True or False, if robot should turn. **Default:** False.
+            True or False, if robot should turn. 
+            **Default:** False.
 
         .. todo::
         
