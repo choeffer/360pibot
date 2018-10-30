@@ -221,12 +221,12 @@ First, in the Raspberry Pi configuration *Remote GPIO* has to be enabled. This c
 be done via GUI or ``sudo raspi-config``. This will allow remote connections while 
 the pigpio daemon is running.
 
-Then the environment variable has to be set when launching Python 3 or an IDE. This 
-variable will point to the IP address (and optional port) on which the Raspberry Pi 
+Then the environment variable has to be set while or before launching Python 3 or an IDE. 
+This variable will point to the IP address (and optional port) on which the Raspberry Pi 
 is accessable, on its own provided hotspot/network or on a WLAN it is connected to. 
 There are also other possibilities available for configuring remote access. They are 
 mentioned in the pgpio documentation, see pigpio_pi_ . E.g. the IP address and port 
-can be passed as argument if initializing a pigpio.pi() object.
+can be passed as arguments if initializing a pigpio.pi() object.
 
 .. code-block:: console
 
