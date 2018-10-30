@@ -6,7 +6,7 @@ Installation
 Python environment
 ------------------
 
-The following steps to set up a working environment applies for both, 
+The following steps to set up a working environment are applicable for both, 
 the Raspberry Pi or a laptop/computer. 
 Remember, the modules can be used on a laptop/computer and remote controling 
 the Raspberry Pis GPIOs or on the Raspberry Pi itself, without any modifications
