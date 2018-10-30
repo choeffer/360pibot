@@ -262,7 +262,7 @@ class motion:
         which might cause problems. The output value of each inner PID controller is scaled between -1 
         and 1 and the output value of each outer PID controller is limited to -1 and 1.
         This ensures that no scaling factors are introduced in the P/I/D values and also that
-        the output of the inner loop (speed) matches the speed range of the servos, defined in 
+        the output of each PID controller matches the speed range of the servos, defined in 
         :class:`lib_para_360_servo.write_pwm.set_speed` . A sliding median window is used to filter out
         the noise in the rotation speed measurement (ticks/s) which is done indirectly by measuring the 
         position of the servo. Also a deadband filter after the error calculation of the outer control
@@ -283,13 +283,14 @@ class motion:
 
         .. todo::
         
-            Modify the module/class so that the PID controller values can be set while initializing
-            the class, so that they do not have to be hardcoded in the source code.
+            Modify the module/class, so that all PID controller values can be set while 
+            initializing the class, so that they do not have to be hardcoded in the 
+            source code.
 
         .. todo::
 
             Modify the stopping condition, so that both wheels have to be at the set-point
-            and not just the right wheel. At moment the control loop stops even if left
+            and not just the right wheel. At moment, the control loop stops even if the left
             wheel has not reached the set-point. This causes slight inaccuracies while moving!
             See stopping condition in the source code.       
         
@@ -327,34 +328,40 @@ class motion:
         error_r_p_old = 0
         error_r_s_old = 0
 
-        #empty list for ticks_*
+        #empty lists for ticks_*
         list_ticks_l = []
         list_ticks_r = []
 
-        #start time of the outer control loop
-        start_time = time.time()
-        #outer control loop: total distance/right wheel
         position_reached = False
 
-        #### start of outer control loop:
+        #start time of the control loop
+        start_time = time.time()
+
+        #control loop:
         while not position_reached:
-            #DEBUGGING OPTION: printing runtime of loop , see end of while true loop
+            #DEBUGGING OPTION:
+            #printing runtime of loop , see end of while true loop
             #start_time_each_loop = time.time()
 
             angle_l = self.get_angle_l()
             angle_r = self.get_angle_r()
 
+            #try needed, because:
+            #- first iteration of the while loop prev_angle_* is missing and the 
+            #method self.get_total_angle() will throw an exception.
+            #- second iteration of the while loop prev_total_angle_* is missing, 
+            #which will throw another exception
             try:
                 turns_l, total_angle_l = self.get_total_angle(angle_l, self.unitsFC, prev_angle_l, turns_l)
                 turns_r, total_angle_r = self.get_total_angle(angle_r, self.unitsFC, prev_angle_r, turns_r)
 
-                #### Controller right wheel
+                #### cascade control right wheel
 
-                ## Position Controll
+                ## Position Control
                 #Er = SP - PV
                 error_r_p = target_angle_r - total_angle_r
-                #print(error_r_p)
-                #Deadband-Filter to remove stuttering forward and backward after reaching the position
+
+                #Deadband-Filter to remove ocillating forwards and backwards after reaching set-point
                 if error_r_p <= 1 and error_r_p >= -1:
                     error_r_p = 0
                 #I-Part
@@ -366,14 +373,13 @@ class motion:
                 output_r_p = Kp_p * error_r_p + Ki_p * sampling_time * sum_error_r_p + Kd_p / sampling_time * (error_r_p - error_r_p_old)
                 #limit output of position control to speed range
                 output_r_p = max(min(1, output_r_p), -1)
-                #print(output_r_p)
 
                 error_r_p_old = error_r_p
 
-                ## Speed Controll
+                ## Speed Control
                 #convert range output_r_p from -1 to 1 to ticks/s
                 output_r_p_con = 650 * output_r_p
-                #ticks per second (ticks/s), as a moving median window with 5 values
+                #ticks per second (ticks/s), calculated from a moving median window with 5 values
                 ticks_r = (total_angle_r - prev_total_angle_r) / sampling_time
                 list_ticks_r.append(ticks_r)
                 list_ticks_r = list_ticks_r[-5:]
@@ -384,7 +390,7 @@ class motion:
 
                 #I-Part
                 sum_error_r_s += error_r_s
-                #limit I-Part
+                #limit I-Part to -1 and 1
                 #sum_error_r_s = max(min(650/Ki_s, sum_error_r_s), -650/Ki_s)
 
                 #PID-Controller
@@ -397,12 +403,12 @@ class motion:
 
                 self.set_speed_r(output_r_s_con)
 
-                #### Controller left wheel
+                #### cascade control left wheel
                 
                 ## Position Control
                 #Er = SP - PV
                 error_l_p = target_angle_l - total_angle_l
-                #Deadband-Filter to remove stuttering forward and backward after reaching the position
+                #Deadband-Filter to remove ocillating forwards and backwards after reaching set-point
                 if error_l_p <= 1 and error_l_p >= -1:
                     error_l_p = 0
                 #I-Part
@@ -411,17 +417,17 @@ class motion:
                 #limit I-Part
                 sum_error_l_p = max(min(20, sum_error_l_p), -20)
 
-                #PI-Controller
+                #PID-Controller
                 output_l_p = Kp_p * error_l_p + Ki_p * sampling_time * sum_error_l_p + Kd_p / sampling_time * (error_l_p - error_l_p_old)
                 #limit output of position control to speed range
                 output_l_p = max(min(1, output_l_p), -1)
 
                 error_l_p_old = error_l_p
 
-                ## Speed Controll
-                #convert range output_r_p from -1 to 1 to ticks/s
+                ## Speed Control
+                #convert range output_l_p from -1 to 1 to ticks/s
                 output_l_p_con = 650 * output_l_p
-                #ticks per second (ticks/s), as a moving median window with 5 values
+                #ticks per second (ticks/s), calculated from a moving median window with 5 values
                 ticks_l = (total_angle_l - prev_total_angle_l) / sampling_time
                 list_ticks_l.append(ticks_l)
                 list_ticks_l = list_ticks_l[-5:]
@@ -431,19 +437,18 @@ class motion:
 
                 #I-Part
                 sum_error_l_s += error_l_s
-                #limit I-Part
+                #limit I-Part to -1 and 1
                 #sum_error_l_s = max(min(650/Ki_s, sum_error_l_s), -650/Ki_s)
 
-                #PI-Controller
+                #PID-Controller
                 output_l_s = Kp_s * error_l_s + Ki_s * sampling_time * sum_error_l_s + Kd_s / sampling_time * (error_l_s - error_l_s_old)
 
                 error_l_s_old = error_l_s
 
-                #convert range output_r_s fom ticks/s to -1 to 1
+                #convert range output_l_s fom ticks/s to -1 to 1
                 output_l_s_con = output_l_s / 650
 
                 self.set_speed_l(output_l_s_con)
-                #self.set_speed_l(0.5)
 
             except Exception:
                 pass
@@ -451,7 +456,10 @@ class motion:
             prev_angle_l = angle_l
             prev_angle_r = angle_r
 
-            #first run of while true loop, no total_angle_ is calcualted, because prev_angle_ is not available
+            #try needed, because first iteration of the while loop prev_angle_* is
+            #missing and the method self.get_total_angle() will throw an exception,
+            #and therefore no total_angle_* gets calculated
+
             try:
                 prev_total_angle_l = total_angle_l
                 prev_total_angle_r = total_angle_r
@@ -460,7 +468,7 @@ class motion:
 
             #### todo ####
             # modify the stopping condition, so that both wheels have to be at the set-point
-            # and not just the right wheel. At moment the control loop stops even if left
+            # and not just the right wheel. At moment, the control loop stops even if left
             # wheel has not reached the set-point, this causes inaccuracies while moving!!!
             try:
                 if total_angle_r >= target_angle_r and number_ticks >= 0:
@@ -478,11 +486,12 @@ class motion:
             except Exception:
                 pass
 
-            #Pause outer control loop to wait for changes in the system
+            #Pause control loop for chosen sample time
             #https://stackoverflow.com/questions/474528/what-is-the-best-way-to-repeatedly-execute-a-function-every-x-seconds-in-python/25251804#25251804
             time.sleep(sampling_time - ((time.time() - start_time) % sampling_time))
 
-            #DEBUGGING OPTION: printing runtime of loop, see beginning of while true loop
+            #DEBUGGING OPTION: 
+            #printing runtime of loop, see beginning of while true loop
             #print('{:.20f}'.format((time.time() - start_time_each_loop)))
         
         return None
