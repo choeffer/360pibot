@@ -66,7 +66,7 @@ Cabling
 -------
 
 Below see a Fritzing sheet which illustrates the cabling. The voltage divider is 
-build out of two resistors, blue one with 82 Ohm, gold one with 150 Ohm.
+build out of two resistors, blue one with 82 Ohm and gold one with 150 Ohm.
 
 .. warning::
 
