@@ -26,8 +26,8 @@ and mouse while controling/programming it. The possibillity of remote controling
 the Raspberry Pis GPIOs is a big advantage of the used pigpio_ module. It is also possible to 
 use the modules on the Raspberry Pi itself and connect to it over VNC, see VNC_ . For both ways, 
 using the modules on the Raspberry Pi itself or remote on a laptop/computer to control
-the Raspberry Pis GPIOs, no modifications have to be made in the source code, it 
-works in both cases.
+the Raspberry Pis GPIOs, no modifications have to be made in the source code, they 
+work in both cases.
 
 All the default values in the modules are the once which have been used at a 
 demo implementation. They provide a good starting point for the range of the values.
