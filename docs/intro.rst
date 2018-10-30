@@ -52,7 +52,7 @@ View from the front side.
 
 .. image:: /_static/2.jpg
 
-View from the backside.
+View from the back side.
 
 .. image:: /_static/3.jpg
 
