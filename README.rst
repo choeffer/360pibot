@@ -2,7 +2,7 @@ Python 3 implementation for programming an ActivityBot 360° Robot Kit 360_kit_ 
 a Raspberry Pi. The modules of the implementation are using the pigpio_ module 
 to control the GPIOs of the Raspberry Pi. No other external module is needed.
 
-At the moment, the following functions are implemented:
+At the moment, the following functions are implemented.
 
 * Turning on the spot.
 * Moving straight forward and backward.
