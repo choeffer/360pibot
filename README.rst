@@ -15,7 +15,7 @@ the inner loops are controlling the speed of each wheel.
 
 The Documentation_ is hosted on `Read the Docs`_ .
 
-The modules also enable remote controling the robots GPIOs. This enables 
+The modules also enable remote controling the Raspberry Pis GPIOs. This enables 
 executing the scripts on a laptop/computer and over e.g. WLAN remote controling the Raspberry Pi 
 which provides a WLAN Hotspot, see remote_pin_ and pi_hotspot_ . So, the robot can freely
 move with a powerbank attached and does not have to be connected to a monitor, keyboard 
