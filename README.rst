@@ -13,7 +13,8 @@ controllers. Each wheel is controlled by a cascade control, which means
 a cascade of two PID controllers. The outer loops are controlling the position, 
 the inner loops are controlling the speed of each wheel.
 
-The documentation is hosted on `Read the Docs`_ , see here Documentation_ .
+The documentation is hosted on `Read the Docs`_ and is 
+available at https://360pibot.readthedocs.io/ .
 
 The modules also enable remote controling the Raspberry Pis GPIOs. This enables 
 use of the modules on a laptop/computer and over e.g. WLAN remote controling the Raspberry Pi 
@@ -36,5 +37,4 @@ References
 .. _360_kit: https://www.parallax.com/product/32600
 .. _pigpio: https://pypi.org/project/pigpio/
 .. _VNC: https://www.raspberrypi.org/documentation/remote-access/vnc/
-.. _Documentation: https://360pibot.readthedocs.io/
 .. _`Read the Docs`: https://readthedocs.org/
