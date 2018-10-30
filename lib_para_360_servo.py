@@ -54,7 +54,6 @@ class write_pwm:
         self.gpio = gpio
         self.min_pw = min_pw
         self.max_pw = max_pw
-        #define max and minimum speed
         self.min_speed = min_speed
         self.max_speed = max_speed
         #calculate slope for calculating the pulse width
@@ -71,14 +70,16 @@ class write_pwm:
         need to be set very small and big so that they do not limit the set pulsewidth. Because normally
         they are used to protect the servo, by limiting the pulsewidth to a certain range.
 
+        .. warning::
+            Be carefull with setting the min and max pulsewidth! Test carefully ``min_pw`` and ``max_pw``
+            before setting them. Wrong values can damage the servo, see set_servo_pulsewidth_ !!!
+
         :param int,float pulsewidth:
             Pulsewidth of the PWM signal. Will be limited to ``min_pw`` and ``max_pw``.
+        
+        .. _set_servo_pulsewidth: http://abyz.me.uk/rpi/pigpio/python.html#set_servo_pulsewidth
         """
         
-        #be carefully with setting the pulsewidth!!!
-        #test carefully min_pw and max_pw value before settting them!!!
-        #this can DAMAGE the servo!!!
-        #http://abyz.me.uk/rpi/pigpio/python.html#set_servo_pulsewidth
         pulse_width = max(min(self.max_pw, pulse_width), self.min_pw)
 
         self.pi.set_servo_pulsewidth(user_gpio = self.gpio, pulsewidth = pulse_width)
@@ -93,11 +94,11 @@ class write_pwm:
         """
         Sets speed of the servo.
 
-        This method sets the servo rotation speed. The speed range is defined by 
-        by ``min_speed`` and ``max_speed``.
+        This method sets the servos rotation speed. The speed range is defined by 
+        by ``min_speed`` and ``max_speed`` .
 
         :param int,float speed:
-            Should be between ``min_speed`` and ``max_degree`` ,
+            Should be between ``min_speed`` and ``max_speed`` ,
             otherwise the value will be limited to those values.
         """
 
@@ -130,13 +131,12 @@ class write_pwm:
         
         self.set_pw(self.min_pw)
 
-#hardcoded period for 910 Hz signal
 class read_pwm:
     """
     Reads position of a Parallax Feedback 360° High-Speed Servo `360_data_sheet`_ .
 
     This class reads the position of a Parallax Feedback 360° High-Speed Servo. At the
-    moment the period for a 910 Hz signal is hardcoded.
+    moment, the period for a 910 Hz signal is hardcoded.
 
     :param pigpio.pi pi: 
         Instance of a pigpio.pi() object.
@@ -216,9 +216,6 @@ class read_pwm:
 
         self.cb.cancel()
 
-#servo speed 0.2 is needed for calibrating and is needed to be set "manually" 
-#by setting the servo to this speed, see Example 1 below
-#hardcoded period for 910 Hz Signal
 class calibrate_pwm:
     """
     Calibrates Parallax Feedback 360° High-Speed servo with the help of the :class:`read_pwm` class.
@@ -247,7 +244,7 @@ class calibrate_pwm:
         measurement will run. **Default:** 120.
     :returns: Printouts of different measurements
 
-    At the moment the period for a 910 Hz signal is hardcoded, as in :meth:`read_pwm` .
+    At the moment, the period for a 910 Hz signal is hardcoded, as in :meth:`read_pwm` .
 
     .. todo::
         Enable the class to be able to handle different signals, not just 910 Hz.

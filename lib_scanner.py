@@ -221,7 +221,6 @@ class para_standard_servo:
         self.gpio = gpio
         self.min_pw = min_pw
         self.max_pw = max_pw
-        #allowed range of servo movement, see max_left(), max_right() functions
         self.min_degree = min_degree
         self.max_degree = max_degree
         #calculate slope for calculating the pulse width
@@ -238,13 +237,16 @@ class para_standard_servo:
         need to be set very small and big so that they do not limit the set pulsewidth. Because normally
         they are used to protect the servo, by limiting the pulsewidth to a certain range.
 
+        .. warning::
+            Be carefull with setting the min and max pulsewidth! Test carefully ``min_pw`` and ``max_pw``
+            before setting them. Wrong values can damage the servo, see set_servo_pulsewidth_ !!!
+
         :param int,float pulsewidth:
             Pulsewidth of the PWM signal. Will be limited to ``min_pw`` and ``max_pw``.
+
+        .. _set_servo_pulsewidth: http://abyz.me.uk/rpi/pigpio/python.html#set_servo_pulsewidth
         """
         
-        #be carefully with setting the pulsewidth!!!
-        #test carefully min_pw and max_pw value before settting them!!!
-        #this can DAMAGE the servo!!!
         #http://abyz.me.uk/rpi/pigpio/python.html#set_servo_pulsewidth
         pulse_width = max(min(self.max_pw, pulse_width), self.min_degree)
 
