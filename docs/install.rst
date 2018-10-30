@@ -8,7 +8,7 @@ Python environment
 
 The following steps to set up a working environment are applicable for both, 
 the Raspberry Pi or a laptop/computer. 
-Remember, the modules can be used on a laptop/computer and remote controling 
+Remember, the modules can be used on a laptop/computer for remote controlling 
 the Raspberry Pis GPIOs or on the Raspberry Pi itself, without any modifications
 to be made in the source code.
 
@@ -214,7 +214,7 @@ drastically improve the use of the modules, because e.g. IDEs can be used, the r
 freely move around and so on. The latter option will be shortly explained here.
 
 So after enabling the hotspot feature on the Raspberry Pi and beeing connected with your 
-laptop/computer to it, the follwing steps are needed to remote controll the 
+laptop/computer to it, the follwing steps are needed to remote control the 
 Raspberry Pis GPIOs. For a more detailed description see remote_pin_ .
 
 First, in the Raspberry Pi configuration *Remote GPIO* has to be enabled. This can 
