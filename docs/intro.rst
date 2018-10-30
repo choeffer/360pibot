@@ -29,18 +29,20 @@ using the modules on the Raspberry Pi itself or remote on a laptop/computer to c
 the Raspberry Pis GPIOs, no modifications have to be made in the source code, they 
 work in both cases.
 
-All the default values in the modules are the once which have been used at a 
+All the default values in the modules are the once which have been used at the 
 demo implementation. They provide a good starting point for the range of the values.
 
 The documentation is done with Sphinx_ and can be extended or modified as needed for 
 e.g. documenting own projects based on this or if extending functionality of the modules 
-and document them.
+and documenting this.
 
-Following some pictures of the demo implementation. Buying two Parallax Feedback 360° 
-High-Speed servos `360_data_sheet`_ , two robot wheels `wheel_robot`_, one Parallax 
-Standard Servo `stand_data_sheet`_ and a `HC-SR04`_ ultrasonic sensor will also be sufficient.
-Then build an own chassi to mount all the stuff, instead of buying directly a ActivityBot 
+Buying two Parallax Feedback 360° High-Speed Servos `360_data_sheet`_ , two robot wheels 
+`wheel_robot`_, one Parallax Standard Servo `stand_data_sheet`_ and a `HC-SR04`_ 
+ultrasonic sensor will also be sufficient. This enables building an own chassi 
+and attaching there the above listed parts, instead of buying directly a ActivityBot 
 360° Robot Kit 360_kit_ .
+
+Following some pictures of the demo implementation.
 
 View from the right side.
 
@@ -54,7 +56,7 @@ View from the backside.
 
 .. image:: /_static/3.jpg
 
-View from top, including the local coordinate system of the robot. 
+View from top, including the local coordinate system of the demo implementation. 
 
 .. image:: /_static/4.jpg
 
@@ -63,8 +65,8 @@ View from top, including the local coordinate system of the robot.
 Cabling
 -------
 
-Below see a Fritzing sheet which shows the cabling. The voltage divider is using two resistors,
-blue one with 82 Ohm, gold one with 150 Ohm.
+Below see a Fritzing sheet which illustrates the cabling. The voltage divider is 
+build out of two resistors, blue one with 82 Ohm, gold one with 150 Ohm.
 
 .. warning::
 
@@ -73,16 +75,16 @@ blue one with 82 Ohm, gold one with 150 Ohm.
     to 3.3 V. 3.3 V is the max voltage the Raspberry Pi can handle on a GPIO, otherwise 
     it might get damaged! The chosen resistors for the voltage divider convert 5 V to 
     3.23 V. **Setup:** The output of the ``Echo`` Pin is connected to the blue 82 Ohm 
-    resistor. At its end the GPIO is connected and then the golden 150 Ohm resistor at 
-    which end ground is connected.
+    resistor. At its end, the GPIO is connected and then the golden 150 Ohm resistor at 
+    whose end ground is connected.
 
 .. warning::
 
     The 5 V of the USB power supply should be connceted to the 5 V Pin of the Raspberry Pi 
     directly, as shown in the Fritzing sheet, because it does not only power the
     Raspberry Pi itself, also the three servos and maybe more devices, which get added 
-    in the future, are powered over it. So powering all devices over the micro-USB port 
-    should be avoided, because otherwise all needed current of all devices would be 
+    in the future, are powered over it. Therefore, powering all devices over the micro-USB 
+    port should be avoided, because otherwise all needed current of all devices would be 
     conducted through the Raspberry Pi.
     
 .. image:: /_static/6.jpg
