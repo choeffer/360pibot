@@ -40,7 +40,7 @@ and documenting this.
 Buying two Parallax Feedback 360° High-Speed Servos `360_data_sheet`_ , two robot wheels 
 `wheel_robot`_, one Parallax Standard Servo `stand_data_sheet`_ and a `HC-SR04`_ 
 ultrasonic sensor will also be sufficient. This enables building an own chassi 
-and attaching there the above listed parts, instead of buying directly a ActivityBot 
+and attaching there the above listed parts, instead of directly buying an ActivityBot 
 360° Robot Kit 360_kit_ .
 
 Following some pictures of the demo implementation.
