@@ -245,7 +245,9 @@ class motion:
         for each wheel. Each cascade controol loop has the same parameters (P/I/D values), so that 
         both wheels are controlled in the same way. Chosen default: Outer controll loop is a pure P 
         controller, the inner controll loop is a PI controller. The outer loop is a position controller,
-        the inner loop a speed controller. The output value of each inner PID controller is scaled between -1 
+        the inner loop a speed controller. The I part of each PID controller can be limited, so that 
+        the sum of the errors is not integrated till infinity which means to very high or low values 
+        which might cause problems. The output value of each inner PID controller is scaled between -1 
         and 1 and the output values of each outer PID controller is limited to -1 to 1.
         This ensures that no scaling factors are introduced in the P/I/D values and also that
         the output of the inner loop (speed) matches the range of the speed of the servos, defined in 
@@ -417,7 +419,7 @@ class motion:
                 #I-Part
                 sum_error_l_s += error_l_s
                 #limit I-Part
-                #sum_error_r_s = max(min(650/Ki_s, sum_error_r_s), -650/Ki_s)
+                #sum_error_l_s = max(min(650/Ki_s, sum_error_l_s), -650/Ki_s)
 
                 #PI-Controller
                 output_l_s = Kp_s * error_l_s + Ki_s * sampling_time * sum_error_l_s + Kd_s / sampling_time * (error_l_s - error_l_s_old)
