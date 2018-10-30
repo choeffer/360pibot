@@ -182,6 +182,12 @@ class para_standard_servo:
     have a 50Hz PWM for setting the position. The position of the Parallax Standard Servo 
     can be set between -90 (``min_degree``) and +90 (``max_degree``) degree.
 
+    .. note::
+        ``min_pw`` and ``max_pw`` might needed to be interchanged, depending on if ``min_pw`` is 
+        moving the servo to max_right/clockwise or max_left/counter-clockwise,
+        see methods :meth:`lib_scanner.max_left` and :meth:`lib_scanner.max_right`. 
+        :meth:`lib_scanner.max_right` -> ``min_pw`` should let the servo rotate clockwise.
+
     .. warning::
         Be carefull with setting the min and max pulsewidth! Test carefully ``min_pw`` and ``max_pw``
         before setting them. Wrong values can damage the servo, see set_servo_pulsewidth_ !!!
@@ -213,9 +219,6 @@ class para_standard_servo:
 
         self.pi = pi
         self.gpio = gpio
-        #min_pw and max_pw might needed to be interchanged, depending on
-        #if min_pw is moving servo to max_right or max_left,
-        #see methods `max_left` and `max_right` further down
         self.min_pw = min_pw
         self.max_pw = max_pw
         #allowed range of servo movement, see max_left(), max_right() functions
@@ -280,14 +283,16 @@ class para_standard_servo:
 
     def max_left(self):
         """
-        Sets the position of the servo to -90 degree, so ``min_degree`` (max left).
+        Sets the position of the servo to -90 degree, so ``min_degree`` (max left, 
+        counter-clockwise).
         """
         
         self.set_pw(self.max_pw)
 
     def max_right(self):
         """
-        Sets the position of the servo to 90 degree, so ``max_degree`` (max right).
+        Sets the position of the servo to 90 degree, so ``max_degree`` (max right, 
+        clockwise).
         """
 
         self.set_pw(self.min_pw)

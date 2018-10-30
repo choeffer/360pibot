@@ -17,6 +17,12 @@ class write_pwm:
     by ``min_pw`` and ``max_pw``, the class allows setting the servo speed and automatically
     calculates the appropriate pulsewidth for the chosen speed.
 
+    .. note::
+        ``min_pw`` and ``max_pw`` might needed to be interchanged, depending on if ``min_pw`` is 
+        moving the servo max_forward/clockwise or max_backwards/counter-clockwise,
+        see methods :meth:`lib_para_360_servo.max_forward` and  :meth:`lib_para_360_servo.max_backward`. 
+        :meth:`lib_para_360_servo.max_forward` -> ``min_pw`` should let the servo rotate clockwise.
+
     .. warning::
         Be carefull with setting the min and max pulsewidth! Test carefully ``min_pw`` and ``max_pw``
         before setting them. Wrong values can damage the servo, see set_servo_pulsewidth_ !!!
@@ -46,9 +52,6 @@ class write_pwm:
 
         self.pi = pi
         self.gpio = gpio
-        #min_pw and max_pw might needed to be interchanged, depending on
-        #if min_pw is moving servo to max_forward or max_backward
-        #see test functions below
         self.min_pw = min_pw
         self.max_pw = max_pw
         #define max and minimum speed
@@ -111,19 +114,21 @@ class write_pwm:
         pulse_width = (self.min_pw+self.max_pw)/2
         self.set_pw(pulse_width = pulse_width)
 
-    def max_forward(self):
-        """
-        Sets the speed of the servo to 1, so ``max_speed``
-        """
-        
-        self.set_pw(self.min_pw)
-
     def max_backward(self):
         """
-        Sets the speed of the servo to -1, so ``min_speed``
+        Sets the speed of the servo to -1, so ``min_speed`` (max backwards,
+        counter-clockwise)
         """
 
         self.set_pw(self.max_pw)
+
+    def max_forward(self):
+        """
+        Sets the speed of the servo to 1, so ``max_speed`` (max forward,
+        clockwise)
+        """
+        
+        self.set_pw(self.min_pw)
 
 #hardcoded period for 910 Hz signal
 class read_pwm:
