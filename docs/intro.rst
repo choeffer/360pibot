@@ -25,7 +25,7 @@ move with a powerbank attached and does not have to be connected to a monitor, k
 and mouse while controling/programming it. The possibillity of remote controling
 the Raspberry Pis GPIOs is a big advantage of the used pigpio_ module. It is also possible to 
 use the modules on the Raspberry Pi itself and connect to it over VNC, see VNC_ . For both ways, 
-executing the code on the Raspberry Pi itself or remote on a laptop/computer to control
+using the modules on the Raspberry Pi itself or remote on a laptop/computer to control
 the Raspberry Pis GPIOs, no modifications have to be made in the source code, it 
 works in both cases.
 
