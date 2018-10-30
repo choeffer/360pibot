@@ -13,7 +13,7 @@ controllers. Each wheel is controlled by a cascade control, which means
 a cascade of two PID controllers. The outer loops are controlling the position, 
 the inner loops are controlling the speed of each wheel.
 
-The Documentation_ is hosted on `Read the Docs`_ .
+The documentation is hosted on `Read the Docs`_ , see here Documentation_ .
 
 The modules also enable remote controling the Raspberry Pis GPIOs. This enables 
 use of the modules on a laptop/computer and over e.g. WLAN remote controling the Raspberry Pi 
