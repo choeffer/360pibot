@@ -29,8 +29,9 @@ using the modules on the Raspberry Pi itself or remote on a laptop/computer to c
 the Raspberry Pis GPIOs, no modifications have to be made in the source code, they 
 work in both cases.
 
-All the default values in the modules are the once which have been used at the 
-demo implementation. They provide a good starting point for the range of the values.
+All the default values in the modules are the once which are used while 
+experimenting/developing with the demo implementation. They provide a good starting 
+point for the range of the values.
 
 The documentation is done with Sphinx_ and can be extended or modified as needed for 
 e.g. documenting own projects based on this or if extending functionality of the modules 
