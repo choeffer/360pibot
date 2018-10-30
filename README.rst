@@ -6,7 +6,7 @@ At the moment, the following functions are implemented:
 
 * Turning on the spot.
 * Moving straight forward and backward.
-* Scanning the surrounding with a ultrasonic sensor mounted on a servo.
+* Scanning the surrounding with an ultrasonic sensor mounted on a servo.
 
 The turning and moving straight movement is controlled by four digital PID 
 controllers. Each wheel is controlled by a cascade control, which means 
