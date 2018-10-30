@@ -23,7 +23,7 @@ use of the modules on a laptop/computer and over e.g. WLAN remote controling the
 which provides a WLAN Hotspot, see remote_pin_ and pi_hotspot_ . So, the robot can freely
 move with a powerbank attached and does not have to be connected to a monitor, keyboard 
 and mouse while controling/programming it. The possibillity of remote controling
-the Raspberry Pis GPIOs is a big advantage of the used pigpio_ module. It is also possible 
+the Raspberry Pis GPIOs is a big advantage of the used pigpio_ module. It is also possible to 
 use the modules on the Raspberry Pi itself and connect to it over VNC, see VNC_ . For both ways, 
 executing the code on the Raspberry Pi itself or remote on a laptop/computer to control
 the Raspberry Pis GPIOs, no modifications have to be made in the source code, it 
