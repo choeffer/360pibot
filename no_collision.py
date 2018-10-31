@@ -19,7 +19,7 @@ while True:
     if any(t<0.4 for t in list_dist):
         robot.turn(45)
 
-    elif any(t>=0.4 for t in list_dist):
+    else:
         robot.straight(200)
 
 #http://abyz.me.uk/rpi/pigpio/python.html#callback

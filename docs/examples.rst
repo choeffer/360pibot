@@ -53,7 +53,7 @@ is included as ``calibrate.py`` in the root of the git repository.
     pi = pigpio.pi()
 
     #### Calibrate servos, speed  = 0.2 and -0.2
-    # chose gpio_l_w/gpio_l_r (left wheel), or accordingly gpio_r_w/gpio_r_r (right wheel)
+    #chose gpio_l_w/gpio_l_r (left wheel), or accordingly gpio_r_w/gpio_r_r (right wheel)
 
     servo = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_r_w, 
         min_pw = 1280, max_pw = 1720)
@@ -233,11 +233,11 @@ root of the git repository.
         min_pw = 600, max_pw = 2350)
 
     servo.middle_position()
-    time.sleep(1)
+    time.sleep(2)
     servo.max_right()
-    time.sleep(1)
+    time.sleep(2)
     servo.max_left()
-    time.sleep(1)
+    time.sleep(2)
     servo.set_position(degree = 45)
 
     #http://abyz.me.uk/rpi/pigpio/python.html#stop
@@ -259,7 +259,7 @@ in the root of the git repository.
     pi = pigpio.pi()
 
     ranger = lib_scanner.scanner(pi = pi)
-    
+
     distances = ranger.read_all_angles()
     print(distances)
 
@@ -302,7 +302,7 @@ is included as ``no_collision.py`` in the root of the git repository.
         if any(t<0.4 for t in list_dist):
             robot.turn(45)
 
-        elif any(t>=0.4 for t in list_dist):
+        else:
             robot.straight(200)
 
     #http://abyz.me.uk/rpi/pigpio/python.html#callback

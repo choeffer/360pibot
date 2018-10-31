@@ -10,11 +10,11 @@ servo = lib_scanner.para_standard_servo(gpio = 22, pi = pi,
     min_pw = 600, max_pw = 2350)
     
 servo.middle_position()
-time.sleep(1)
+time.sleep(2)
 servo.max_right()
-time.sleep(1)
+time.sleep(2)
 servo.max_left()
-time.sleep(1)
+time.sleep(2)
 servo.set_position(degree = 45)
 
 #http://abyz.me.uk/rpi/pigpio/python.html#stop
