@@ -114,7 +114,7 @@ be installed in the global Python 3 environment.
 Installing modules for the documentation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The whole documentation is done with Sphinx_ and can be extended or 
+The whole documentation is made with Sphinx_ and can be extended or 
 modified as needed for e.g. documenting own projects based on this or if 
 extending functionality of the modules and documenting this. The standard docstring format 
 (ReStructuredText_ (reST)) is used. The used theme is from `Read the Docs`_ 

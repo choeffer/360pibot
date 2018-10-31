@@ -29,7 +29,7 @@ use the modules on the Raspberry Pi itself and connect to it over VNC, see VNC_ 
 using the modules on the Raspberry Pi itself or remote on a laptop/computer to control
 the Raspberry Pis GPIOs, no modifications have to be done in the source code of the modules.
 
-The documentation is done with Sphinx_ and can be extended or modified as needed for 
+The documentation is made with Sphinx_ and can be extended or modified as needed for 
 e.g. documenting own projects based on this or if extending functionality of the modules 
 and documenting this.
 

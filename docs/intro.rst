@@ -32,7 +32,7 @@ All the default values in the modules are the once which are used while
 experimenting/developing with the demo implementation. They provide a good starting 
 point for the range of the values.
 
-The documentation is done with Sphinx_ and can be extended or modified as needed for 
+The documentation is made with Sphinx_ and can be extended or modified as needed for 
 e.g. documenting own projects based on this or if extending functionality of the modules 
 and documenting this.
 
