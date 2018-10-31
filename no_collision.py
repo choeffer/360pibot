@@ -1,13 +1,15 @@
-import lib_scanner
-import lib_motion
-import pigpio
 import time
+
+import pigpio
+
+import lib_motion
+import lib_scanner
 
 #initialize one pigpio.pi() instance to be used by all lib_*
 pi = pigpio.pi()
 
 robot = lib_motion.motion(pi = pi)
-ranger =lib_scanner.scanner(pi = pi)
+ranger = lib_scanner.scanner(pi = pi)
 
 while True:
 
