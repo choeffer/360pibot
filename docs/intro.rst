@@ -24,7 +24,8 @@ at the :ref:`Examples` section for some code examples.
 
 All the default values in the modules are the once which are used while 
 experimenting/developing with the demo implementation. They provide a good starting 
-point for the range of the values.
+point for the range of the values. Pictures of the demo implementation can be
+found further down in this section.
 
 The modules also enable remote controlling the Raspberry Pis GPIOs. This enables 
 use of the modules on a laptop/computer and over e.g. WLAN remote controlling the Raspberry Pi 
