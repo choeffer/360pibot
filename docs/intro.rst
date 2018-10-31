@@ -71,7 +71,6 @@ Local coordinate system of the demo implementation
 
 .. image:: /_static/4.jpg
 
-
 Cabling of the demo implementation
 ----------------------------------
 
