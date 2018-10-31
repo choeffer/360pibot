@@ -116,12 +116,14 @@ Installing modules for the documentation
 
 The whole documentation is made with Sphinx_ and can be extended or 
 modified as needed for e.g. documenting own projects based on this or if 
-extending functionality of the modules and documenting this. The standard docstring format 
-(ReStructuredText_ (reST)) is used. The used theme is from `Read the Docs`_ 
-where also the documentation is hosted. Therefore, two more modules are needed 
-for beeing able to modify or extend the documentation. How to use Sphinx is not 
-part of this documentation. But there are good introductions and tutorials 
-which provide a good starting point, see docs1_ , docs2_ , docs3_ and docs4_ .
+extending functionality of the modules and documenting this. The whole 
+documentation is stored in the ``docs/`` folder of the repository. The 
+standard docstring format (ReStructuredText_ (reST)) is used. The used 
+theme is from `Read the Docs`_ where also the documentation is hosted. 
+Therefore, two more modules are needed for beeing able to modify or 
+extend the documentation. How to use Sphinx is not part of this documentation. 
+But there are good introductions and tutorials which provide a good starting 
+point, see docs1_ , docs2_ , docs3_ and docs4_ .
 
 .. note::
 

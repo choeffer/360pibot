@@ -8,18 +8,18 @@ to control the GPIOs of the Raspberry Pi. No other external module is needed.
 About
 -----
 
-At the moment, the following functions are implemented.
+At the moment, the following functions are implemented:
 
-* Turning on the spot.
-* Moving straight forward and backward.
-* Scanning the surrounding with an ultrasonic sensor mounted on a servo.
+* Turning on the spot
+* Moving straight - forward and backward
+* Scanning the surrounding with an ultrasonic sensor mounted on a servo
 
-The turning and moving straight movements are controlled by four digital PID 
-controllers. Each wheel is controlled by a cascade control, which means 
-a cascade of two PID controllers. The outer loops are controlling the position, 
-the inner loops are controlling the speed of each wheel.
+The turning and straight movements are controlled by four digital PID 
+controllers. Each wheel is controlled by a cascade control, using 
+a cascade of two PID controllers. The outer loops control the position 
+while the inner loops control the speed of each wheel.
 
-The modules provide simple APIs for the turning and moving straight 
+The modules provide simple APIs for turning and straight 
 movements and also for scanning the surrounding or stearing a servo. Have a look 
 at the Examples section of the documentation for some code examples.
 
@@ -31,23 +31,22 @@ found in the Introduction section of the documentation.
 The modules also enable remote controlling the Raspberry Pis GPIOs. This enables 
 use of the modules on a laptop/computer and over e.g. WLAN remote controlling the Raspberry Pi 
 which provides a WLAN Hotspot, see remote_pin_ and pi_hotspot_ . So, the robot can freely
-move with a powerbank attached and does not have to be connected to a monitor, keyboard 
-and mouse while controlling/programming it. The possibillity of remote controlling
-the Raspberry Pis GPIOs is a big advantage of the used pigpio_ module. It is also possible to 
-use the modules on the Raspberry Pi itself and connect to it over VNC, see VNC_ . For both ways, 
-using the modules on the Raspberry Pi itself or remote on a laptop/computer to control
-the Raspberry Pis GPIOs, no modifications have to be done in the source code of the modules.
+move with a powerbank attached without any peripheral devices while controlling/programming it. 
+The possibillity of remote controlling the Raspberry Pis GPIOs is a big advantage of the 
+used pigpio_ module. It is also possible to use the modules on the Raspberry Pi itself 
+and connect to it over VNC, see VNC_ . For both ways, using the modules on the Raspberry 
+Pi itself or remote on a laptop/computer to control the Raspberry Pis GPIOs, no 
+modifications have to be done in the source code of the modules.
 
 The documentation is made with Sphinx_ and can be extended or modified as needed for 
 e.g. documenting own projects based on this or if extending functionality of the modules 
 and documenting this. The whole documentation is stored in the ``docs/`` folder 
 of the repository.
 
-Buying two Parallax Feedback 360° High-Speed Servos `360_data_sheet`_ , two robot wheels 
+Instead of buying an ActivityBot 360° Robot Kit 360_kit_ it is sufficient to buy 
+two Parallax Feedback 360° High-Speed Servos `360_data_sheet`_ , two robot wheels 
 `wheel_robot`_, one Parallax Standard Servo `stand_data_sheet`_ and a `HC-SR04`_ 
-ultrasonic sensor will also be sufficient. This enables building an own chassi 
-and attaching there the above listed parts, instead of buying an ActivityBot 
-360° Robot Kit 360_kit_ .
+ultrasonic sensor, this enables to build your own chassi.
 
 Documentation
 -------------
