@@ -64,6 +64,8 @@ View from the back side.
 
 .. image:: /_static/5.jpg
 
+.. _`Defined_local_coordinate_system`:
+
 Defined local coordinate system in module lib_motion
 ----------------------------------------------------
 
