@@ -220,9 +220,9 @@ class calibrate_pwm:
     """
     Calibrates Parallax Feedback 360° High-Speed Servo with the help of the :class:`read_pwm` class.
 
-    This class helps to find out the min and max duty cycle of the feedback signal
-    of the servo. This values are then needed in :class:`lib_motion` to have 
-    a more precise measurement of the position. The experience has shown that each
+    This class helps to find out the min and max duty cycle of the feedback signal of a 
+    servo. This values ( ``dcMin`` / ``dcMax`` ) are then needed in :class:`lib_motion` 
+    to have a more precise measurement of the position. The experience has shown that each
     servo has slightly different min/max duty cycle values, different than the once 
     provided in the data sheet 360_data_sheet_ . Values smaller and bigger than the 
     printed out once as "duty_cycle_min/duty_cycle_max" are outliers and should 
