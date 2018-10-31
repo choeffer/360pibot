@@ -4,26 +4,25 @@ Examples
 ========
 
 In this section some code examples are listed. The intention of this code examples 
-is providing a guideline and a style guide how things should be programmed. The code
-for each example is included at the bottom of each Python module. 
+is providing a guideline and a style guide how things should be programmed.
 
 .. note::
 
     In this examples, not all possible or needed arguments are passed to the 
-    classes or methods. The examples use the default values of the modules. 
+    classes or methods. The examples mostly use the default values of the modules. 
     For more informations about which arguments can be passed to a class or 
     method and which arguments need to be adjusted, see :ref:`360pibot_API` . 
     As already mentioned above, the intention of this examples is providing a 
     guideline and a style guide how things should be done in general, and not 
-    how each class is working in detail. This is described here :ref:`360pibot_API` 
-    and in the comments in the source code.
+    how each class is working in detail. This is described in section 
+    :ref:`360pibot_API` and in the comments in the source code.
 
 Calibrating 360° servo
 ----------------------
 
 The following code calibrates a Parallax Feedback 360° High-Speed Servo 
 `360_data_sheet`_ . The values ``dcMin`` and ``dcMax`` are later needed 
-in :ref:`lib_motion` . For more informations, see 
+in :class:`lib_motion.motion` . For more informations, see 
 :meth:`lib_para_360_servo.calibrate_pwm` . This example 
 is included as ``calibrate.py`` in the root of the git repository.
 
