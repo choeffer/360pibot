@@ -29,9 +29,10 @@ is included as ``calibrate.py`` in the root of the git repository.
 .. note::
 
     As seen in the example code, one pigpio.pi() instance can be passed to 
-    all used classes. This reduces the number of parallel threads which gets started.
-    If using one pigpio.pi() instance for each used class, so multiple instances in
-    one script, more parallel threads will be started, which is not necessary.
+    all used classes or modules. This reduces the number of parallel threads 
+    which gets started. If using one pigpio.pi() instance for each used class 
+    or module, so multiple instances in one script, more parallel threads will 
+    be started, which is not necessary.
 
 .. code-block:: python
 
@@ -54,8 +55,8 @@ is included as ``calibrate.py`` in the root of the git repository.
     #### Calibrate servos, speed  = 0.2 and -0.2
     #chose gpio_l_w/gpio_l_r (left wheel), or accordingly gpio_r_w/gpio_r_r (right wheel)
 
-    servo = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_r_w, 
-        min_pw = 1280, max_pw = 1720)
+    servo = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_r_w)
+
     #buffer time for initializing everything
     time.sleep(1)
     servo.set_speed(0.2)
@@ -134,9 +135,9 @@ The following code sets the speed of the two used Parallax Feedback
 360° High-Speed Servos `360_data_sheet`_ back to zero to stop both wheels. 
 This might be needed e.g. if a script raises an exception and stops executing 
 before setting the speed of the servos back to zero. In this case, the 
-servos will continue rotating with the last set speed, until the speed is set 
-again. This example is included as ``emergency_stop.py`` in the root of the git 
-repository.
+servos will continue rotating with the last set speed, until the before set 
+speed is changed again. This example is included as ``emergency_stop.py`` in the 
+root of the git repository.
 
 .. code-block:: python
 
@@ -152,11 +153,9 @@ repository.
 
     pi = pigpio.pi()
 
-    servo_l = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_l, 
-        min_pw = 1280, max_pw = 1720)
+    servo_l = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_l)
 
-    servo_r = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_r, 
-        min_pw = 1280, max_pw = 1720)
+    servo_r = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_r)
 
     #buffer time for initializing everything
     time.sleep(1)
