@@ -7,8 +7,8 @@ In this section it is documented how to use each module. In the source
 code it is commented, if necessary, how each part of the code is working 
 and what it is intended to do.
 
-For the Parallax Feedback 360° High-Speed Servo `360_data_sheet`_ there is 
-also C example code available sample_360_ .
+For the Parallax Feedback 360° High-Speed Servo `360_data_sheet`_ also a C 
+example is available sample_360_ .
 
 .. _`lib_scanner`:
 
