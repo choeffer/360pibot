@@ -64,10 +64,10 @@ View from the back side.
 
 .. image:: /_static/5.jpg
 
-.. _`Defined_local_coordinate_system`:
+.. _`Used_local_coordinate_system`:
 
-Defined local coordinate system in module lib_motion
-----------------------------------------------------
+Used local coordinate system in module lib_motion
+-------------------------------------------------
 
 The following picture shows the local coordinat system which is used in 
 :ref:`lib_motion` .
