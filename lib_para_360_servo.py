@@ -221,13 +221,13 @@ class calibrate_pwm:
     Calibrates Parallax Feedback 360° High-Speed Servo with the help of the :class:`read_pwm` class.
 
     This class helps to find out the min and max duty cycle of the feedback signal of a 
-    servo. This values ( ``dcMin`` / ``dcMax`` ) are then needed in :class:`lib_motion` 
+    servo. This values ( ``dcMin`` / ``dcMax`` ) are then needed in :ref:`lib_motion` 
     to have a more precise measurement of the position. The experience has shown that each
     servo has slightly different min/max duty cycle values, different than the once 
     provided in the data sheet 360_data_sheet_ . Values smaller and bigger than the 
     printed out once as "duty_cycle_min/duty_cycle_max" are outliers and should 
     therefore not be considered. This can be seen in printout of smallest/biggest 
-    250 values, there are sometimes a few outliers. Compare the printouts of different
+    250 values. There are sometimes a few outliers. Compare the printouts of different
     runs to get a feeling for it.
 
     .. note::
@@ -335,23 +335,23 @@ class calibrate_pwm:
 
 if __name__ == "__main__":
 
-    #define GPIO for each sensor to read from
+    #define GPIO for each servo to read from
     gpio_l_r = 16
     gpio_r_r = 20
 
-    #define GPIO for each sensor to write to
+    #define GPIO for each servo to write to
     gpio_l_w = 17
     gpio_r_w = 27
     
     pi = pigpio.pi()
 
-    #### Example 1 - Calibrate servos, speed  = 0.2 or -0.2
-    # chose gpio_l_w/gpio_l_r (left wheel) accordingly gpio_r_w/gpio_r_r (right wheel)
+    #### Example 1 - Calibrate servos, speed  = 0.2 and -0.2
+    # chose gpio_l_w/gpio_l_r (left wheel), or accordingly gpio_r_w/gpio_r_r (right wheel)
 
     servo = write_pwm(pi = pi, gpio=gpio_r_w, min_pw = 1280, max_pw = 1720)
     #buffer time for initializing everything
     time.sleep(1)
-    servo.set_speed(-0.2)
+    servo.set_speed(0.2)
     wheel = calibrate_pwm(pi = pi, gpio = gpio_r_r)
     servo.set_speed(0)
     
