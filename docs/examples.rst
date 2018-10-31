@@ -126,13 +126,19 @@ Moving the robot
 The following code makes the robot turning four times 45 degree to the left,
 then moving 20 cm (200 mm) forwards, then 20 cm backwards and 
 in the end turning two times 90 degree to the right. This example is included 
-in :ref:`lib_motion` .
+as ``move_robot.py`` in the root of the git repository.
 
 .. code-block:: python
 
+    import time
+
+    import pigpio
+
+    import lib_motion
+
     pi = pigpio.pi()
 
-    robot = motion(pi = pi)
+    robot = lib_motion.motion(pi = pi)
 
     a = 0
     while a < 4:
@@ -144,7 +150,7 @@ in :ref:`lib_motion` .
     time.sleep(1)
     robot.straight(-200)
     time.sleep(1)
-    
+
     a = 0
     while a < 2:
         robot.turn(-90)
@@ -162,13 +168,20 @@ Moving standard servo
 
 The following code stears the standard servo stand_data_sheet_ . First 
 to the middle position, then to the max right, then to max left and finally 
-to 45 degree. This example is included in :ref:`lib_scanner` .
+to 45 degree.  This example is included as ``move_stand_servo.py`` in the 
+root of the git repository.
 
 .. code-block:: python
 
-    #### Example 2
+    import time
+
+    import pigpio
+
+    import lib_scanner
+
     pi = pigpio.pi()
-    servo = para_standard_servo(gpio = 22, pi = pi, min_pw = 600, max_pw = 2350)
+    servo = lib_scanner.para_standard_servo(gpio = 22, pi = pi,
+        min_pw = 600, max_pw = 2350)
     servo.middle_position()
     time.sleep(1)
     servo.max_right()
@@ -193,7 +206,6 @@ in the root of the git repository.
 
     import lib_scanner
 
-    #### Example 1
     pi = pigpio.pi()
     ranger = lib_scanner.scanner(pi = pi)
     distances = ranger.read_all_angles()

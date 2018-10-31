@@ -2,7 +2,6 @@ import pigpio
 
 import lib_scanner
 
-#### Example 1
 pi = pigpio.pi()
 ranger = lib_scanner.scanner(pi = pi)
 distances = ranger.read_all_angles()
