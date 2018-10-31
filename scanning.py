@@ -3,7 +3,9 @@ import pigpio
 import lib_scanner
 
 pi = pigpio.pi()
+
 ranger = lib_scanner.scanner(pi = pi)
+
 distances = ranger.read_all_angles()
 print(distances)
 

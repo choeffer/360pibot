@@ -340,8 +340,10 @@ class scanner:
     :param int,float time_servo_reach_position:
         Time in seconds to wait until the servo moves from one to another position. 
         This needs to be tested for each servo, how much time is needed.
-        **Default:** 1.5, this was sufficient to safely reach each position before 
-        the measurement is made.
+        **Default:** 3, this should be sufficient to safely (incl. lot of safety 
+        buffer) reach each position before the measurement is made. If the servo 
+        is not oscillating after reaching each position, even a value 0f 0.35 was 
+        working fine with the demo implementation.
     :param bool debug:
         Controls if debugging printouts and measurements are made or not. For more 
         details, have a look at the source code. 
@@ -361,7 +363,7 @@ class scanner:
         self, pi, trigger = 6, echo = 5, 
         gpio = 22, min_pw = 600, max_pw = 2350, min_degree = -90, max_degree = 90,
         angles = [-90, -45, 0, 45, 90],
-        time_servo_reach_position = 1.5, debug = False):
+        time_servo_reach_position = 3, debug = False):
 
         #create one pigpio.pi() instance for the sensor and servo
         self.pi = pi

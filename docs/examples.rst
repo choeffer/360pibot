@@ -21,10 +21,10 @@ for each example is included at the bottom of each Python module.
 Calibrating 360° servo
 ----------------------
 
-The following code calibrates a Parallax Feedback 360° High-Speed servo 
-`360_data_sheet`_ . This example is included in :ref:`lib_para_360_servo` . The values 
-``dcMin`` and ``dcMax`` are later needed in :ref:`lib_motion` . For more 
-informations, see :meth:`lib_para_360_servo.calibrate_pwm` . This example 
+The following code calibrates a Parallax Feedback 360° High-Speed Servo 
+`360_data_sheet`_ . The values ``dcMin`` and ``dcMax`` are later needed 
+in :ref:`lib_motion` . For more informations, see 
+:meth:`lib_para_360_servo.calibrate_pwm` . This example 
 is included as ``calibrate.py`` in the root of the git repository.
 
 .. note::
@@ -131,6 +131,43 @@ be chosen, so the biggest out of 964.6 and 969.15. For the right wheel, for ``du
 Emergency stop
 --------------
 
+The following code sets the speed of the two used Parallax Feedback 
+360° High-Speed Servos `360_data_sheet`_ back to zero to stop both wheels. 
+This might be needed e.g. if a script raises an exception and stops executing 
+before setting the speed of the servos back to zero. In this case, the 
+servos will continue rotating with the last set speed, until the speed is set 
+again. This example is included as ``emergency_stop.py`` in the root of the git 
+repository.
+
+.. code-block:: python
+
+    import time
+
+    import pigpio
+
+    import lib_para_360_servo
+
+    #define GPIO for each servo to write to
+    gpio_l = 17
+    gpio_r = 27
+
+    pi = pigpio.pi()
+
+    servo_l = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_l, 
+        min_pw = 1280, max_pw = 1720)
+
+    servo_r = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_r, 
+        min_pw = 1280, max_pw = 1720)
+
+    #buffer time for initializing everything
+    time.sleep(1)
+
+    servo_l.set_speed(0)
+    servo_r.set_speed(0)
+
+    #http://abyz.me.uk/rpi/pigpio/python.html#stop
+    pi.stop()
+
 Moving the robot
 ----------------
 
@@ -191,8 +228,10 @@ root of the git repository.
     import lib_scanner
 
     pi = pigpio.pi()
+
     servo = lib_scanner.para_standard_servo(gpio = 22, pi = pi,
         min_pw = 600, max_pw = 2350)
+
     servo.middle_position()
     time.sleep(1)
     servo.max_right()
@@ -218,7 +257,9 @@ in the root of the git repository.
     import lib_scanner
 
     pi = pigpio.pi()
+
     ranger = lib_scanner.scanner(pi = pi)
+    
     distances = ranger.read_all_angles()
     print(distances)
 
