@@ -1,6 +1,12 @@
+360pibot
+========
+
 Python 3 implementation for programming an ActivityBot 360° Robot Kit 360_kit_ with
 a Raspberry Pi. The modules of the implementation are using the pigpio_ module 
 to control the GPIOs of the Raspberry Pi. No other external module is needed.
+
+About
+-----
 
 At the moment, the following functions are implemented.
 
@@ -8,13 +14,10 @@ At the moment, the following functions are implemented.
 * Moving straight forward and backward.
 * Scanning the surrounding with an ultrasonic sensor mounted on a servo.
 
-The turning and moving straight movement is controlled by four digital PID 
+The turning and moving straight movements are controlled by four digital PID 
 controllers. Each wheel is controlled by a cascade control, which means 
 a cascade of two PID controllers. The outer loops are controlling the position, 
 the inner loops are controlling the speed of each wheel.
-
-The documentation is hosted on `Read the Docs`_ and is 
-available at https://360pibot.readthedocs.io/ .
 
 The modules also enable remote controlling the Raspberry Pis GPIOs. This enables 
 use of the modules on a laptop/computer and over e.g. WLAN remote controlling the Raspberry Pi 
@@ -24,8 +27,23 @@ and mouse while controlling/programming it. The possibillity of remote controlli
 the Raspberry Pis GPIOs is a big advantage of the used pigpio_ module. It is also possible to 
 use the modules on the Raspberry Pi itself and connect to it over VNC, see VNC_ . For both ways, 
 using the modules on the Raspberry Pi itself or remote on a laptop/computer to control
-the Raspberry Pis GPIOs, no modifications have to be made in the source code, they 
-work in both cases.
+the Raspberry Pis GPIOs, no modifications have to be done in the source code of the modules.
+
+The documentation is done with Sphinx_ and can be extended or modified as needed for 
+e.g. documenting own projects based on this or if extending functionality of the modules 
+and documenting this.
+
+Buying two Parallax Feedback 360° High-Speed Servos `360_data_sheet`_ , two robot wheels 
+`wheel_robot`_, one Parallax Standard Servo `stand_data_sheet`_ and a `HC-SR04`_ 
+ultrasonic sensor will also be sufficient. This enables building an own chassi 
+and attaching there the above listed parts, instead of buying an ActivityBot 
+360° Robot Kit 360_kit_ .
+
+Documentation
+-------------
+
+The documentation is hosted on `Read the Docs`_ and is 
+available at https://360pibot.readthedocs.io/ .
 
 References
 ----------
@@ -35,6 +53,11 @@ References
 .. _pi_hotspot: https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
 .. _remote_pin : http://gpiozero.readthedocs.io/en/stable/remote_gpio.html
 .. _360_kit: https://www.parallax.com/product/32600
+.. _`360_data_sheet`: https://www.parallax.com/sites/default/files/downloads/900-00360-Feedback-360-HS-Servo-v1.1.pdf
+.. _`stand_data_sheet`: https://www.parallax.com/sites/default/files/downloads/900-00005-Standard-Servo-Product-Documentation-v2.2.pdf
+.. _`HC-SR04`: https://cdn.sparkfun.com/assets/b/3/0/b/a/DGCH-RED_datasheet.pdf
+.. _`wheel_robot`: https://www.parallax.com/product/28114
 .. _pigpio: https://pypi.org/project/pigpio/
 .. _VNC: https://www.raspberrypi.org/documentation/remote-access/vnc/
+.. _Sphinx: https://www.sphinx-doc.org/
 .. _`Read the Docs`: https://readthedocs.org/

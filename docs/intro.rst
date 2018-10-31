@@ -13,7 +13,7 @@ At the moment, the following functions are implemented.
 * Moving straight forward and backward.
 * Scanning the surrounding with an ultrasonic sensor mounted on a servo.
 
-The turning and moving straight movement is controlled by four digital PID 
+The turning and moving straight movements are controlled by four digital PID 
 controllers. Each wheel is controlled by a cascade control, which means 
 a cascade of two PID controllers. The outer loops are controlling the position, 
 the inner loops are controlling the speed of each wheel.
@@ -26,8 +26,7 @@ and mouse while controlling/programming it. The possibillity of remote controlli
 the Raspberry Pis GPIOs is a big advantage of the used pigpio_ module. It is also possible to 
 use the modules on the Raspberry Pi itself and connect to it over VNC, see VNC_ . For both ways, 
 using the modules on the Raspberry Pi itself or remote on a laptop/computer to control
-the Raspberry Pis GPIOs, no modifications have to be made in the source code, they 
-work in both cases.
+the Raspberry Pis GPIOs, no modifications have to be done in the source code of the modules.
 
 All the default values in the modules are the once which are used while 
 experimenting/developing with the demo implementation. They provide a good starting 
@@ -40,7 +39,7 @@ and documenting this.
 Buying two Parallax Feedback 360° High-Speed Servos `360_data_sheet`_ , two robot wheels 
 `wheel_robot`_, one Parallax Standard Servo `stand_data_sheet`_ and a `HC-SR04`_ 
 ultrasonic sensor will also be sufficient. This enables building an own chassi 
-and attaching there the above listed parts, instead of directly buying an ActivityBot 
+and attaching there the above listed parts, instead of buying an ActivityBot 
 360° Robot Kit 360_kit_ .
 
 Following some pictures of the demo implementation.

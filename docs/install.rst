@@ -9,8 +9,8 @@ Python environment
 The following steps to set up a working environment are applicable for both, 
 the Raspberry Pi or a laptop/computer. 
 Remember, the modules can be used on a laptop/computer for remote controlling 
-the Raspberry Pis GPIOs or on the Raspberry Pi itself, without any modifications
-to be made in the source code.
+the Raspberry Pis GPIOs or on the Raspberry Pi itself, without any modifications 
+in the source code of the modules.
 
 Getting files
 ^^^^^^^^^^^^^
