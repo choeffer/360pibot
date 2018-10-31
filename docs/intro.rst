@@ -47,6 +47,9 @@ ultrasonic sensor will also be sufficient. This enables building an own chassi
 and attaching there the above listed parts, instead of buying an ActivityBot 
 360° Robot Kit 360_kit_ .
 
+Pictures of demo implementation
+-------------------------------
+
 Following some pictures of the demo implementation.
 
 View from the right side.
