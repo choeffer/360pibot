@@ -23,7 +23,7 @@ The modules provide simple APIs for turning and straight
 movements and also for scanning the surrounding or stearing a servo. Have a look 
 at the :ref:`Examples` section for some code examples.
 
-All the default values in the modules are the once which are used while 
+All the default values in the modules are those which are used while 
 experimenting/developing with the demo implementation. They provide a good starting 
 point for the range of the values. Pictures of the demo implementation can be
 found further down in this section.
