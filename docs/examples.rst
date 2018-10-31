@@ -24,7 +24,8 @@ Calibrating 360° servo
 The following code calibrates a Parallax Feedback 360° High-Speed servo 
 `360_data_sheet`_ . This example is included in :ref:`lib_para_360_servo` . The values 
 ``dcMin`` and ``dcMax`` are later needed in :ref:`lib_motion` . For more 
-informations, see :meth:`lib_para_360_servo.calibrate_pwm` .
+informations, see :meth:`lib_para_360_servo.calibrate_pwm` . This example 
+is included as ``calibrate.py`` in the root of the git repository.
 
 .. note::
 
@@ -35,6 +36,12 @@ informations, see :meth:`lib_para_360_servo.calibrate_pwm` .
 
 .. code-block:: python
 
+    import time
+
+    import pigpio
+
+    import lib_para_360_servo
+
     #define GPIO for each servo to read from
     gpio_l_r = 16
     gpio_r_r = 20
@@ -42,17 +49,18 @@ informations, see :meth:`lib_para_360_servo.calibrate_pwm` .
     #define GPIO for each servo to write to
     gpio_l_w = 17
     gpio_r_w = 27
-    
+
     pi = pigpio.pi()
 
-    #### Example 1 - Calibrate servos, speed  = 0.2 and -0.2
+    #### Calibrate servos, speed  = 0.2 and -0.2
     # chose gpio_l_w/gpio_l_r (left wheel), or accordingly gpio_r_w/gpio_r_r (right wheel)
 
-    servo = write_pwm(pi = pi, gpio=gpio_r_w, min_pw = 1280, max_pw = 1720)
+    servo = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_r_w, 
+        min_pw = 1280, max_pw = 1720)
     #buffer time for initializing everything
     time.sleep(1)
     servo.set_speed(0.2)
-    wheel = calibrate_pwm(pi = pi, gpio = gpio_r_r)
+    wheel = lib_para_360_servo.calibrate_pwm(pi = pi, gpio = gpio_r_r)
     servo.set_speed(0)
 
     #http://abyz.me.uk/rpi/pigpio/python.html#stop
@@ -119,6 +127,9 @@ In this case, for the left wheel for ``duty_cycle_min`` / ``dcMin`` 27.3 should 
 so the smallest out of 27.3 and 31.85. For ``duty_cycle_max`` / ``dcMax`` 969.15 should 
 be chosen, so the biggest out of 964.6 and 969.15. For the right wheel, for ``duty_cycle_min`` 
 / ``dcMin`` 27.3 and for ``duty_cycle_max`` / ``dcMax`` 978.25 accordingly.
+
+Emergency stop
+--------------
 
 Moving the robot
 ----------------
@@ -226,13 +237,6 @@ The robot will turn 45 degree to the left if there is any obstacle closer
 than 40 cm at the five default measuring angles. If not, the robot will
 drive 20 cm forward. This loop continues until it is stopped. This example 
 is included as ``no_collision.py`` in the root of the git repository.
-
-.. note::
-
-    As seen in the example code, one pigpio.pi() instance can be passed to 
-    all used classes. This reduces the number of parallel threads which gets started.
-    If using one pigpio.pi() instance for each used class, so multiple instances in
-    one script, more parallel threads will be started, which is not necessary.
 
 .. code-block:: python
 
