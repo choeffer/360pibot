@@ -16,7 +16,7 @@ class motion:
     to the x-axis in the direction to the left wheel. The center (0/0) is where the middle
     of the robot chassis is cutting across a imaginary line through both wheels/servos.
     Angle phi is the displacement of the local coordinate system to the real world 
-    coordinate system. See :ref:`Defined_local_coordinate_system` .
+    coordinate system. See :ref:`Defined_local_coordinate_system` for a picture of it.
 
     .. warning::
         Be carefull with setting the min and max pulsewidth! Test carefully ``min_pw`` and ``max_pw``
