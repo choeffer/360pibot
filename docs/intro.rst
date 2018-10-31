@@ -73,8 +73,9 @@ View from top, including the local coordinate system of the demo implementation.
 Cabling
 -------
 
-Below see a Fritzing sheet which illustrates the cabling. The voltage divider is 
-build out of two resistors, blue one with 82 Ohm and gold one with 150 Ohm.
+Below see a Fritzing sheet which illustrates the cabling of the demo implementation. 
+The voltage divider is build out of two resistors, blue one with 82 Ohm and gold 
+one with 150 Ohm.
 
 .. warning::
 
