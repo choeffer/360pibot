@@ -22,6 +22,10 @@ The modules provide a simple API interface for the turning and moving straight
 movements and also for scanning the surrounding or stearing a servo. Have a look 
 at the :ref:`Examples` section for some code examples.
 
+All the default values in the modules are the once which are used while 
+experimenting/developing with the demo implementation. They provide a good starting 
+point for the range of the values.
+
 The modules also enable remote controlling the Raspberry Pis GPIOs. This enables 
 use of the modules on a laptop/computer and over e.g. WLAN remote controlling the Raspberry Pi 
 which provides a WLAN Hotspot, see remote_pin_ and pi_hotspot_ . So, the robot can freely
@@ -31,10 +35,6 @@ the Raspberry Pis GPIOs is a big advantage of the used pigpio_ module. It is als
 use the modules on the Raspberry Pi itself and connect to it over VNC, see VNC_ . For both ways, 
 using the modules on the Raspberry Pi itself or remote on a laptop/computer to control
 the Raspberry Pis GPIOs, no modifications have to be done in the source code of the modules.
-
-All the default values in the modules are the once which are used while 
-experimenting/developing with the demo implementation. They provide a good starting 
-point for the range of the values.
 
 The documentation is made with Sphinx_ and can be extended or modified as needed for 
 e.g. documenting own projects based on this or if extending functionality of the modules 
