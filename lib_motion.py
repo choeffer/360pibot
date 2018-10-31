@@ -243,7 +243,7 @@ class motion:
         Ki_p = 0,
         Kd_p = 0,
         #Inner Controller, speed
-        Kp_s = 0.5,
+        Kp_s = 0.3,
         Ki_s = 0.1,
         Kd_s = 0,
         straight = False, turn = False):
@@ -263,7 +263,7 @@ class motion:
         and 1 and the output value of each outer PID controller is limited to -1 and 1.
         This ensures that no scaling factors are introduced in the P/I/D values and also that
         the output of each PID controller matches the speed range of the servos, defined in 
-        :class:`lib_para_360_servo.write_pwm.set_speed` . A sliding median window is used to filter out
+        :meth:`lib_para_360_servo.write_pwm.set_speed` . A sliding median window is used to filter out
         the noise in the rotation speed measurement (ticks/s) which is done indirectly by measuring the 
         position of the servo. Also a deadband filter after the error calculation of the outer control
         loop is implemented. This adjustments help to make the controllers more stable, e.g. filter out
