@@ -36,7 +36,7 @@ High-Speed Servo `360_data_sheet`_ .
 
 This module includes three classes. One for setting the speed :class:`lib_para_360_servo.write_pwm` ,
 one for reading the position :class:`lib_para_360_servo.read_pwm` and one for calibrating 
-a servo to determine the appropriate values needed in :ref:`lib_motion` 
+a servo to determine the appropriate ``dcMin`` / ``dcMax`` values needed in :ref:`lib_motion` 
 :class:`lib_para_360_servo.calibrate_pwm` .
 
 .. automodule:: lib_para_360_servo

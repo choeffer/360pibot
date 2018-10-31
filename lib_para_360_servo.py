@@ -227,8 +227,8 @@ class calibrate_pwm:
     provided in the data sheet 360_data_sheet_ . Values smaller and bigger than the 
     printed out once as "duty_cycle_min/duty_cycle_max" are outliers and should 
     therefore not be considered. This can be seen in printout of smallest/biggest 
-    250 values, there are sometimes a few outliers. Compare the printouts to get a 
-    feeling for it, therefore, run it serveral times.
+    250 values, there are sometimes a few outliers. Compare the printouts of different
+    runs to get a feeling for it.
 
     .. note::
         **IMPORTANT** The robot wheels must be able to rotate free in the air for calibration.

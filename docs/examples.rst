@@ -22,9 +22,9 @@ Calibrating 360° servo
 ----------------------
 
 The following code calibrates a Parallax Feedback 360° High-Speed servo 
-`360_data_sheet`_ . This example is included in :ref:`lib_para_360_servo` . The values
-are later needed in :ref:`lib_motion` . For more informations, see 
-:meth:`lib_para_360_servo.calibrate_pwm` .
+`360_data_sheet`_ . This example is included in :ref:`lib_para_360_servo` . The values 
+``dcMin`` and ``dcMax`` are later needed in :ref:`lib_motion` . For more 
+informations, see :meth:`lib_para_360_servo.calibrate_pwm` .
 
 .. note::
 
@@ -114,10 +114,10 @@ Below see an example output which was generated with the demo installation.
     duty_cycle_min: 27.3
     duty_cycle_max: 978.25
 
-In this case, for the left wheel for ``duty_cycle_min`` 27.3 should be chosen, 
-so the smallest of 27.3 and 31.85. For ``duty_cycle_max`` 969.15 should be chosen,
-so the biggest out of 964.6 and 969.15. For the right wheel, ``duty_cycle_min`` 
-of 27.3 and  ``duty_cycle_max`` 978.25 accordingly.
+In this case, for the left wheel for ``duty_cycle_min`` / ``dcMin`` 27.3 should be chosen, 
+so the smallest out of 27.3 and 31.85. For ``duty_cycle_max`` / ``dcMax`` 969.15 should 
+be chosen, so the biggest out of 964.6 and 969.15. For the right wheel, ``duty_cycle_min`` 
+/ ``dcMin`` of 27.3 and ``duty_cycle_max`` / ``dcMax`` 978.25 accordingly.
 
 Moving the robot
 ----------------
