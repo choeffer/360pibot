@@ -47,8 +47,8 @@ ultrasonic sensor will also be sufficient. This enables building an own chassi
 and attaching there the above listed parts, instead of buying an ActivityBot 
 360° Robot Kit 360_kit_ .
 
-Pictures of demo implementation
--------------------------------
+Pictures of the demo implementation
+-----------------------------------
 
 Following some pictures of the demo implementation.
 
@@ -70,8 +70,8 @@ View from top, including the local coordinate system of the demo implementation.
 
 .. image:: /_static/5.jpg
 
-Cabling of demo implementation
-------------------------------
+Cabling of the demo implementation
+----------------------------------
 
 Below see a Fritzing sheet which illustrates the cabling of the demo implementation. 
 The voltage divider is build out of two resistors, blue one with 82 Ohm and gold 
