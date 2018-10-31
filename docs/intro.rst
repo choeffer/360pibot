@@ -45,7 +45,7 @@ of the repository.
 Instead of buying an ActivityBot 360° Robot Kit 360_kit_ it is sufficient to buy 
 two Parallax Feedback 360° High-Speed Servos `360_data_sheet`_ , two robot wheels 
 `wheel_robot`_, one Parallax Standard Servo `stand_data_sheet`_ and a `HC-SR04`_ 
-ultrasonic sensor to build your own chassi.
+ultrasonic sensor to build your own chassi/robot.
 
 Pictures of the demo implementation
 -----------------------------------
