@@ -10,11 +10,9 @@ gpio_r = 27
 
 pi = pigpio.pi()
 
-servo_l = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_l, 
-    min_pw = 1280, max_pw = 1720)
+servo_l = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_l)
 
-servo_r = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_r, 
-    min_pw = 1280, max_pw = 1720)
+servo_r = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_r)
 
 #buffer time for initializing everything
 time.sleep(1)

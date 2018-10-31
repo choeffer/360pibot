@@ -214,8 +214,9 @@ Moving standard servo
 
 The following code stears the standard servo stand_data_sheet_ . First 
 to the middle position, then to the max right, then to max left and finally 
-to 45 degree.  This example is included as ``move_stand_servo.py`` in the 
-root of the git repository.
+to 45 degree (regarding reached max left and max right). See 
+:class:`lib_scanner.para_standard_servo` how to use it. This example is 
+included as ``move_stand_servo.py`` in the root of the git repository.
 
 .. code-block:: python
 
@@ -227,8 +228,7 @@ root of the git repository.
 
     pi = pigpio.pi()
 
-    servo = lib_scanner.para_standard_servo(gpio = 22, pi = pi,
-        min_pw = 600, max_pw = 2350)
+    servo = lib_scanner.para_standard_servo(pi = pi, gpio = 22)
 
     servo.middle_position()
     time.sleep(2)
@@ -247,6 +247,13 @@ Scanning
 The following code scans the surrounding of the robot in all five default
 angles and prints out the result. This example is included as ``scanning.py`` 
 in the root of the git repository.
+
+.. warning::
+
+    Make sure that the ``min_pw`` and ``max_pw`` values are carefully tested
+    **before** using this example, see **warning** in 
+    :class:`lib_scanner.para_standard_servo`! The default values for the 
+    created ranger object are just valid for the demo implementation!
 
 .. code-block:: python
 
@@ -276,6 +283,13 @@ The robot will turn 45 degree to the left if there is any obstacle closer
 than 40 cm at the five default measuring angles. If not, the robot will
 drive 20 cm forward. This loop continues until it is stopped. This example 
 is included as ``no_collision.py`` in the root of the git repository.
+
+.. warning::
+
+    Make sure that the ``min_pw`` and ``max_pw`` values are carefully tested
+    **before** using this example, see **warning** in 
+    :class:`lib_scanner.para_standard_servo`! The default values for the 
+    created ranger object are just valid for the demo implementation!
 
 .. code-block:: python
 
