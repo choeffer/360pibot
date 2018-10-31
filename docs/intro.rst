@@ -69,7 +69,7 @@ View from the back side.
 Used local coordinate system in module lib_motion
 -------------------------------------------------
 
-The following picture shows the local coordinat system which is used in 
+The following picture shows the local coordinate system which is used in 
 :ref:`lib_motion` .
 
 .. image:: /_static/4.jpg

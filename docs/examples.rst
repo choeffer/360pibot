@@ -12,10 +12,10 @@ is included at the bottom of each Python module.
     In this examples, not all possible or needed arguments are passed to the 
     classes or methods. The examples use the default values which are hardcoded in the 
     modules. For more information which variables can be passed to a class or 
-    method and which arguments need to be adjusted, see :ref:`360pibot_Python_API` . 
+    method and which arguments need to be adjusted, see :ref:`360pibot_API` . 
     As already mentioned above, the intention of this examples is providing a 
     guideline how things should be done in general, and not how each class is 
-    working in detail, this is described here :ref:`360pibot_Python_API` and 
+    working in detail, this is described here :ref:`360pibot_API` and 
     in the comments in the source code.
 
 Calibrating 360° servo
