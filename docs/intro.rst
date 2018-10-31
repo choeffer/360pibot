@@ -70,8 +70,8 @@ View from top, including the local coordinate system of the demo implementation.
 
 .. image:: /_static/5.jpg
 
-Cabling
--------
+Cabling of demo implementation
+------------------------------
 
 Below see a Fritzing sheet which illustrates the cabling of the demo implementation. 
 The voltage divider is build out of two resistors, blue one with 82 Ohm and gold 
