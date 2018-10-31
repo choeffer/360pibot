@@ -2,7 +2,6 @@ import time
 
 import pigpio
 
-
 #https://cdn.sparkfun.com/assets/b/3/0/b/a/DGCH-RED_datasheet.pdf
 class hcsr04:
     """
@@ -341,7 +340,7 @@ class scanner:
     :param int,float time_servo_reach_position:
         Time in seconds to wait until the servo moves from one to another position. 
         This needs to be tested for each servo, how much time is needed.
-        **Default:** 0.35, this was sufficient to safely reach each position before 
+        **Default:** 1.5, this was sufficient to safely reach each position before 
         the measurement is made.
     :param bool debug:
         Controls if debugging printouts and measurements are made or not. For more 
@@ -362,7 +361,7 @@ class scanner:
         self, pi, trigger = 6, echo = 5, 
         gpio = 22, min_pw = 600, max_pw = 2350, min_degree = -90, max_degree = 90,
         angles = [-90, -45, 0, 45, 90],
-        time_servo_reach_position = 0.35, debug = False):
+        time_servo_reach_position = 1.5, debug = False):
 
         #create one pigpio.pi() instance for the sensor and servo
         self.pi = pi
@@ -434,25 +433,5 @@ class scanner:
 
 if __name__ == '__main__':
 
-    #### Example 1
-    pi = pigpio.pi()
-    ranger = scanner(pi = pi)
-    distances = ranger.read_all_angles()
-    print(distances)
-    #http://abyz.me.uk/rpi/pigpio/python.html#callback
-    ranger.cancel()
-    #http://abyz.me.uk/rpi/pigpio/python.html#stop
-    pi.stop()
-
-    #### Example 2
-    # pi = pigpio.pi()
-    # servo = para_standard_servo(gpio = 22, pi = pi, min_pw = 600, max_pw = 2350)
-    # servo.middle_position()
-    # time.sleep(1)
-    # servo.max_right()
-    # time.sleep(1)
-    # servo.max_left()
-    # time.sleep(1)
-    # servo.set_position(degree = 45)
-    # #http://abyz.me.uk/rpi/pigpio/python.html#stop
-    # pi.stop()
+    #just continue
+    pass
