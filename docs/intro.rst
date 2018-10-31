@@ -50,8 +50,6 @@ and attaching there the above listed parts, instead of buying an ActivityBot
 Pictures of the demo implementation
 -----------------------------------
 
-Following some pictures of the demo implementation.
-
 View from the right side.
 
 .. image:: /_static/1.jpg
@@ -66,8 +64,11 @@ View from the back side.
 
 .. image:: /_static/5.jpg
 
-Local coordinate system of the demo implementation
---------------------------------------------------
+Defined local coordinate system in module lib_motion
+----------------------------------------------------
+
+The following picture shows the local coordinat system which is used in 
+:ref:`lib_motion` .
 
 .. image:: /_static/4.jpg
 

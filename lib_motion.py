@@ -15,8 +15,8 @@ class motion:
     the following way. X-axis positive is straight forward, y-axis positive perpendicular 
     to the x-axis in the direction to the left wheel. The center (0/0) is where the middle
     of the robot chassis is cutting across a imaginary line through both wheels/servos.
-    Angle phi is the displacement of the local coordinate system to the real world coordinate
-    system. See :ref:`Introduction` for a picture.
+    Angle phi is the displacement of the local coordinate system to the real world 
+    coordinate system. See :ref:`Introduction` for a picture.
 
     .. warning::
         Be carefull with setting the min and max pulsewidth! Test carefully ``min_pw`` and ``max_pw``
@@ -190,8 +190,8 @@ class motion:
 
         This method turns the robot about x degree to the left or to the right. 
         Positive degree values turn the robot to the left,
-        negative degree values to the right, see picture in :ref:`Introduction` , where 
-        the local coordinate system of the robot is shown. This method calls 
+        negative degree values to the right, see picture in :ref:`Introduction` , 
+        where the local coordinate system of the robot is shown. This method calls 
         :meth:`lib_motion.move` which controls the movement of the robot.
 
         :param int,float degree:
