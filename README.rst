@@ -19,6 +19,10 @@ controllers. Each wheel is controlled by a cascade control, which means
 a cascade of two PID controllers. The outer loops are controlling the position, 
 the inner loops are controlling the speed of each wheel.
 
+The modules provide a simple API interface for the turning and moving straight 
+movements and also for scanning the surrounding or stearing a servo. Have a look 
+at the Examples section of the documentation for some code examples.
+
 The modules also enable remote controlling the Raspberry Pis GPIOs. This enables 
 use of the modules on a laptop/computer and over e.g. WLAN remote controlling the Raspberry Pi 
 which provides a WLAN Hotspot, see remote_pin_ and pi_hotspot_ . So, the robot can freely
