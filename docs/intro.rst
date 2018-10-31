@@ -18,7 +18,7 @@ controllers. Each wheel is controlled by a cascade control, which means
 a cascade of two PID controllers. The outer loops are controlling the position, 
 the inner loops are controlling the speed of each wheel.
 
-The modules provide simple API interfaces for the turning and moving straight 
+The modules provide simple APIs for the turning and moving straight 
 movements and also for scanning the surrounding or stearing a servo. Have a look 
 at the :ref:`Examples` section for some code examples.
 
@@ -39,7 +39,8 @@ the Raspberry Pis GPIOs, no modifications have to be done in the source code of 
 
 The documentation is made with Sphinx_ and can be extended or modified as needed for 
 e.g. documenting own projects based on this or if extending functionality of the modules 
-and documenting this.
+and documenting this. The whole documentation is stored in the ``docs/`` folder 
+of the repository.
 
 Buying two Parallax Feedback 360° High-Speed Servos `360_data_sheet`_ , two robot wheels 
 `wheel_robot`_, one Parallax Standard Servo `stand_data_sheet`_ and a `HC-SR04`_ 
