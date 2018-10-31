@@ -64,11 +64,13 @@ View from the back side.
 
 .. image:: /_static/3.jpg
 
-View from top, including the local coordinate system of the demo implementation. 
+.. image:: /_static/5.jpg
+
+Local coordinate system of the demo implementation
+--------------------------------------------------
 
 .. image:: /_static/4.jpg
 
-.. image:: /_static/5.jpg
 
 Cabling of the demo implementation
 ----------------------------------
