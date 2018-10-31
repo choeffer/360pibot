@@ -96,7 +96,7 @@ one with 150 Ohm.
     port should be avoided, because otherwise all needed current of all devices would be 
     conducted through the Raspberry Pi.
     
-.. image:: /_static/6.svg
+.. image:: /_static/6.jpg
 
 References
 ----------
