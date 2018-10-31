@@ -251,8 +251,8 @@ in the root of the git repository.
 .. warning::
 
     Make sure that the ``min_pw`` and ``max_pw`` values are carefully tested
-    **before** using this example, see **warning** in 
-    :class:`lib_scanner.para_standard_servo`! The default values for the 
+    **before** using this example, see **Warning** in 
+    :class:`lib_scanner.para_standard_servo` ! The default values for the 
     created ranger object are just valid for the demo implementation!
 
 .. code-block:: python
@@ -287,8 +287,8 @@ is included as ``no_collision.py`` in the root of the git repository.
 .. warning::
 
     Make sure that the ``min_pw`` and ``max_pw`` values are carefully tested
-    **before** using this example, see **warning** in 
-    :class:`lib_scanner.para_standard_servo`! The default values for the 
+    **before** using this example, see **Warning** in 
+    :class:`lib_scanner.para_standard_servo` ! The default values for the 
     created ranger object are just valid for the demo implementation!
 
 .. code-block:: python
