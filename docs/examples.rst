@@ -24,7 +24,7 @@ The following code calibrates a Parallax Feedback 360° High-Speed Servo
 `360_data_sheet`_ . The values ``dcMin`` and ``dcMax`` are later needed 
 in :class:`lib_motion.motion` . For more informations, see 
 :meth:`lib_para_360_servo.calibrate_pwm` . This example 
-is included as ``calibrate.py`` in the root of the git repository.
+is included as ``calibrate.py`` .
 
 .. note::
 
@@ -136,8 +136,7 @@ The following code sets the speed of the two used Parallax Feedback
 This might be needed e.g. if a script raises an exception and stops executing 
 before setting the speed of the servos back to zero. In this case, the 
 servos will continue rotating with the last set speed, until the before set 
-speed is changed again. This example is included as ``emergency_stop.py`` in the 
-root of the git repository.
+speed is changed again. This example is included as ``emergency_stop.py`` .
 
 .. code-block:: python
 
@@ -172,7 +171,7 @@ Moving the robot
 The following code makes the robot turning four times 45 degree to the left,
 then moving 20 cm (200 mm) forwards, then 20 cm backwards and 
 in the end turning two times 90 degree to the right. This example is included 
-as ``move_robot.py`` in the root of the git repository.
+as ``move_robot.py`` .
 
 .. code-block:: python
 
@@ -216,7 +215,7 @@ The following code stears the standard servo stand_data_sheet_ . First
 to the middle position, then to the max right, then to max left and finally 
 to 45 degree (regarding reached max left and max right). See 
 :class:`lib_scanner.para_standard_servo` how to use it. This example is 
-included as ``move_stand_servo.py`` in the root of the git repository.
+included as ``move_stand_servo.py`` .
 
 .. code-block:: python
 
@@ -245,8 +244,7 @@ Scanning
 --------
 
 The following code scans the surrounding of the robot in all five default
-angles and prints out the result. This example is included as ``scanning.py`` 
-in the root of the git repository.
+angles and prints out the result. This example is included as ``scanning.py`` .
 
 .. warning::
 
@@ -282,7 +280,7 @@ The following code implements a simple collision avoiding algorithm.
 The robot will turn 45 degree to the left if there is any obstacle closer
 than 40 cm at the five default measuring angles. If not, the robot will
 drive 20 cm forward. This loop continues until it is stopped. This example 
-is included as ``no_collision.py`` in the root of the git repository.
+is included as ``no_collision.py`` .
 
 .. warning::
 

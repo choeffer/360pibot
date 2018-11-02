@@ -15,7 +15,7 @@ in the source code of the modules.
 Getting files
 ^^^^^^^^^^^^^
 
-First step is creating a folder named ``360pibot`` in the Raspberry Pis ``home`` folder
+One option is creating a folder named ``360pibot`` in the Raspberry Pis ``home`` folder
 
 .. code-block:: console
 
@@ -111,14 +111,14 @@ be installed in the global Python 3 environment.
     pip3 install pigpio
 
 
-Installing modules for the documentation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Installing modules for building the documentation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The whole documentation is made with Sphinx_ and can be extended or 
 modified as needed for e.g. documenting own projects based on this or if 
 extending functionality of the modules and documenting this. The whole 
-documentation is stored in the ``docs/`` folder of the repository. The 
-standard docstring format (ReStructuredText_ (reST)) is used. The used 
+documentation is stored in the ``docs/`` folder. The standard 
+docstring format (ReStructuredText_ (reST)) is used. The used 
 theme is from `Read the Docs`_ where also the documentation is hosted. 
 Therefore, two more modules are needed for beeing able to modify or 
 extend the documentation. How to use Sphinx is not part of this documentation. 
@@ -141,7 +141,6 @@ If using a venv
 
     cd ~
     cd 360pibot
-    python3 -m venv venv
     source venv/bin/activate
     pip3 install sphinx sphinx_rtd_theme
 
@@ -151,10 +150,31 @@ or if installing in the global Python 3 environment.
 
     pip3 install sphinx sphinx_rtd_theme
 
-There is also a ``requirements.txt`` available in the repository which 
-will install the used versions of the modules which are used while 
-experimenting/developing with the demo implementation and writing the 
-documentation.
+After this, the following command ``make html`` builds the html documentation 
+which will be stored in the ``docs/_build/html/`` folder. There, open the 
+``index.html`` with your preferred web browser.
+
+If using a venv
+
+.. code-block:: console
+
+    cd ~
+    cd 360pibot
+    source venv/bin/activate
+    cd docs
+    make html
+
+or if using the global Python 3 environment.
+
+.. code-block:: console
+
+    cd ~
+    cd 360pibot/docs
+    make html
+
+The ``requirements.txt`` file will install the used versions of 
+the modules which are used while experimenting/developing with 
+the demo implementation and writing the documentation.
 
 This can be done by using a venv
 
@@ -162,7 +182,6 @@ This can be done by using a venv
 
     cd ~
     cd 360pibot
-    python3 -m venv venv
     source venv/bin/activate
     pip3 install -r requirements.txt
 
@@ -172,7 +191,10 @@ or by installing them in the global Python 3 environment.
 
     pip3 install -r requirements.txt
 
-The ``requirements.txt`` is created with ``pip3 freeze > requirements.txt``.
+The ``requirements.txt`` file is created with ``pip3 freeze > requirements.txt``. 
+The ``requirements_rtd.txt`` file is used by `Read the Docs`_ . The documentation 
+is auto build each time a commit is made. For further information, see 
+`Read the Docs Webhooks`_ .
 
 Raspberry Pi
 ------------
@@ -254,3 +276,4 @@ References
 .. _docs3: https://www.youtube.com/watch?v=0ROZRNZkPS8
 .. _docs4: https://www.youtube.com/watch?v=hM4I58TA72g
 .. _pigpio_pi: http://abyz.me.uk/rpi/pigpio/python.html#pigpio.pi
+.. _`Read the Docs Webhooks`: https://docs.readthedocs.io/en/latest/webhooks.html
