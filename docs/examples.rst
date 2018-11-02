@@ -143,8 +143,8 @@ included as ``move_stand_servo.py`` .
 .. literalinclude:: ../move_stand_servo.py
    :linenos:
 
-Scanning of the surrounding
----------------------------
+Scanning the surrounding
+------------------------
 
 The following code scans the surrounding of the robot in all five default
 angles and prints out the result. This example is included as ``scanning.py`` .
