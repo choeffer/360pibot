@@ -23,7 +23,7 @@ The modules provide simple APIs for turning and straight
 movements and also for scanning the surrounding or stearing a servo. Have a look 
 at the :ref:`Examples` section for some code examples.
 
-All the default values in the modules are those which are used while 
+Most of the default values in the modules are those which are used while 
 experimenting/developing with the demo implementation. They provide a good starting 
 point for the range of the values. Pictures of the demo implementation can be
 found further down in this section.
@@ -41,7 +41,7 @@ modifications have to be done in the source code of the modules.
 The documentation is made with Sphinx_ and can be extended or modified as needed for 
 e.g. documenting own projects based on this or if extending functionality of the modules 
 and documenting this. The whole documentation is stored in the ``docs/`` folder 
-of the repository.
+of the git repository.
 
 Instead of buying an ActivityBot 360° Robot Kit 360_kit_ it is sufficient to buy 
 two Parallax Feedback 360° High-Speed Servos `360_data_sheet`_ , two robot wheels 
