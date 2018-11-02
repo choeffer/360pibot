@@ -243,7 +243,7 @@ class motion:
         Ki_p = 0,
         Kd_p = 0,
         #Inner Controller, speed
-        Kp_s = 0.3,
+        Kp_s = 0.4,
         Ki_s = 0.1,
         Kd_s = 0,
         straight = False, turn = False):
