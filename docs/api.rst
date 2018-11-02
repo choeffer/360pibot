@@ -7,9 +7,6 @@ In this section the use of each module is documented. In the source
 code it is commented, if necessary, how each part of the code is working 
 and what it is intended to do.
 
-For the Parallax Feedback 360° High-Speed Servo `360_data_sheet`_ also C 
-example code is available sample_360_ .
-
 .. _`lib_scanner`:
 
 lib_scanner
@@ -61,6 +58,5 @@ References
 .. target-notes::
 
 .. _`360_data_sheet`: https://www.parallax.com/sites/default/files/downloads/900-00360-Feedback-360-HS-Servo-v1.1.pdf
-.. _sample_360: https://www.parallax.com/downloads/feedback-360%C2%B0-high-speed-servo-propeller-c-example-code
 .. _`HC-SR04`: https://cdn.sparkfun.com/assets/b/3/0/b/a/DGCH-RED_datasheet.pdf
 .. _`stand_data_sheet`: https://www.parallax.com/sites/default/files/downloads/900-00005-Standard-Servo-Product-Documentation-v2.2.pdf

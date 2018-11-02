@@ -8,6 +8,9 @@ is providing a guideline and a style guide how things should be done in general,
 and not how each class is working in detail. This is described in section 
 :ref:`360pibot_API` .
 
+For the Parallax Feedback 360° High-Speed Servo `360_data_sheet`_ also C 
+example code is available sample_360_ .
+
 .. note::
 
     In this examples, not all possible or needed arguments are passed to the 
@@ -175,4 +178,4 @@ References
 
 .. _`360_data_sheet`: https://www.parallax.com/sites/default/files/downloads/900-00360-Feedback-360-HS-Servo-v1.1.pdf
 .. _stand_data_sheet: https://www.parallax.com/sites/default/files/downloads/900-00005-Standard-Servo-Product-Documentation-v2.2.pdf
-
+.. _sample_360: https://www.parallax.com/downloads/feedback-360%C2%B0-high-speed-servo-propeller-c-example-code
