@@ -3,17 +3,14 @@
 Installation
 ============
 
-Python environment
-------------------
-
-The following steps to set up a working environment are applicable for both, 
+The following steps to set up a working environment are valid for both, 
 the Raspberry Pi or a laptop/computer. 
 Remember, the modules can be used on a laptop/computer for remote controlling 
 the Raspberry Pis GPIOs or on the Raspberry Pi itself, without any modifications 
 in the source code of the modules.
 
 Getting files
-^^^^^^^^^^^^^
+-------------
 
 One option is creating a folder named ``360pibot`` in the Raspberry Pis ``home`` folder
 
@@ -40,19 +37,19 @@ will be installed if not already existing, then the repository will be cloned.
 Both methods for getting the project files are also working on a laptop/computer.
 
 Installing needed modules
-^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 Next step is to install the needed modules. They can be installed in the global 
 Python 3 environment or in a virtual environment. The latter has the advantage 
 that the packages are isolated from other projects (and also from the system wide 
 installed/global once) and if things get messed up, the virtual environment can just 
-be deleted and created from scratch again. For more information about virtual 
+be deleted and created from scratch again. For more informations about virtual 
 environments in Python, see venv1_ and venv2_ . First, installing with a 
 virtual environment will be explainend, afterwards with using the global 
 Python 3 environment.
 
 With a virtual environment
-""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 On a Raspberry Pi first ensure that the packages ``python3-venv`` and ``python3-pip`` 
 are installed. This has also to be checked on a Debian based distribution like 
@@ -95,11 +92,11 @@ Deactivating the running virtual environment can be done later by just typing
 .. note::
 
     For later using the installed module the virtual environment has to be activated 
-    every time, because the pigpio package is installed inside it and not callable 
+    every time, because the pigpio package is installed inside and not callable 
     from outside.
 
 Without a virtual environment
-"""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In this case, just the following steps are needed. Then, the ``pigpio`` module will 
 be installed in the global Python 3 environment.
@@ -112,7 +109,7 @@ be installed in the global Python 3 environment.
 
 
 Installing modules for building the documentation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------------------
 
 The whole documentation is made with Sphinx_ and can be extended or 
 modified as needed for e.g. documenting own projects based on this or if 
@@ -172,7 +169,7 @@ or if using the global Python 3 environment.
     cd 360pibot/docs
     make html
 
-The ``requirements.txt`` file will install the used versions of 
+The ``requirements.txt`` file will install the exact versions of 
 the modules which are used while experimenting/developing with 
 the demo implementation and writing the documentation.
 
@@ -200,7 +197,7 @@ Raspberry Pi
 ------------
 
 The following steps are specific to the Raspberry Pi. It is needed to install the 
-``pigpio`` package, automate/enable starting the daemon at boot and then doing a reboot 
+``pigpio`` package, enable starting the pigpio daemon at boot and then doing a reboot 
 to activate the pigpio daemon. For more information see `pigpio_download`_  and remote_pin_ . 
 For the demo implementation the package from the Raspbian repository is chosen, 
 because then it is more guarenteed that it is good integrated in the system, even 
@@ -249,8 +246,8 @@ Then the environment variable has to be set while or before launching Python 3 o
 This variable will point to the IP address (and optional port) on which the Raspberry Pi 
 is accessable, on its own provided hotspot/network or on a WLAN it is connected to. 
 There are also other possibilities available for configuring remote access. They are 
-mentioned in the pgpio documentation, see pigpio_pi_ . E.g. the IP address and port 
-can be passed as arguments if initializing a pigpio.pi() object.
+mentioned in the pigpio documentation, see pigpio_pi_ . E.g. the IP address and port 
+can be passed as arguments if initializing a pigpio.pi() instance.
 
 .. code-block:: console
 

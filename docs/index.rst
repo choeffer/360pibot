@@ -7,7 +7,7 @@ Welcome to 360pibot's documentation!
 ====================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :numbered:
    
    intro
