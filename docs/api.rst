@@ -3,7 +3,7 @@
 360pibot API
 ============
 
-In this section it is documented how to use each module. In the source
+In this section the use of each module is documented. In the source
 code it is commented, if necessary, how each part of the code is working 
 and what it is intended to do.
 

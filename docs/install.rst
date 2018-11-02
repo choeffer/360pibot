@@ -4,7 +4,7 @@ Installation
 ============
 
 The following steps to set up a working environment are valid for both, 
-the Raspberry Pi or a laptop/computer. 
+the Raspberry Pi and a laptop/computer. 
 Remember, the modules can be used on a laptop/computer for remote controlling 
 the Raspberry Pis GPIOs or on the Raspberry Pi itself, without any modifications 
 in the source code of the modules.
@@ -40,13 +40,13 @@ Installing needed modules
 -------------------------
 
 Next step is to install the needed modules. They can be installed in the global 
-Python 3 environment or in a virtual environment. The latter has the advantage 
-that the packages are isolated from other projects (and also from the system wide 
-installed/global once) and if things get messed up, the virtual environment can just 
-be deleted and created from scratch again. For more informations about virtual 
-environments in Python, see venv1_ and venv2_ . First, installing with a 
-virtual environment will be explainend, afterwards with using the global 
-Python 3 environment.
+Python 3 environment or in a virtual Python 3 environment. The latter has the 
+advantage that the packages are isolated from other projects (and also from the 
+system wide installed/global once) and if things get messed up, the virtual 
+environment can just be deleted and created from scratch again. For more 
+informations about virtual environments in Python 3, see venv1_ and venv2_ . 
+First, installing with a virtual environment will be explainend, afterwards 
+with using the global Python 3 environment.
 
 With a virtual environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -61,7 +61,8 @@ Ubuntu/Mint.
     sudo apt-get install python3-venv python3-pip
 
 Afterwards, navigate to the created ``360pibot`` folder and create a virtual 
-environment named ``venv`` and activate it in the running terminal. 
+environment named ``venv`` and activate it. An activated virtual environment 
+is indicated by a ``(venv)`` in the beginning of the terminal prompt.
 
 .. note::
 
@@ -75,15 +76,14 @@ environment named ``venv`` and activate it in the running terminal.
     python3 -m venv venv
     source venv/bin/activate
 
-With the activated virtual environment (indicated by a ``(venv)`` in the beginning 
-of the terminal prompt) now install the needed ``pigpio`` module.
+With the activated virtual environment install the needed ``pigpio`` module.
 
 .. code-block:: console
 
     pip3 install pigpio
 
-Deactivating the running virtual environment can be done later by just typing 
-``deactivate`` in the running terminal.
+Deactivating the acvtivated virtual environment can be done later by just typing 
+``deactivate`` in the terminal where the virtual environment is activated.
 
 .. code-block:: console
 
@@ -91,7 +91,7 @@ Deactivating the running virtual environment can be done later by just typing
 
 .. note::
 
-    For later using the installed module the virtual environment has to be activated 
+    For later using the installed module, the virtual environment has to be activated 
     every time, because the pigpio package is installed inside and not callable 
     from outside.
 

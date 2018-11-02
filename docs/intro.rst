@@ -66,8 +66,8 @@ View from the back side.
 
 .. _`Used_local_coordinate_system`:
 
-Used local coordinate system in module lib_motion
--------------------------------------------------
+Used local coordinate system
+----------------------------
 
 The following picture shows the local coordinate system which is used in 
 :ref:`lib_motion` .

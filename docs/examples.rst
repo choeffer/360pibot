@@ -4,7 +4,9 @@ Examples
 ========
 
 In this section some code examples are listed. The intention of this code examples 
-is providing a guideline and a style guide how things should be programmed.
+is providing a guideline and a style guide how things should be done in general,
+and not how each class is working in detail. This is described in section 
+:ref:`360pibot_API` .
 
 .. note::
 
@@ -12,10 +14,6 @@ is providing a guideline and a style guide how things should be programmed.
     classes or methods. The examples mostly use the default values of the modules. 
     For more informations about which arguments can be passed to a class or 
     method and which arguments need to be adjusted, see :ref:`360pibot_API` . 
-    As already mentioned above, the intention of this examples is providing a 
-    guideline and a style guide how things should be done in general, and not 
-    how each class is working in detail. This is described in section 
-    :ref:`360pibot_API` and in the comments in the source code.
 
 Calibrating 360° servo
 ----------------------
