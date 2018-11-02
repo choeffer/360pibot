@@ -34,37 +34,8 @@ is included as ``calibrate.py`` .
     or module, so multiple instances in one script, more parallel threads will 
     be started, which is not necessary.
 
-.. code-block:: python
-
-    import time
-
-    import pigpio
-
-    import lib_para_360_servo
-
-    #define GPIO for each servo to read from
-    gpio_l_r = 16
-    gpio_r_r = 20
-
-    #define GPIO for each servo to write to
-    gpio_l_w = 17
-    gpio_r_w = 27
-
-    pi = pigpio.pi()
-
-    #### Calibrate servos, speed  = 0.2 and -0.2
-    #chose gpio_l_w/gpio_l_r (left wheel), or accordingly gpio_r_w/gpio_r_r (right wheel)
-
-    servo = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_r_w)
-
-    #buffer time for initializing everything
-    time.sleep(1)
-    servo.set_speed(0.2)
-    wheel = lib_para_360_servo.calibrate_pwm(pi = pi, gpio = gpio_r_r)
-    servo.set_speed(0)
-
-    #http://abyz.me.uk/rpi/pigpio/python.html#stop
-    pi.stop()
+.. literalinclude:: ../calibrate.py
+   :linenos:
 
 Below see different example terminal outputs which were generated with the 
 demo installation.
@@ -138,32 +109,8 @@ before setting the speed of the servos back to zero. In this case, the
 servos will continue rotating with the last set speed, until the before set 
 speed is changed again. This example is included as ``emergency_stop.py`` .
 
-.. code-block:: python
-
-    import time
-
-    import pigpio
-
-    import lib_para_360_servo
-
-    #define GPIO for each servo to write to
-    gpio_l = 17
-    gpio_r = 27
-
-    pi = pigpio.pi()
-
-    servo_l = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_l)
-
-    servo_r = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_r)
-
-    #buffer time for initializing everything
-    time.sleep(1)
-
-    servo_l.set_speed(0)
-    servo_r.set_speed(0)
-
-    #http://abyz.me.uk/rpi/pigpio/python.html#stop
-    pi.stop()
+.. literalinclude:: ../emergency_stop.py
+   :linenos:
 
 Moving the robot
 ----------------
@@ -173,40 +120,8 @@ then moving 20 cm (200 mm) forwards, then 20 cm backwards and
 in the end turning two times 90 degree to the right. This example is included 
 as ``move_robot.py`` .
 
-.. code-block:: python
-
-    import time
-
-    import pigpio
-
-    import lib_motion
-
-    pi = pigpio.pi()
-
-    robot = lib_motion.motion(pi = pi)
-
-    a = 0
-    while a < 4:
-        robot.turn(45)
-        time.sleep(1)
-        a+=1
-
-    robot.straight(200)
-    time.sleep(1)
-    robot.straight(-200)
-    time.sleep(1)
-
-    a = 0
-    while a < 2:
-        robot.turn(-90)
-        time.sleep(1)
-        a+=1
-
-    #http://abyz.me.uk/rpi/pigpio/python.html#callback
-    robot.cancel()
-
-    #http://abyz.me.uk/rpi/pigpio/python.html#stop
-    pi.stop()
+.. literalinclude:: ../move_robot.py
+   :linenos:
 
 Moving standard servo
 ---------------------
@@ -217,28 +132,8 @@ to 45 degree (regarding reached max left and max right). See
 :class:`lib_scanner.para_standard_servo` how to use it. This example is 
 included as ``move_stand_servo.py`` .
 
-.. code-block:: python
-
-    import time
-
-    import pigpio
-
-    import lib_scanner
-
-    pi = pigpio.pi()
-
-    servo = lib_scanner.para_standard_servo(pi = pi, gpio = 22)
-
-    servo.middle_position()
-    time.sleep(2)
-    servo.max_right()
-    time.sleep(2)
-    servo.max_left()
-    time.sleep(2)
-    servo.set_position(degree = 45)
-
-    #http://abyz.me.uk/rpi/pigpio/python.html#stop
-    pi.stop()
+.. literalinclude:: ../move_stand_servo.py
+   :linenos:
 
 Scanning
 --------
@@ -253,25 +148,8 @@ angles and prints out the result. This example is included as ``scanning.py`` .
     :class:`lib_scanner.para_standard_servo` ! The default values for the 
     created ranger object are just valid for the demo implementation!
 
-.. code-block:: python
-
-    import pigpio
-
-    import lib_scanner
-
-    pi = pigpio.pi()
-
-    ranger = lib_scanner.scanner(pi = pi)
-
-    distances = ranger.read_all_angles()
-    print(distances)
-
-    #http://abyz.me.uk/rpi/pigpio/python.html#callback
-    ranger.cancel()
-
-    #http://abyz.me.uk/rpi/pigpio/python.html#stop
-    pi.stop()
-
+.. literalinclude:: ../scanning.py
+   :linenos:
 
 Simple Collision avoiding algorithm
 -----------------------------------
@@ -289,38 +167,8 @@ is included as ``no_collision.py`` .
     :class:`lib_scanner.para_standard_servo` ! The default values for the 
     created ranger object are just valid for the demo implementation!
 
-.. code-block:: python
-
-    import time
-
-    import pigpio
-
-    import lib_motion
-    import lib_scanner
-
-    #initialize one pigpio.pi() instance to be used by all lib_*
-    pi = pigpio.pi()
-
-    robot = lib_motion.motion(pi = pi)
-    ranger = lib_scanner.scanner(pi = pi)
-
-    while True:
-
-        distances = ranger.read_all_angles()
-        print(distances)
-        list_dist = list(distances.values())
-        if any(t<0.4 for t in list_dist):
-            robot.turn(45)
-
-        else:
-            robot.straight(200)
-
-    #http://abyz.me.uk/rpi/pigpio/python.html#callback
-    robot.cancel()
-    ranger.cancel()
-
-    #http://abyz.me.uk/rpi/pigpio/python.html#stop
-    pi.stop()
+.. literalinclude:: ../no_collision.py
+   :linenos:
 
 References
 ----------
