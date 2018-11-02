@@ -8,12 +8,13 @@ pi = pigpio.pi()
 .. warning::
 
     Make sure that the ``min_pw`` and ``max_pw`` values are carefully tested
-    **before** using this example, see **warning** in 
-    :class:`lib_scanner.para_standard_servo`! The default values for the 
-    created ranger object are just valid for the demo implementation!
+    **before** using this example, see **Warning** in 
+    :class:`lib_scanner.para_standard_servo` ! The passed values ``min_pw`` 
+    and ``max_pw`` for the created ranger object are just valid for the 
+    demo implementation!
 """
 
-ranger = lib_scanner.scanner(pi = pi)
+ranger = lib_scanner.scanner(pi = pi, min_pw=600, max_pw=2350)
 
 distances = ranger.read_all_angles()
 print(distances)

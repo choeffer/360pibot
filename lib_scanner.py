@@ -324,12 +324,10 @@ class scanner:
         To this GPIO the signal wire of the servo has to be connected.
     :param int min_pw:
         Min pulsewidth, see **Warning**, carefully test the value before!
-        **Default:** 600, tested carefully, see warning, value just valid for the 
-        demo implementation!
+        **Default:** 1000, taken from set_servo_pulsewidth_ .
     :param int max_pw:
         Max pulsewidth, see **Warning**, carefully test the value before!
-        **Default:** 2350, tested carefully, see warning, value just valid for the 
-        demo implementation!
+        **Default:** 2000, taken from set_servo_pulsewidth_ .
     :param int min_degree:
         Min degree which the servo is able to move.
         **Default:** -90, taken from stand_data_sheet_ .
@@ -363,7 +361,7 @@ class scanner:
     #default values which are used for the demo implementation
     def __init__(
         self, pi, trigger = 6, echo = 5, 
-        gpio = 22, min_pw = 600, max_pw = 2350, min_degree = -90, max_degree = 90,
+        gpio = 22, min_pw = 1000, max_pw = 2000, min_degree = -90, max_degree = 90,
         angles = [-90, -45, 0, 45, 90],
         time_servo_reach_position = 3, debug = False):
 
