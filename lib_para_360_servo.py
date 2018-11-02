@@ -15,13 +15,13 @@ class write_pwm:
     This class stears a Parallax Feedback 360° High-Speed Servo. Out of the speed range,
     defined by ``min_speed`` and ``max_speed``, and the range of the pulsewidth, defined 
     by ``min_pw`` and ``max_pw``, the class allows setting the servo speed and automatically
-    calculates the appropriate pulsewidth for the chosen speed.
+    calculates the appropriate pulsewidth for the chosen speed value.
 
     .. note::
         ``min_pw`` and ``max_pw`` might needed to be interchanged, depending on if ``min_pw`` is 
         moving the servo max_forward/clockwise or max_backwards/counter-clockwise,
-        see methods :meth:`lib_para_360_servo.max_forward` and  :meth:`lib_para_360_servo.max_backward`. 
-        :meth:`lib_para_360_servo.max_forward` -> ``min_pw`` should let the servo rotate clockwise.
+        see methods :meth:`max_forward` and  :meth:`max_backward`. 
+        :meth:`max_forward` -> ``min_pw`` should let the servo rotate clockwise.
 
     .. warning::
         Be carefull with setting the min and max pulsewidth! Test carefully ``min_pw`` and ``max_pw``
@@ -66,9 +66,10 @@ class write_pwm:
         Sets pulsewidth of the PWM.
 
         This method allows setting the pulsewidth of the PWM directly. This can be used to
-        test which ``min_pw`` and ``max_pw`` are appropriate. For this the ``min_pw`` and ``max_pw``
-        need to be set very small and big so that they do not limit the set pulsewidth. Because normally
-        they are used to protect the servo, by limiting the pulsewidth to a certain range.
+        test which ``min_pw`` and ``max_pw`` are appropriate. For this the ``min_pw`` and ``max_pw`` 
+        are needed to be set very small and very big, so that they do not limit the set pulsewidth. 
+        Because normally they are used to protect the servo by limiting the pulsewidth 
+        to a certain range.
 
         .. warning::
             Be carefull with setting the min and max pulsewidth! Test carefully ``min_pw`` and ``max_pw``
@@ -208,8 +209,7 @@ class read_pwm:
 
         This method cancels the started callback function if initializing an object.
         As written in the pigpio callback_ documentation, the callback function may be cancelled
-        by calling the cancel function after the created instance is not needed anymore, see examples 
-        in the source code.
+        by calling the cancel function after the created instance is not needed anymore.
 
         .. _callback: http://abyz.me.uk/rpi/pigpio/python.html#callback
         """
@@ -218,7 +218,7 @@ class read_pwm:
 
 class calibrate_pwm:
     """
-    Calibrates Parallax Feedback 360° High-Speed Servo with the help of the :class:`read_pwm` class.
+    Calibrates a Parallax Feedback 360° High-Speed Servo with the help of the :class:`read_pwm` class.
 
     This class helps to find out the min and max duty cycle of the feedback signal of a 
     servo. This values ( ``dcMin`` / ``dcMax`` ) are then needed in :ref:`lib_motion` 
@@ -226,16 +226,16 @@ class calibrate_pwm:
     servo has slightly different min/max duty cycle values, different than the once 
     provided in the data sheet 360_data_sheet_ . Values smaller and bigger than the 
     printed out once as "duty_cycle_min/duty_cycle_max" are outliers and should 
-    therefore not be considered. This can be seen in printout of smallest/biggest 
+    therefore not be considered. This can be seen in the printouts of smallest/biggest 
     250 values. There are sometimes a few outliers. Compare the printouts of different
     runs to get a feeling for it.
 
     .. note::
         **IMPORTANT** The robot wheels must be able to rotate free in the air for calibration.
         **ALSO IMPORTANT** Rotating forward or backward might sometimes give slightly 
-        different results for min/max duty cycle! Chose the smallest value and the 
+        different results for min/max duty cycle! Choose the smallest value and the 
         biggest value out of the forward and backward runs. Do both directions three 
-        times for each wheel, with speed = 0.2 and -0.2, and then 
+        times for each wheel, with speed = 0.2 and -0.2, then 
         chose the values. The speed has to be set manually, see :ref:`Examples`.
 
     :param pigpio.pi pi: 
@@ -245,7 +245,7 @@ class calibrate_pwm:
         To this GPIO the feedback wire of the servo has to be connected.
     :param int,float measurement_time:
         Time in seconds for how long duty cycle values will be collected, so for how long the
-        measurement will be done. **Default:** 120.
+        measurement will be made. **Default:** 120.
     :returns: Printouts of different measurements
 
     At the moment, the period for a 910 Hz signal is hardcoded, as in :meth:`read_pwm` .

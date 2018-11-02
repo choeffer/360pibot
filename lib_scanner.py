@@ -21,7 +21,8 @@ class hcsr04:
         GPIO identified by their Broadcom number, see elinux.org_ .
         To this GPIO the echo pin of the `HC-SR04`_ has to be connected.
     :param int,float pulse_len:
-        Defines the length of the pulse, which is sent on the trigger GPIO, in microseconds.
+        Defines in microseconds the length of the pulse, which is sent on the trigger
+        GPIO.
         **Default:** 15, taken from the data sheet (10µs) and added 50%, to have a 
         buffer to surely trigger the measurement.
 
@@ -85,19 +86,16 @@ class hcsr04:
         the distance in meters.
 
         :param int,float temp_air: 
-            Temperature of the air in degree celsius. The temperature is used 
-            for calculating the distance to an object. 
+            Temperature of the air in degree celsius. 
             **Default:** 20.
         :param int,float upper_limit: 
             The upper measurement limit in meters.
             **Default:** 4, upper limit taken from the data sheet `HC-SR04`_ .
         :param int number_of_sonic_bursts:
-            The number of sonic bursts the sensor will make. This parameter is 
-            later used internally in the method.
+            The number of sonic bursts the sensor will make. 
             **Default:** 8, taken from the data sheet `HC-SR04`_ .
         :param int,float added_buffer:
             The added safety buffer for waiting for the distance measurement.
-            This parameter is later used internally in the method.
             **Default:** 2, so 100% safety buffer.
         :param bool debug:
             Controls if debugging printouts are made or not. For more details, have
@@ -163,8 +161,7 @@ class hcsr04:
 
         This method cancels the started callback function if initializing an object.
         As written in the pigpio callback_ documentation, the callback function may be cancelled
-        by calling the cancel function after the created instance is not needed anymore, see examples 
-        in the source code.
+        by calling the cancel function after the created instance is not needed anymore.
 
         .. _callback: http://abyz.me.uk/rpi/pigpio/python.html#callback
         """
@@ -184,8 +181,8 @@ class para_standard_servo:
     .. note::
         ``min_pw`` and ``max_pw`` might needed to be interchanged, depending on if ``min_pw`` is 
         moving the servo to max_right/clockwise or max_left/counter-clockwise,
-        see methods :meth:`lib_scanner.max_left` and :meth:`lib_scanner.max_right`. 
-        :meth:`lib_scanner.max_right` -> ``min_pw`` should let the servo rotate clockwise.
+        see methods :meth:`max_left` and :meth:`max_right`. 
+        :meth:`max_right` -> ``min_pw`` should let the servo rotate clockwise.
 
     .. warning::
         Be carefull with setting the min and max pulsewidth! Test carefully ``min_pw`` and ``max_pw``
@@ -232,9 +229,10 @@ class para_standard_servo:
         Sets pulsewidth of the PWM.
 
         This method allows setting the pulsewidth of the PWM directly. This can be used to
-        test which ``min_pw`` and ``max_pw`` are appropriate. For this the ``min_pw`` and ``max_pw``
-        need to be set very small and big so that they do not limit the set pulsewidth. Because normally
-        they are used to protect the servo, by limiting the pulsewidth to a certain range.
+        test which ``min_pw`` and ``max_pw`` are appropriate. For this the ``min_pw`` and 
+        ``max_pw`` are needed to be set very small and very big, so that they do not limit 
+        the set pulsewidth. Because normally they are used to protect the servo by limiting 
+        the pulsewidth to a certain range.
 
         .. warning::
             Be carefull with setting the min and max pulsewidth! Test carefully ``min_pw`` and ``max_pw``
@@ -339,10 +337,10 @@ class scanner:
         make measurements.
     :param int,float time_servo_reach_position:
         Time in seconds to wait until the servo moves from one to another position. 
-        This needs to be tested for each servo, how much time is needed.
+        This needs to be tested for each servo.
         **Default:** 3, this should be sufficient to safely (incl. lot of safety 
         buffer) reach each position before the measurement is made. If the servo 
-        is not oscillating after reaching each position, even a value 0f 0.35 was 
+        is not oscillating after reaching each position, even a value of 0.35 was 
         working fine with the demo implementation.
     :param bool debug:
         Controls if debugging printouts and measurements are made or not. For more 
@@ -350,7 +348,7 @@ class scanner:
         **Default:** False, so no printouts and measurements are made.
         
     .. todo::
-        Implement passing all values to the sonar.read() function (see source code). At the moment just 
+        Implement passing all values to the sonar.read() function (see source code). At the moment, just 
         debug is passed and for the rest the default values are used, see :meth:`hcsr04.read`.
 
     .. _elinux.org: https://elinux.org/RPi_Low-level_peripherals#Model_A.2B.2C_B.2B_and_B2
@@ -390,7 +388,7 @@ class scanner:
         Moves servo and makes measurements at every defined position.
 
         This method moves the servo to every position defined in :class:`list` 
-        ``angles`` and makes a measuremnt there and afterwards returns a 
+        ``angles`` , makes a measurement there and afterwards returns a 
         :class:`dict` with the distance in meter for every position.
 
         :return: Measured distances in meters for each position defined in ``angles``.
@@ -425,8 +423,7 @@ class scanner:
 
         This method cancels the started callback function if initializing an object.
         As written in the pigpio callback_ documentation, the callback function may be cancelled
-        by calling the cancel function after the created instance is not needed anymore, see examples 
-        in the source code.
+        by calling the cancel function after the created instance is not needed anymore.
 
         .. _callback: http://abyz.me.uk/rpi/pigpio/python.html#callback
         """

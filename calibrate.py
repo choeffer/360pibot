@@ -15,7 +15,8 @@ gpio_r_w = 27
 pi = pigpio.pi()
 
 #### Calibrate servos, speed  = 0.2 and -0.2
-#chose gpio_l_w/gpio_l_r (left wheel), or accordingly gpio_r_w/gpio_r_r (right wheel)
+#choose gpio_l_w/gpio_l_r (left wheel), or gpio_r_w/gpio_r_r 
+#(right wheel) accordingly
 
 servo = lib_para_360_servo.write_pwm(pi = pi, gpio = gpio_r_w)
 

@@ -15,7 +15,7 @@ robot = lib_motion.motion(pi = pi)
 
     Make sure that the ``min_pw`` and ``max_pw`` values are carefully tested
     **before** using this example, see **Warning** in 
-    :class:`lib_scanner.para_standard_servo` ! The passed values ``min_pw`` 
+    :class:`lib_scanner.para_standard_servo` . The passed values ``min_pw`` 
     and ``max_pw`` for the created ranger object are just valid for the 
     demo implementation!
 """

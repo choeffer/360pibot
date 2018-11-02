@@ -107,8 +107,8 @@ The following code sets the speed of the two used Parallax Feedback
 360° High-Speed Servos `360_data_sheet`_ back to zero to stop both wheels. 
 This might be needed e.g. if a script raises an exception and stops executing 
 before setting the speed of the servos back to zero. In this case, the 
-servos will continue rotating with the last set speed, until the before set 
-speed is changed again. This example is included as ``emergency_stop.py`` .
+servos will continue rotating with the last set speed. This example is included 
+as ``emergency_stop.py`` .
 
 .. literalinclude:: ../emergency_stop.py
    :linenos:
@@ -123,7 +123,7 @@ as ``move_robot.py`` .
 
 .. note::
 
-    The P/I/D values of the PID controllers have a strong influence on the 
+    The PID controller values have a strong influence on the 
     the robots movement. Therefore, try out different values 
     than the default once if the robot is not moving as exspected. Also to 
     get a feeling of their influence.
@@ -136,9 +136,9 @@ Moving standard servo
 
 The following code stears the standard servo stand_data_sheet_ . First 
 to the middle position, then to the max right, then to max left and finally 
-to 45 degree (regarding reached max left and max right). See 
-:class:`lib_scanner.para_standard_servo` how to use it. This example is 
-included as ``move_stand_servo.py`` .
+to 45 degree (regarding reached max left and max right). For more informations, 
+see :class:`lib_scanner.para_standard_servo` . This example is included as 
+``move_stand_servo.py`` .
 
 .. literalinclude:: ../move_stand_servo.py
    :linenos:
@@ -153,7 +153,7 @@ angles and prints out the result. This example is included as ``scanning.py`` .
 
     Make sure that the ``min_pw`` and ``max_pw`` values are carefully tested
     **before** using this example, see **Warning** in 
-    :class:`lib_scanner.para_standard_servo` ! The passed values ``min_pw`` 
+    :class:`lib_scanner.para_standard_servo` . The passed values ``min_pw`` 
     and ``max_pw`` for the created ranger object are just valid for the 
     demo implementation!
 
@@ -166,14 +166,13 @@ Simple collision avoiding algorithm
 The following code implements a simple collision avoiding algorithm.
 The robot will turn 45 degree to the left if there is any obstacle closer
 than 40 cm at the five default measuring angles. If not, the robot will
-drive 20 cm forward. This loop continues until it is stopped. This example 
-is included as ``no_collision.py`` .
+drive 20 cm forward. This example is included as ``no_collision.py`` .
 
 .. warning::
 
     Make sure that the ``min_pw`` and ``max_pw`` values are carefully tested
     **before** using this example, see **Warning** in 
-    :class:`lib_scanner.para_standard_servo` ! The passed values ``min_pw`` 
+    :class:`lib_scanner.para_standard_servo` . The passed values ``min_pw`` 
     and ``max_pw`` for the created ranger object are just valid for the 
     demo implementation!
 

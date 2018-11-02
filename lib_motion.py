@@ -10,11 +10,11 @@ class motion:
     """
     Controls the robot movement.
 
-    This class controls the robot movement by controlling the two Parallax Feedback 360° 
+    This class controls the robots movement by controlling the two Parallax Feedback 360° 
     High-Speed Servos `360_data_sheet`_ . The robots local coordinate system is defined in
-    the following way. X-axis positive is straight forward, y-axis positive perpendicular 
+    the following way. X-axis positive is straight forward, y-axis positive is perpendicular 
     to the x-axis in the direction to the left wheel. The center (0/0) is where the middle
-    of the robot chassis is cutting across a imaginary line through both wheels/servos.
+    of the robots chassi is cutting across a imaginary line through both wheels/servos.
     Angle phi is the displacement of the local coordinate system to the real world 
     coordinate system. See :ref:`Used_local_coordinate_system` for a picture of it.
 
@@ -192,7 +192,7 @@ class motion:
         Positive degree values turn the robot to the left,
         negative degree values to the right, see picture in :ref:`Introduction` , 
         where the local coordinate system of the robot is shown. This method calls 
-        :meth:`lib_motion.move` which controls the movement of the robot.
+        :meth:`lib_motion.motion.move` which controls the movement of the robot.
 
         :param int,float degree:
             Degree the robot has to turn.
@@ -212,7 +212,7 @@ class motion:
         values move the robot forward (regarding the local x-axis), negative distance 
         values backward (regarding the local x-axis), see picture in :ref:`Introduction` , 
         where the local coordinate system of the robot is shown. This method calls 
-        :meth:`lib_motion.move` which controls the movement of the robot.
+        :meth:`lib_motion.motion.move` which controls the movement of the robot.
 
         :param int,float distance_in_mm:
             Distance the robot has to move.
@@ -250,8 +250,8 @@ class motion:
         """
         Controls movement of the robot.
 
-        This method controls the movement of the robot. It is called from :meth:`lib_motion.turn` 
-        or :meth:`lib_motion.straight` and is not ment to be called directly. The parameters
+        This method controls the movement of the robot. It is called from :meth:`lib_motion.motion.turn` 
+        or :meth:`lib_motion.motion.straight` and is not ment to be called directly. The parameters
         of the four digital PID controllers have to be hardcoded into the modules source code at the moment.
         The four PID controllers are used to make two cascade control loops, one cascade control loop
         for each wheel. Each cascade control loop has the same parameters (P/I/D values), so that 
@@ -289,8 +289,8 @@ class motion:
 
         .. todo::
 
-            Modify the stopping condition, so that both wheels have to be at the set-point
-            and not just the right wheel. At moment, the control loop stops even if the left
+            Modify the stopping condition, so that both wheels must have reached the set-point
+            and not just the right wheel. At the moment, the control loop stops even if the left
             wheel has not reached the set-point. This causes slight inaccuracies while moving!
             See stopping condition in the source code.       
         
@@ -502,8 +502,7 @@ class motion:
 
         This method cancels the started callback function if initializing an object.
         As written in the pigpio callback_ documentation, the callback function may be cancelled
-        by calling the cancel function after the created instance is not needed anymore, see examples 
-        in the source code.
+        by calling the cancel function after the created instance is not needed anymore.
 
         .. _callback: http://abyz.me.uk/rpi/pigpio/python.html#callback
         """
