@@ -146,8 +146,9 @@ angles and prints out the result. This example is included as ``scanning.py`` .
 
     Make sure that the ``min_pw`` and ``max_pw`` values are carefully tested
     **before** using this example, see **Warning** in 
-    :class:`lib_scanner.para_standard_servo` ! The default values for the 
-    created ranger object are just valid for the demo implementation!
+    :class:`lib_scanner.para_standard_servo` ! The passed values ``min_pw`` 
+    and ``max_pw`` for the created ranger object are just valid for the 
+    demo implementation!
 
 .. literalinclude:: ../scanning.py
    :linenos:
@@ -165,8 +166,9 @@ is included as ``no_collision.py`` .
 
     Make sure that the ``min_pw`` and ``max_pw`` values are carefully tested
     **before** using this example, see **Warning** in 
-    :class:`lib_scanner.para_standard_servo` ! The default values for the 
-    created ranger object are just valid for the demo implementation!
+    :class:`lib_scanner.para_standard_servo` ! The passed values ``min_pw`` 
+    and ``max_pw`` for the created ranger object are just valid for the 
+    demo implementation!
 
 .. literalinclude:: ../no_collision.py
    :linenos:
