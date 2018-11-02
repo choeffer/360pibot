@@ -121,6 +121,13 @@ then moving 20 cm (200 mm) forwards, then 20 cm backwards and
 in the end turning two times 90 degree to the right. This example is included 
 as ``move_robot.py`` .
 
+.. note::
+
+    The P/I/D values of the PID controllers have a strong influence on the 
+    the robots movement. Therefore, try out different values 
+    than the default once if the robot is not moving as exspected. Also to 
+    get a feeling of their influence.
+
 .. literalinclude:: ../move_robot.py
    :linenos:
 
