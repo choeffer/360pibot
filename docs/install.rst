@@ -108,8 +108,8 @@ be installed in the global Python 3 environment.
     pip3 install pigpio
 
 
-Installing modules for building the documentation
--------------------------------------------------
+Modifying/building the documentation
+------------------------------------
 
 The whole documentation is made with Sphinx_ and can be extended or 
 modified as needed for e.g. documenting own projects based on this or if 
