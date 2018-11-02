@@ -222,7 +222,7 @@ if the packages might be a bit older.
         sudo systemctl daemon-reload
         sudo systemctl restart pigpiod.service
 
-Hotspot and Remote access
+Hotspot and remote access
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Another step which improves programming the Raspberry Pi is to enable a hotspot on it, 

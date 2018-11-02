@@ -116,7 +116,7 @@ speed is changed again. This example is included as ``emergency_stop.py`` .
 Moving the robot
 ----------------
 
-The following code makes the robot turning four times 45 degree to the left,
+The following code lets the robot turning four times 45 degree to the left,
 then moving 20 cm (200 mm) forwards, then 20 cm backwards and 
 in the end turning two times 90 degree to the right. This example is included 
 as ``move_robot.py`` .
@@ -143,8 +143,8 @@ included as ``move_stand_servo.py`` .
 .. literalinclude:: ../move_stand_servo.py
    :linenos:
 
-Scanning
---------
+Scanning of the surrounding
+---------------------------
 
 The following code scans the surrounding of the robot in all five default
 angles and prints out the result. This example is included as ``scanning.py`` .
@@ -160,7 +160,7 @@ angles and prints out the result. This example is included as ``scanning.py`` .
 .. literalinclude:: ../scanning.py
    :linenos:
 
-Simple Collision avoiding algorithm
+Simple collision avoiding algorithm
 -----------------------------------
 
 The following code implements a simple collision avoiding algorithm.
