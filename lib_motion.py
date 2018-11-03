@@ -74,10 +74,34 @@ class motion:
     :param int max_pw_r:
         Max pulsewidth, see **Warning**, carefully test the value before!
         **Default:** 1720, taken from the data sheet `360_data_sheet`_ .
+    :param int,float Kp_p:
+        Kp value of the outer PID controllers, see method :meth:`move` 
+        for more informations.
+        **Default:** 0.1.
+    :param int,float Ki_p:
+        Ki value of the outer PID controllers, see method :meth:`move` 
+        for more informations.
+        **Default:** 0.15.
+    :param int,float Kd_p:
+        Kd value of the outer PID controllers, see method :meth:`move` 
+        for more informations.
+        **Default:** 0.
+    :param int,float Kp_s:
+        Kp value of the inner PID controllers, see method :meth:`move` 
+        for more informations.
+        **Default:** 0.5.
+    :param int,float Ki_s:
+        Ki value of the inner PID controllers, see method :meth:`move` 
+        for more informations.
+        **Default:** 0.
+    :param int,float Kd_s:
+        Kd value of the inner PID controllers, see method :meth:`move` 
+        for more informations.
+        **Default:** 0.
 
     .. todo::
-        Implement passing min_speed and max_speed values down to 
-        :meth:`lib_para_360_servo.write_pwm` when initialzing the object.
+        Implement passing ``min_speed`` and ``max_speed`` values down to 
+        :meth:`lib_para_360_servo.write_pwm` when initializing the instance.
 
     .. _`360_data_sheet`: https://www.parallax.com/sites/default/files/downloads/900-00360-Feedback-360-HS-Servo-v1.1.pdf
     .. _`wheel_robot`: https://www.parallax.com/product/28114
@@ -90,16 +114,28 @@ class motion:
         dcMin_r = 27.3, dcMax_r = 978.25,
         l_wheel_gpio = 16, r_wheel_gpio = 20,
         servo_l_gpio = 17, min_pw_l = 1280, max_pw_l = 1720,
-        servo_r_gpio = 27, min_pw_r = 1280, max_pw_r = 1720):
+        servo_r_gpio = 27, min_pw_r = 1280, max_pw_r = 1720,
+        Kp_p = 0.1, #not too big values, otherwise output of position control would slow down too abrupt
+        Ki_p = 0.15,
+        Kd_p = 0,
+        Kp_s = 0.5,
+        Ki_s = 0,
+        Kd_s = 0):
         
         self.pi = pi
+        self.width_robot = width_robot
+        self.diameter_wheels = diameter_wheels
         self.unitsFC = unitsFC
         self.dcMin_l = dcMin_l
         self.dcMax_l = dcMax_l
         self.dcMin_r = dcMin_r
         self.dcMax_r = dcMax_r
-        self.width_robot = width_robot
-        self.diameter_wheels = diameter_wheels
+        self.Kp_p = Kp_p
+        self.Ki_p = Ki_p
+        self.Kd_p = Kd_p
+        self.Kp_s = Kp_s
+        self.Ki_s = Ki_s
+        self.Kd_s = Kd_s
 
         self.l_wheel = lib_para_360_servo.read_pwm(pi = self.pi, gpio = l_wheel_gpio)
         self.r_wheel = lib_para_360_servo.read_pwm(pi = self.pi, gpio = r_wheel_gpio)
@@ -238,33 +274,24 @@ class motion:
         #3. For recognizing the RPMs of the wheel 10ms is needed to have enough changes in the
         #position, was found out by testing.
         sampling_time = 0.01,
-        #Outer Controller, position
-        Kp_p = 0.1, #not too big values, otherwise output of position control would slow down too abrupt
-        Ki_p = 0.15,
-        Kd_p = 0,
-        #Inner Controller, speed
-        Kp_s = 0.5,
-        Ki_s = 0,
-        Kd_s = 0,
         straight = False, turn = False):
         """
         Controls movement of the robot.
 
         This method controls the movement of the robot. It is called from :meth:`lib_motion.motion.turn` 
-        or :meth:`lib_motion.motion.straight` and is not ment to be called directly. The parameters
-        of the four digital PID controllers have to be hardcoded into the modules source code at the moment.
-        The four PID controllers are used to make two cascade control loops, one cascade control loop
-        for each wheel. Each cascade control loop has the same parameters (P/I/D values), so that 
+        or :meth:`lib_motion.motion.straight` and is not ment to be called directly. Four 
+        digital PID controllers are used to make two cascade control loops, one cascade control loop
+        for each wheel. Each cascade control loop has the same parameters (P/I/D parameters), so that 
         both wheels are controlled in the same way. Chosen default: Outer control loop is a PI 
         controller, inner control loop is a P controller. The outer loop is a position controller,
         the inner loop a speed controller. After both wheels have reached their set-point (position), 
         it is waited one second before the movement is marked as finished. This ensures that 
         overshoots/oscillations are possible and that both wheels can independently reach their
-        set-point (position). The I part of each PID controller is limited, so that 
+        set-point (position). The I part of each PID controller is limited to -1 and 1, so that 
         the sum of the errors is not integrated till infinity which means to very high or low values 
         which might cause problems. The output value of each inner PID controller is scaled between -1 
         and 1 and the output value of each outer PID controller is limited to -1 and 1.
-        This ensures that no scaling factors are introduced in the P/I/D values and also that
+        This ensures that no scaling factors are introduced in the P/I/D parameters and also that
         the output of each PID controller matches the speed range of the servos, defined in 
         :meth:`lib_para_360_servo.write_pwm.set_speed` . A sliding median window is used to filter out
         the noise in the rotation speed measurement (ticks/s) which is done indirectly by measuring the 
@@ -272,7 +299,7 @@ class motion:
         loop is implemented. This adjustments help to make the controllers more stable, e.g. filter out
         outliers while calculating the rotation speed and therefore avoid high value changes/jumps or
         avoid oscillations after reaching the set-point (position). The sample time of the digital PID
-        controllers can also be freely chosen and does not influence the P/I/D values nor the rotation
+        controllers can also be freely chosen and does not influence the P/I/D parameters nor the rotation
         speed measurement.
 
         :param int,float number_ticks:
@@ -283,12 +310,6 @@ class motion:
         :param bool turn:
             True or False, if robot should turn. 
             **Default:** False.
-
-        .. todo::
-        
-            Modify the module/class, so that all PID controller values can be set while 
-            initializing the class, so that they do not have to be hardcoded in the 
-            source code.
         """
 
         turns_l = 0
@@ -368,12 +389,12 @@ class motion:
                 #limit I-Part to -1 and 1 
                 #try needed, because Ki_p can be zero
                 try:
-                    sum_error_r_p = max(min(1/Ki_p, sum_error_r_p), -1/Ki_p)
+                    sum_error_r_p = max(min(1/self.Ki_p, sum_error_r_p), -1/self.Ki_p)
                 except Exception:
                     pass
 
                 #PID-Controller
-                output_r_p = Kp_p * error_r_p + Ki_p * sampling_time * sum_error_r_p + Kd_p / sampling_time * (error_r_p - error_r_p_old)
+                output_r_p = self.Kp_p * error_r_p + self.Ki_p * sampling_time * sum_error_r_p + self.Kd_p / sampling_time * (error_r_p - error_r_p_old)
                 #limit output of position control to speed range
                 output_r_p = max(min(1, output_r_p), -1)
 
@@ -396,12 +417,12 @@ class motion:
                 #limit I-Part to -1 and 1
                 #try needed, because Ki_s can be zero
                 try:
-                    sum_error_r_s = max(min(650/Ki_s, sum_error_r_s), -650/Ki_s)
+                    sum_error_r_s = max(min(650/self.Ki_s, sum_error_r_s), -650/self.Ki_s)
                 except Exception:
                     pass
 
                 #PID-Controller
-                output_r_s = Kp_s * error_r_s + Ki_s * sampling_time * sum_error_r_s + Kd_s / sampling_time * (error_r_s - error_r_s_old)
+                output_r_s = self.Kp_s * error_r_s + self.Ki_s * sampling_time * sum_error_r_s + self.Kd_s / sampling_time * (error_r_s - error_r_s_old)
 
                 error_r_s_old = error_r_s
 
@@ -424,12 +445,12 @@ class motion:
                 #limit I-Part to -1 and 1
                 #try needed, because Ki_p can be zero
                 try:
-                    sum_error_l_p = max(min(1/Ki_p, sum_error_l_p), -1/Ki_p)
+                    sum_error_l_p = max(min(1/self.Ki_p, sum_error_l_p), -1/self.Ki_p)
                 except Exception:
                     pass
 
                 #PID-Controller
-                output_l_p = Kp_p * error_l_p + Ki_p * sampling_time * sum_error_l_p + Kd_p / sampling_time * (error_l_p - error_l_p_old)
+                output_l_p = self.Kp_p * error_l_p + self.Ki_p * sampling_time * sum_error_l_p + self.Kd_p / sampling_time * (error_l_p - error_l_p_old)
                 #limit output of position control to speed range
                 output_l_p = max(min(1, output_l_p), -1)
 
@@ -451,12 +472,12 @@ class motion:
                 #limit I-Part to -1 and 1
                 #try needed, because Ki_s can be zero
                 try:
-                    sum_error_l_s = max(min(650/Ki_s, sum_error_l_s), -650/Ki_s)
+                    sum_error_l_s = max(min(650/self.Ki_s, sum_error_l_s), -650/self.Ki_s)
                 except Exception:
                     pass
 
                 #PID-Controller
-                output_l_s = Kp_s * error_l_s + Ki_s * sampling_time * sum_error_l_s + Kd_s / sampling_time * (error_l_s - error_l_s_old)
+                output_l_s = self.Kp_s * error_l_s + self.Ki_s * sampling_time * sum_error_l_s + self.Kd_s / sampling_time * (error_l_s - error_l_s_old)
 
                 error_l_s_old = error_l_s
 
