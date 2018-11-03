@@ -74,6 +74,18 @@ class motion:
     :param int max_pw_r:
         Max pulsewidth, see **Warning**, carefully test the value before!
         **Default:** 1720, taken from the data sheet `360_data_sheet`_ .
+    :param float sampling_time:
+        Sampling time of the four PID controllers in seconds.
+        **Default:** 0.01.
+        1. PWM of motor feedback is 910Hz (0,001098901 s), so position changes cannot 
+        be recognized faster than 1.1 ms. Therefore, it is not needed to run the outer control 
+        loop more often and update the speed values which have a 50 Hz (20ms) PWM.
+        2. Tests of the runtime of the code including the controller part have shown that
+        writing the pulse_width (pi.set_servo_pulsewidth()) in :ref:`lib_para_360_servo` is 
+        the bottleneck which drastically slows down the code by the factor ~400 
+        (0,002 seconds vs 0,000005 seconds; runtime with vs without writing pulsewidth).
+        3. For recognizing the RPMs of the wheels 10ms is needed to have enough changes in the
+        position. This was found out by testing. See method :meth:`move` for more informations.
     :param int,float Kp_p:
         Kp value of the outer PID controllers, see method :meth:`move` 
         for more informations.
@@ -115,16 +127,6 @@ class motion:
         l_wheel_gpio = 16, r_wheel_gpio = 20,
         servo_l_gpio = 17, min_pw_l = 1280, max_pw_l = 1720,
         servo_r_gpio = 27, min_pw_r = 1280, max_pw_r = 1720,
-        #0.010 seconds sampling time:
-        #1. PWM of motor feedback is 910Hz (0,001098901 s), so position changes cannot 
-        #be recognized faster than 1.1 ms. therefore, it is not needed to run the outer control 
-        #loop more often and update the speed values which have a 50 Hz (20ms) PWM.
-        #2. Tests of the runtime of the code including the controller part showed, that
-        #writing the pulse_width (pi.set_servo_pulsewidth()) in the lib_para_360_servo.py is 
-        #the bottleneck which drastically slows down the code by the factor ~400 
-        #(0,002 seconds vs 0,000005 seconds; runtime with vs without writing pulsewidth).
-        #3. For recognizing the RPMs of the wheel 10ms is needed to have enough changes in the
-        #position, was found out by testing.
         sampling_time = 0.01,
         Kp_p = 0.1, #not too big values, otherwise output of position control would slow down too abrupt
         Ki_p = 0.15,
