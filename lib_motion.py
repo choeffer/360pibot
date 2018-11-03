@@ -65,6 +65,14 @@ class motion:
     :param int max_pw_l:
         Max pulsewidth, see **Warning**, carefully test the value before!
         **Default:** 1720, taken from the data sheet `360_data_sheet`_ .
+    :param int min_speed_l:
+        Min speed which the servo is able to move. **Default:** -1, so that 
+        the speed range is also scaled between -1 and 1 as the output of 
+        the inner control loop.
+    :param int max_speed_l:
+        Max speed which the servo is able to move. **Default:** 1, so that 
+        the speed range is also scaled between -1 and 1 as the output of 
+        the inner control loop. 
     :param int servo_r_gpio:
         GPIO identified by their Broadcom number, see elinux.org_ .
         To this GPIO the control wire of the right servo has to be connected.
@@ -74,6 +82,14 @@ class motion:
     :param int max_pw_r:
         Max pulsewidth, see **Warning**, carefully test the value before!
         **Default:** 1720, taken from the data sheet `360_data_sheet`_ .
+    :param int min_speed_r:
+        Min speed which the servo is able to move. **Default:** -1, so that 
+        the speed range is also scaled between -1 and 1 as the output of 
+        the inner control loop. 
+    :param int max_speed_r:
+        Max speed which the servo is able to move. **Default:** 1, so that 
+        the speed range is also scaled between -1 and 1 as the output of 
+        the inner control loop. 
     :param float sampling_time:
         Sampling time of the four PID controllers in seconds.
         **Default:** 0.01.
@@ -111,12 +127,6 @@ class motion:
         for more informations.
         **Default:** 0.
 
-    .. todo::
-        Implement passing ``min_speed`` and ``max_speed`` values down to 
-        :meth:`lib_para_360_servo.write_pwm` when initializing the instance. 
-        They should have values of -1 and 1 so that the speed range is 
-        also scaled between -1 and 1 as the output of the inner control loop.
-
     .. _`360_data_sheet`: https://www.parallax.com/sites/default/files/downloads/900-00360-Feedback-360-HS-Servo-v1.1.pdf
     .. _`wheel_robot`: https://www.parallax.com/product/28114
     .. _elinux.org: https://elinux.org/RPi_Low-level_peripherals#Model_A.2B.2C_B.2B_and_B2
@@ -127,8 +137,8 @@ class motion:
         dcMin_l = 27.3, dcMax_l = 969.15,
         dcMin_r = 27.3, dcMax_r = 978.25,
         l_wheel_gpio = 16, r_wheel_gpio = 20,
-        servo_l_gpio = 17, min_pw_l = 1280, max_pw_l = 1720,
-        servo_r_gpio = 27, min_pw_r = 1280, max_pw_r = 1720,
+        servo_l_gpio = 17, min_pw_l = 1280, max_pw_l = 1720, min_speed_l = -1, max_speed_l = 1,
+        servo_r_gpio = 27, min_pw_r = 1280, max_pw_r = 1720, min_speed_r = -1, max_speed_r = 1,
         sampling_time = 0.01,
         Kp_p = 0.1, #not too big values, otherwise output of position control would slow down too abrupt
         Ki_p = 0.15,
@@ -155,8 +165,8 @@ class motion:
 
         self.l_wheel = lib_para_360_servo.read_pwm(pi = self.pi, gpio = l_wheel_gpio)
         self.r_wheel = lib_para_360_servo.read_pwm(pi = self.pi, gpio = r_wheel_gpio)
-        self.servo_l = lib_para_360_servo.write_pwm(pi = self.pi, gpio = servo_l_gpio, min_pw = min_pw_l, max_pw = max_pw_l)
-        self.servo_r = lib_para_360_servo.write_pwm(pi = self.pi, gpio = servo_r_gpio, min_pw = min_pw_r, max_pw = max_pw_r)
+        self.servo_l = lib_para_360_servo.write_pwm(pi = self.pi, gpio = servo_l_gpio, min_pw = min_pw_l, max_pw = max_pw_l, min_speed = min_speed_l, max_speed = max_speed_l)
+        self.servo_r = lib_para_360_servo.write_pwm(pi = self.pi, gpio = servo_r_gpio, min_pw = min_pw_r, max_pw = max_pw_r, min_speed = min_speed_r, max_speed = max_speed_r)
 
         #needed time for initializing the four instances
         time.sleep(1)
