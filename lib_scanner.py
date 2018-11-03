@@ -317,6 +317,23 @@ class scanner:
     :param int echo:
         GPIO identified by their Broadcom number, see elinux.org_ .
         To this GPIO the echo pin of the `HC-SR04`_ has to be connected.
+    :param int,float pulse_len:
+        Defines in microseconds the length of the pulse, which is sent on the trigger
+        GPIO.
+        **Default:** 15, taken from the data sheet (10µs) and added 50%, to have a 
+        buffer to surely trigger the measurement.
+    :param int,float temp_air: 
+        Temperature of the air in degree celsius. 
+        **Default:** 20.
+    :param int,float upper_limit: 
+        The upper measurement limit in meters.
+        **Default:** 4, upper limit taken from the data sheet `HC-SR04`_ .
+    :param int number_of_sonic_bursts:
+        The number of sonic bursts the sensor will make. 
+        **Default:** 8, taken from the data sheet `HC-SR04`_ .
+    :param int,float added_buffer:
+        The added safety buffer for waiting for the distance measurement.
+        **Default:** 2, so 100% safety buffer.
     :param int gpio:
         GPIO identified by their Broadcom number, see elinux.org_ .
         To this GPIO the signal wire of the servo has to be connected.
@@ -347,10 +364,6 @@ class scanner:
         details, have a look at the source code. 
         **Default:** False, so no printouts and measurements are made.
         
-    .. todo::
-        Implement passing all values to the sonar.read() function (see source code). At the moment, just 
-        debug is passed and for the rest the default values are used, see :meth:`hcsr04.read`.
-
     .. _elinux.org: https://elinux.org/RPi_Low-level_peripherals#Model_A.2B.2C_B.2B_and_B2
     .. _`HC-SR04`: https://cdn.sparkfun.com/assets/b/3/0/b/a/DGCH-RED_datasheet.pdf
     .. _set_servo_pulsewidth: http://abyz.me.uk/rpi/pigpio/python.html#set_servo_pulsewidth
@@ -358,7 +371,8 @@ class scanner:
         
     #default values which are used for the demo implementation
     def __init__(
-        self, pi, trigger = 6, echo = 5, 
+        self, pi, trigger = 6, echo = 5, pulse_len = 15,
+        temp_air = 20, upper_limit = 4, number_of_sonic_bursts = 8, added_buffer = 2,
         gpio = 22, min_pw = 1000, max_pw = 2000, min_degree = -90, max_degree = 90,
         angles = [-90, -45, 0, 45, 90],
         time_servo_reach_position = 3, debug = False):
@@ -367,6 +381,11 @@ class scanner:
         self.pi = pi
         self.trigger = trigger
         self.echo = echo
+        self.pulse_len = pulse_len
+        self.temp_air = temp_air
+        self.upper_limit = upper_limit
+        self.number_of_sonic_bursts = number_of_sonic_bursts
+        self.added_buffer = added_buffer
         self.gpio = gpio
         self.min_pw = min_pw
         self.max_pw = max_pw
@@ -377,7 +396,7 @@ class scanner:
         self.debug = debug
 
         #initialize sonar and servo instance
-        self.sonar = hcsr04(pi = self.pi, trigger = self.trigger, echo = self.echo)
+        self.sonar = hcsr04(pi = self.pi, trigger = self.trigger, echo = self.echo, pulse_len = self.pulse_len)
         self.servo = para_standard_servo(pi = self.pi, gpio = self.gpio, min_pw = self.min_pw, max_pw = self.max_pw, min_degree = self.min_degree, max_degree = self.max_degree)
 
         #buffer time for initializing everything
@@ -409,7 +428,7 @@ class scanner:
             self.servo.set_position(degree = ang)
             #wait for servo reaching the position
             time.sleep(self.time_servo_reach_position)
-            measurement_dict[ang] = self.sonar.read(debug = self.debug)
+            measurement_dict[ang] = self.sonar.read(temp_air = self.temp_air, upper_limit = self.upper_limit, number_of_sonic_bursts = self.number_of_sonic_bursts, added_buffer = self.added_buffer, debug = self.debug)
         
         if self.debug:
             stop_time = time.time() - start_time
