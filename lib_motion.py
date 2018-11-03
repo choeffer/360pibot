@@ -113,7 +113,9 @@ class motion:
 
     .. todo::
         Implement passing ``min_speed`` and ``max_speed`` values down to 
-        :meth:`lib_para_360_servo.write_pwm` when initializing the instance.
+        :meth:`lib_para_360_servo.write_pwm` when initializing the instance. 
+        They should have values of -1 and 1 so that the speed range is 
+        also scaled between -1 and 1 as the output of the inner control loop.
 
     .. _`360_data_sheet`: https://www.parallax.com/sites/default/files/downloads/900-00360-Feedback-360-HS-Servo-v1.1.pdf
     .. _`wheel_robot`: https://www.parallax.com/product/28114
