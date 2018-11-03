@@ -231,9 +231,9 @@ class calibrate_pwm:
     runs to get a feeling for it.
 
     .. note::
-        **IMPORTANT** The robot wheels must be able to rotate free in the air for calibration.
-        **ALSO IMPORTANT** Rotating forward or backward might sometimes give slightly 
-        different results for min/max duty cycle! Choose the smallest value and the 
+        The robot wheels must be able to rotate free in the air for calibration.
+        Rotating forward or backward might sometimes give slightly 
+        different results for min/max duty cycle. Choose the smallest value and the 
         biggest value out of the forward and backward runs. Do both directions three 
         times for each wheel, with speed = 0.2 and -0.2, then 
         chose the values. The speed has to be set manually, see :ref:`Examples`.
