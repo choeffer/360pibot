@@ -240,11 +240,11 @@ class motion:
         sampling_time = 0.01,
         #Outer Controller, position
         Kp_p = 0.1, #not too big values, otherwise output of position control would slow down too abrupt
-        Ki_p = 0,
+        Ki_p = 0.15,
         Kd_p = 0,
         #Inner Controller, speed
-        Kp_s = 0.4,
-        Ki_s = 0.1,
+        Kp_s = 0.5,
+        Ki_s = 0,
         Kd_s = 0,
         straight = False, turn = False):
         """
@@ -255,9 +255,9 @@ class motion:
         of the four digital PID controllers have to be hardcoded into the modules source code at the moment.
         The four PID controllers are used to make two cascade control loops, one cascade control loop
         for each wheel. Each cascade control loop has the same parameters (P/I/D values), so that 
-        both wheels are controlled in the same way. Chosen default: Outer control loop is a P 
-        controller, the inner control loop is a PI controller. The outer loop is a position controller,
-        the inner loop a speed controller. The I part of each PID controller can be limited, so that 
+        both wheels are controlled in the same way. Chosen default: Outer control loop is a PI 
+        controller, inner control loop is a P controller. The outer loop is a position controller,
+        the inner loop a speed controller. The I part of each PID controller is limited, so that 
         the sum of the errors is not integrated till infinity which means to very high or low values 
         which might cause problems. The output value of each inner PID controller is scaled between -1 
         and 1 and the output value of each outer PID controller is limited to -1 and 1.
@@ -286,14 +286,6 @@ class motion:
             Modify the module/class, so that all PID controller values can be set while 
             initializing the class, so that they do not have to be hardcoded in the 
             source code.
-
-        .. todo::
-
-            Modify the stopping condition, so that both wheels must have reached the set-point
-            and not just the right wheel. At the moment, the control loop stops even if the left
-            wheel has not reached the set-point. This causes slight inaccuracies while moving!
-            See stopping condition in the source code.       
-        
         """
 
         turns_l = 0
@@ -333,6 +325,10 @@ class motion:
         list_ticks_r = []
 
         position_reached = False
+        reached_sp_counter = 0
+        #position must be reached for one second to allow
+        #overshoots/oscillations before reaching set-point
+        wait_after_reach_sp = 1/sampling_time
 
         #start time of the control loop
         start_time = time.time()
@@ -362,12 +358,16 @@ class motion:
                 error_r_p = target_angle_r - total_angle_r
 
                 #Deadband-Filter to remove ocillating forwards and backwards after reaching set-point
-                if error_r_p <= 1 and error_r_p >= -1:
+                if error_r_p <= 2 and error_r_p >= -2:
                     error_r_p = 0
                 #I-Part
                 sum_error_r_p += error_r_p
-                #limit I-Part
-                sum_error_r_p = max(min(20, sum_error_r_p), -20)
+                #limit I-Part to -1 and 1 
+                #try needed, because Ki_p can be zero
+                try:
+                    sum_error_r_p = max(min(1/Ki_p, sum_error_r_p), -1/Ki_p)
+                except Exception:
+                    pass
 
                 #PID-Controller
                 output_r_p = Kp_p * error_r_p + Ki_p * sampling_time * sum_error_r_p + Kd_p / sampling_time * (error_r_p - error_r_p_old)
@@ -391,7 +391,11 @@ class motion:
                 #I-Part
                 sum_error_r_s += error_r_s
                 #limit I-Part to -1 and 1
-                #sum_error_r_s = max(min(650/Ki_s, sum_error_r_s), -650/Ki_s)
+                #try needed, because Ki_s can be zero
+                try:
+                    sum_error_r_s = max(min(650/Ki_s, sum_error_r_s), -650/Ki_s)
+                except Exception:
+                    pass
 
                 #PID-Controller
                 output_r_s = Kp_s * error_r_s + Ki_s * sampling_time * sum_error_r_s + Kd_s / sampling_time * (error_r_s - error_r_s_old)
@@ -409,13 +413,17 @@ class motion:
                 #Er = SP - PV
                 error_l_p = target_angle_l - total_angle_l
                 #Deadband-Filter to remove ocillating forwards and backwards after reaching set-point
-                if error_l_p <= 1 and error_l_p >= -1:
+                if error_l_p <= 2 and error_l_p >= -2:
                     error_l_p = 0
                 #I-Part
                 sum_error_l_p += error_l_p
 
-                #limit I-Part
-                sum_error_l_p = max(min(20, sum_error_l_p), -20)
+                #limit I-Part to -1 and 1
+                #try needed, because Ki_p can be zero
+                try:
+                    sum_error_l_p = max(min(1/Ki_p, sum_error_l_p), -1/Ki_p)
+                except Exception:
+                    pass
 
                 #PID-Controller
                 output_l_p = Kp_p * error_l_p + Ki_p * sampling_time * sum_error_l_p + Kd_p / sampling_time * (error_l_p - error_l_p_old)
@@ -438,7 +446,11 @@ class motion:
                 #I-Part
                 sum_error_l_s += error_l_s
                 #limit I-Part to -1 and 1
-                #sum_error_l_s = max(min(650/Ki_s, sum_error_l_s), -650/Ki_s)
+                #try needed, because Ki_s can be zero
+                try:
+                    sum_error_l_s = max(min(650/Ki_s, sum_error_l_s), -650/Ki_s)
+                except Exception:
+                    pass
 
                 #PID-Controller
                 output_l_s = Kp_s * error_l_s + Ki_s * sampling_time * sum_error_l_s + Kd_s / sampling_time * (error_l_s - error_l_s_old)
@@ -466,22 +478,16 @@ class motion:
             except Exception:
                 pass
 
-            #### todo ####
-            # modify the stopping condition, so that both wheels have to be at the set-point
-            # and not just the right wheel. At moment, the control loop stops even if left
-            # wheel has not reached the set-point, this causes inaccuracies while moving!!!
             try:
-                if total_angle_r >= target_angle_r and number_ticks >= 0:
+                if error_l_p == 0 and error_r_p == 0:
+                    reached_sp_counter += 1
 
-                    self.set_speed_r(0.0)
-                    self.set_speed_l(0.0)
-                    position_reached = True
-
-                elif total_angle_r <= target_angle_r and number_ticks <= 0:
-                    
-                    self.set_speed_r(0.0)
-                    self.set_speed_l(0.0)
-                    position_reached = True
+                    if reached_sp_counter >= wait_after_reach_sp:
+                        self.set_speed_r(0.0)
+                        self.set_speed_l(0.0)
+                        position_reached = True
+                else:
+                    pass
 
             except Exception:
                 pass
