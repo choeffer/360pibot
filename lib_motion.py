@@ -115,6 +115,17 @@ class motion:
         l_wheel_gpio = 16, r_wheel_gpio = 20,
         servo_l_gpio = 17, min_pw_l = 1280, max_pw_l = 1720,
         servo_r_gpio = 27, min_pw_r = 1280, max_pw_r = 1720,
+        #0.010 seconds sampling time:
+        #1. PWM of motor feedback is 910Hz (0,001098901 s), so position changes cannot 
+        #be recognized faster than 1.1 ms. therefore, it is not needed to run the outer control 
+        #loop more often and update the speed values which have a 50 Hz (20ms) PWM.
+        #2. Tests of the runtime of the code including the controller part showed, that
+        #writing the pulse_width (pi.set_servo_pulsewidth()) in the lib_para_360_servo.py is 
+        #the bottleneck which drastically slows down the code by the factor ~400 
+        #(0,002 seconds vs 0,000005 seconds; runtime with vs without writing pulsewidth).
+        #3. For recognizing the RPMs of the wheel 10ms is needed to have enough changes in the
+        #position, was found out by testing.
+        sampling_time = 0.01,
         Kp_p = 0.1, #not too big values, otherwise output of position control would slow down too abrupt
         Ki_p = 0.15,
         Kd_p = 0,
@@ -130,6 +141,7 @@ class motion:
         self.dcMax_l = dcMax_l
         self.dcMin_r = dcMin_r
         self.dcMax_r = dcMax_r
+        self.sampling_time = sampling_time
         self.Kp_p = Kp_p
         self.Ki_p = Ki_p
         self.Kd_p = Kd_p
@@ -263,18 +275,8 @@ class motion:
     def move(
         self,
         number_ticks = 0,
-        #0.010 seconds sampling time:
-        #1. PWM of motor feedback is 910Hz (0,001098901 s), so position changes cannot 
-        #be recognized faster than 1.1 ms. therefore, it is not needed to run the outer control 
-        #loop more often and update the speed values which have a 50 Hz (20ms) PWM.
-        #2. Tests of the runtime of the code including the controller part showed, that
-        #writing the pulse_width (pi.set_servo_pulsewidth()) in the lib_para_360_servo.py is 
-        #the bottleneck which drastically slows down the code by the factor ~400 
-        #(0,002 seconds vs 0,000005 seconds; runtime with vs without writing pulsewidth).
-        #3. For recognizing the RPMs of the wheel 10ms is needed to have enough changes in the
-        #position, was found out by testing.
-        sampling_time = 0.01,
-        straight = False, turn = False):
+        straight = False, 
+        turn = False):
         """
         Controls movement of the robot.
 
@@ -352,7 +354,7 @@ class motion:
         reached_sp_counter = 0
         #position must be reached for one second to allow
         #overshoots/oscillations before stopping control loop
-        wait_after_reach_sp = 1/sampling_time
+        wait_after_reach_sp = 1/self.sampling_time
 
         #start time of the control loop
         start_time = time.time()
@@ -394,7 +396,7 @@ class motion:
                     pass
 
                 #PID-Controller
-                output_r_p = self.Kp_p * error_r_p + self.Ki_p * sampling_time * sum_error_r_p + self.Kd_p / sampling_time * (error_r_p - error_r_p_old)
+                output_r_p = self.Kp_p * error_r_p + self.Ki_p * self.sampling_time * sum_error_r_p + self.Kd_p / self.sampling_time * (error_r_p - error_r_p_old)
                 #limit output of position control to speed range
                 output_r_p = max(min(1, output_r_p), -1)
 
@@ -404,7 +406,7 @@ class motion:
                 #convert range output_r_p from -1 to 1 to ticks/s
                 output_r_p_con = 650 * output_r_p
                 #ticks per second (ticks/s), calculated from a moving median window with 5 values
-                ticks_r = (total_angle_r - prev_total_angle_r) / sampling_time
+                ticks_r = (total_angle_r - prev_total_angle_r) / self.sampling_time
                 list_ticks_r.append(ticks_r)
                 list_ticks_r = list_ticks_r[-5:]
                 ticks_r = statistics.median(list_ticks_r)
@@ -422,7 +424,7 @@ class motion:
                     pass
 
                 #PID-Controller
-                output_r_s = self.Kp_s * error_r_s + self.Ki_s * sampling_time * sum_error_r_s + self.Kd_s / sampling_time * (error_r_s - error_r_s_old)
+                output_r_s = self.Kp_s * error_r_s + self.Ki_s * self.sampling_time * sum_error_r_s + self.Kd_s / self.sampling_time * (error_r_s - error_r_s_old)
 
                 error_r_s_old = error_r_s
 
@@ -450,7 +452,7 @@ class motion:
                     pass
 
                 #PID-Controller
-                output_l_p = self.Kp_p * error_l_p + self.Ki_p * sampling_time * sum_error_l_p + self.Kd_p / sampling_time * (error_l_p - error_l_p_old)
+                output_l_p = self.Kp_p * error_l_p + self.Ki_p * self.sampling_time * sum_error_l_p + self.Kd_p / self.sampling_time * (error_l_p - error_l_p_old)
                 #limit output of position control to speed range
                 output_l_p = max(min(1, output_l_p), -1)
 
@@ -460,7 +462,7 @@ class motion:
                 #convert range output_l_p from -1 to 1 to ticks/s
                 output_l_p_con = 650 * output_l_p
                 #ticks per second (ticks/s), calculated from a moving median window with 5 values
-                ticks_l = (total_angle_l - prev_total_angle_l) / sampling_time
+                ticks_l = (total_angle_l - prev_total_angle_l) / self.sampling_time
                 list_ticks_l.append(ticks_l)
                 list_ticks_l = list_ticks_l[-5:]
                 ticks_l = statistics.median(list_ticks_l)
@@ -477,7 +479,7 @@ class motion:
                     pass
 
                 #PID-Controller
-                output_l_s = self.Kp_s * error_l_s + self.Ki_s * sampling_time * sum_error_l_s + self.Kd_s / sampling_time * (error_l_s - error_l_s_old)
+                output_l_s = self.Kp_s * error_l_s + self.Ki_s * self.sampling_time * sum_error_l_s + self.Kd_s / self.sampling_time * (error_l_s - error_l_s_old)
 
                 error_l_s_old = error_l_s
 
@@ -518,7 +520,7 @@ class motion:
 
             #Pause control loop for chosen sample time
             #https://stackoverflow.com/questions/474528/what-is-the-best-way-to-repeatedly-execute-a-function-every-x-seconds-in-python/25251804#25251804
-            time.sleep(sampling_time - ((time.time() - start_time) % sampling_time))
+            time.sleep(self.sampling_time - ((time.time() - start_time) % self.sampling_time))
 
             #DEBUGGING OPTION: 
             #printing runtime of loop, see beginning of while true loop
