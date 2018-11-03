@@ -128,6 +128,17 @@ as ``move_robot.py`` .
     than the default once if the robot is not moving as exspected. Also to 
     get a feeling of their influence.
 
+.. note::
+
+    Sometimes the end of a movement takes some time because the robot does 
+    not fully reach the set-point directly and therefore has to do a last 
+    very small rotation of a wheel to reach it. So do not be confused 
+    if this happens and the robot takes some time and seems not to proper 
+    function anmyore. Just be patient. This might be solved with increasing 
+    the deadband of the outer PID controller, which on the other hand would 
+    also decrease the accuracy of the movement. Therefore, at the moment 
+    a smaller deadband is chosen which leads to this behaviour.
+
 .. literalinclude:: ../move_robot.py
    :linenos:
 
