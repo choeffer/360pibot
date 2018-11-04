@@ -379,25 +379,17 @@ class scanner:
 
         #create one pigpio.pi() instance for the sensor and servo
         self.pi = pi
-        self.trigger = trigger
-        self.echo = echo
-        self.pulse_len = pulse_len
         self.temp_air = temp_air
         self.upper_limit = upper_limit
         self.number_of_sonic_bursts = number_of_sonic_bursts
         self.added_buffer = added_buffer
-        self.gpio = gpio
-        self.min_pw = min_pw
-        self.max_pw = max_pw
-        self.min_degree = min_degree
-        self.max_degree = max_degree
         self.angles = angles
         self.time_servo_reach_position = time_servo_reach_position
         self.debug = debug
 
         #initialize sonar and servo instance
-        self.sonar = hcsr04(pi = self.pi, trigger = self.trigger, echo = self.echo, pulse_len = self.pulse_len)
-        self.servo = para_standard_servo(pi = self.pi, gpio = self.gpio, min_pw = self.min_pw, max_pw = self.max_pw, min_degree = self.min_degree, max_degree = self.max_degree)
+        self.sonar = hcsr04(pi = self.pi, trigger = trigger, echo = echo, pulse_len = pulse_len)
+        self.servo = para_standard_servo(pi = self.pi, gpio = gpio, min_pw = min_pw, max_pw = max_pw, min_degree = min_degree, max_degree = max_degree)
 
         #buffer time for initializing everything
         time.sleep(1)
