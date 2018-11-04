@@ -1,7 +1,7 @@
 360pibot
 ========
 
-Python 3 implementation for programming an ActivityBot 360° Robot Kit 360_kit_ with
+Python 3 implementation for programming a Parallax ActivityBot 360° Robot Kit 360_kit_ with
 a Raspberry Pi. The modules of the implementation are using the pigpio_ module 
 to control the GPIOs of the Raspberry Pi. No other external module is needed.
 
