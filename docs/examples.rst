@@ -125,8 +125,8 @@ as ``move_robot.py`` .
 
     The PID controller values have a strong influence on the 
     the robots movement. Therefore, try out different values 
-    than the default once if the robot is not moving as exspected. Also to 
-    get a feeling of their influence.
+    than the default once if the robot is not moving as exspected 
+    and also to get a feeling of their influence.
 
 .. note::
 
@@ -135,9 +135,9 @@ as ``move_robot.py`` .
     very small rotation of a wheel to reach it. So do not be confused 
     if this happens and the robot takes some time and seems not to proper 
     function anmyore. Just be patient. This might be solved with increasing 
-    the deadband of the outer PID controller, which on the other hand would 
-    also decrease the accuracy of the movement. Therefore, at the moment 
-    a smaller deadband is chosen which leads to this behaviour.
+    the deadband of the outer PID controllers, which on the other hand would 
+    also decrease the accuracy of the movement. At the moment a smaller 
+    deadband is chosen which leads to this behaviour.
 
 .. literalinclude:: ../move_robot.py
    :linenos:

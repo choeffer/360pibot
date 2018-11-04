@@ -30,7 +30,7 @@ found in the Introduction section of the documentation.
 
 The modules also enable remote controlling the Raspberry Pis GPIOs. This enables 
 use of the modules on a laptop/computer and over e.g. WLAN remote controlling the Raspberry Pi 
-which provides a WLAN Hotspot, see remote_pin_ and pi_hotspot_ . So, the robot can freely
+which provides a WLAN hotspot, see remote_pin_ and pi_hotspot_ . So, the robot can freely
 move with a powerbank attached without any peripheral devices while controlling/programming it. 
 The possibillity of remote controlling the Raspberry Pis GPIOs is a big advantage of the 
 used pigpio_ module. It is also possible to use the modules on the Raspberry Pi itself 

@@ -7,7 +7,7 @@ The following steps to set up a working environment are valid for both,
 the Raspberry Pi and a laptop/computer. 
 Remember, the modules can be used on a laptop/computer for remote controlling 
 the Raspberry Pis GPIOs or on the Raspberry Pi itself, without any modifications 
-of the source code of the modules. On the Raspberry Pi itself, the latest Raspbian 
+of the source code of the modules. On the Raspberry Pi, the latest Raspbian 
 version should be installed, including all available updates afterwards. The 
 image can be downladed from `Raspbian Downloads`_ .
 
@@ -241,7 +241,7 @@ is good and is updated regularly to match the latest Raspbian changes.
 
 Also make yourself familiar with using VNC_ or using remote_pin_ . Latter will again 
 drastically improve the use of the modules, because e.g. IDEs can be used, the robot can 
-freely move around and so on. The latter option will be shortly explained.
+freely move around and so on. The latter option is shortly described.
 
 After enabling a hotspot on the Raspberry Pi and beeing connected with your 
 laptop/computer, the following steps are needed to remote control the 
@@ -254,14 +254,15 @@ the pigpio daemon is running.
 Then, the environment variable has to be set while or before launching Python 3 or an IDE. 
 This variable will point to the IP address (and optional port) on which the Raspberry Pi 
 is accessable. This can be on its own provided hotspot/network or on a WLAN it is connected to. 
-There are also other possibilities available for configuring remote access. They are 
-mentioned in the pigpio documentation, see pigpio_pi_ . E.g. the IP address and port 
-can be passed as arguments if initializing a pigpio.pi() instance.
 
 .. code-block:: console
 
     PIGPIO_ADDR=192.168.1.3 python3 hello.py
     PIGPIO_ADDR=192.168.1.3 python3 code .
+
+There are also other possibilities available for configuring remote access. They are 
+mentioned in the pigpio documentation, see pigpio_pi_ . E.g. the IP address and port 
+can be passed as arguments if initializing a pigpio.pi() instance.
 
 References
 ----------
