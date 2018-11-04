@@ -23,7 +23,7 @@ Calibrating 360° servo
 
 The following code calibrates a Parallax Feedback 360° High-Speed Servo 
 `360_data_sheet`_ . The values ``dcMin`` and ``dcMax`` are later needed 
-in :class:`lib_motion.motion` . For more informations, see 
+in :class:`lib_motion.control` . For more informations, see 
 :meth:`lib_para_360_servo.calibrate_pwm` . This example 
 is included as ``calibrate.py`` .
 

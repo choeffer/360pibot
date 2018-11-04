@@ -46,7 +46,7 @@ lib_motion
 
 Module for moving the robot.
 
-This module includes the method :meth:`lib_motion.motion.move` which is the 
+This module includes the method :meth:`lib_motion.control.move` which is the 
 core of the movement controlling. The module imports :ref:`lib_para_360_servo` .
 
 .. automodule:: lib_motion

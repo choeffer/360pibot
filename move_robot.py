@@ -6,7 +6,7 @@ import lib_motion
 
 pi = pigpio.pi()
 
-robot = lib_motion.motion(pi = pi)
+robot = lib_motion.control(pi = pi)
 
 a = 0
 while a < 4:

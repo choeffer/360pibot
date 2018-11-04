@@ -8,7 +8,7 @@ import lib_scanner
 #initialize one pigpio.pi() instance to be used by all lib_*
 pi = pigpio.pi()
 
-robot = lib_motion.motion(pi = pi)
+robot = lib_motion.control(pi = pi)
 
 """
 .. warning::

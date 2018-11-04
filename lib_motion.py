@@ -6,7 +6,7 @@ import pigpio
 
 import lib_para_360_servo
 
-class motion:
+class control:
     """
     Controls the robot movement.
 
@@ -254,7 +254,7 @@ class motion:
         Positive degree values turn the robot to the left,
         negative degree values to the right, see picture in :ref:`Introduction` , 
         where the local coordinate system of the robot is shown. This method calls 
-        :meth:`lib_motion.motion.move` which controls the movement of the robot.
+        :meth:`lib_motion.control.move` which controls the movement of the robot.
 
         :param int,float degree:
             Degree the robot has to turn.
@@ -274,7 +274,7 @@ class motion:
         values move the robot forward (regarding the local x-axis), negative distance 
         values backward (regarding the local x-axis), see picture in :ref:`Introduction` , 
         where the local coordinate system of the robot is shown. This method calls 
-        :meth:`lib_motion.motion.move` which controls the movement of the robot.
+        :meth:`lib_motion.control.move` which controls the movement of the robot.
 
         :param int,float distance_in_mm:
             Distance the robot has to move.
@@ -292,10 +292,10 @@ class motion:
         straight = False, 
         turn = False):
         """
-        Controls movement of the robot.
+        Core of motion control.
 
-        This method controls the movement of the robot. It is called from :meth:`lib_motion.motion.turn` 
-        or :meth:`lib_motion.motion.straight` and is not ment to be called directly. Four 
+        This method controls the movement of the robot. It is called from :meth:`lib_motion.control.turn` 
+        or :meth:`lib_motion.control.straight` and is not ment to be called directly. Four 
         digital PID controllers are used to make two cascade control loops, one cascade control loop
         for each wheel. Each cascade control loop has the same parameters (P/I/D parameters), so that 
         both wheels are controlled in the same way. Chosen default: Outer control loop is a PI 
