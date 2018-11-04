@@ -418,6 +418,7 @@ class motion:
 
                 ## Speed Control
                 #convert range output_r_p from -1 to 1 to ticks/s
+                #full speed of a wheel forward and backward = +-650 ticks/s
                 output_r_p_con = 650 * output_r_p
                 #ticks per second (ticks/s), calculated from a moving median window with 5 values
                 ticks_r = (total_angle_r - prev_total_angle_r) / self.sampling_time
@@ -474,6 +475,7 @@ class motion:
 
                 ## Speed Control
                 #convert range output_l_p from -1 to 1 to ticks/s
+                #full speed of a wheel forward and backward = +-650 ticks/s
                 output_l_p_con = 650 * output_l_p
                 #ticks per second (ticks/s), calculated from a moving median window with 5 values
                 ticks_l = (total_angle_l - prev_total_angle_l) / self.sampling_time
