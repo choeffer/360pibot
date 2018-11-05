@@ -239,7 +239,7 @@ Hotspot and remote access
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 An important step which improves programming/controlling the Raspberry Pi is to make it remotely 
-accessable. This can be done by connecting the Raspberry Pi to a WLAN network or by 
+accessible. This can be done by connecting the Raspberry Pi to a WLAN network or by 
 enabling a hotspot on it, see pi_hotspot_ . This is recommended 
 before using it. Setting up a hotspot will not be covered here, because the official documentation 
 is good and updated regularly to match the latest Raspbian changes.
@@ -259,7 +259,7 @@ the pigpio daemon is running.
 
 Then, the environment variable has to be set while or before launching Python 3 or an IDE. 
 This variable will point to the IP address (and optional port) on which the Raspberry Pi 
-is accessable. This can be on its own provided hotspot/network or on a WLAN it is connected to. 
+is accessible. This can be on its own provided hotspot/network or on a WLAN it is connected to. 
 
 .. code-block:: console
 
