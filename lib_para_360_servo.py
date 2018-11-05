@@ -68,8 +68,7 @@ class write_pwm:
         This method allows setting the pulsewidth of the PWM directly. This can be used to
         test which ``min_pw`` and ``max_pw`` are appropriate. For this the ``min_pw`` and ``max_pw`` 
         are needed to be set very small and very big, so that they do not limit the set pulsewidth. 
-        Because normally they are used to protect the servo by limiting the pulsewidth 
-        to a certain range.
+        Normally they are used to protect the servo by limiting the pulsewidth to a certain range.
 
         .. warning::
             Be carefull with setting the min and max pulsewidth! Test carefully ``min_pw`` and ``max_pw``
@@ -235,7 +234,7 @@ class calibrate_pwm:
         Rotating forward or backward might sometimes give slightly 
         different results for min/max duty cycle. Choose the smallest value and the 
         biggest value out of the forward and backward runs. Do both directions three 
-        times for each wheel, with speed = 0.2 and -0.2, then 
+        times for each wheel, with speed = 0.2 and -0.2. Then 
         chose the values. The speed has to be set manually, see :ref:`Examples`.
 
     :param pigpio.pi pi: 

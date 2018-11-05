@@ -5,7 +5,7 @@ import pigpio
 #https://cdn.sparkfun.com/assets/b/3/0/b/a/DGCH-RED_datasheet.pdf
 class hcsr04:
     """
-    Makes measurements with an `HC-SR04`_ ultrasonic sensor.
+    Makes measurements with a `HC-SR04`_ ultrasonic sensor.
 
     This class allows making measurements with a `HC-SR04`_ ultrasonic sensor.
     A trigger signal will be sent to a defined GPIO Pin ``trigger`` and a PWM will be recieved 
@@ -21,7 +21,7 @@ class hcsr04:
         GPIO identified by their Broadcom number, see elinux.org_ .
         To this GPIO the echo pin of the `HC-SR04`_ has to be connected.
     :param int,float pulse_len:
-        Defines in microseconds the length of the pulse, which is sent on the trigger
+        Defines in microseconds the length of the pulse which is sent on the trigger
         GPIO.
         **Default:** 15, taken from the data sheet (10µs) and added 50%, to have a 
         buffer to surely trigger the measurement.
@@ -95,7 +95,8 @@ class hcsr04:
             The number of sonic bursts the sensor will make. 
             **Default:** 8, taken from the data sheet `HC-SR04`_ .
         :param int,float added_buffer:
-            The added safety buffer for waiting for the distance measurement.
+            The added safety buffer for waiting for the distance measurement 
+            to complete.
             **Default:** 2, so 100% safety buffer.
         :param bool debug:
             Controls if debugging printouts are made or not. For more details, have
@@ -172,9 +173,9 @@ class hcsr04:
 
 class para_standard_servo:
     """
-    Stears a servo, in this case a Parallax Stadard Servo stand_data_sheet_ .
+    Stears a servo, in this case a Parallax Standard Servo stand_data_sheet_ .
 
-    This class stears a Parallax Stadard Servo and should also work with other servos which 
+    This class stears a Parallax Standard Servo and should also work with other servos which 
     have a 50Hz PWM for setting the position. The position of the Parallax Standard Servo 
     can be set between -90 (``min_degree``) and +90 (``max_degree``) degree.
 
@@ -231,7 +232,7 @@ class para_standard_servo:
         This method allows setting the pulsewidth of the PWM directly. This can be used to
         test which ``min_pw`` and ``max_pw`` are appropriate. For this the ``min_pw`` and 
         ``max_pw`` are needed to be set very small and very big, so that they do not limit 
-        the set pulsewidth. Because normally they are used to protect the servo by limiting 
+        the set pulsewidth. Normally they are used to protect the servo by limiting 
         the pulsewidth to a certain range.
 
         .. warning::

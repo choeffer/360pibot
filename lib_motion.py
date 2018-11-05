@@ -32,24 +32,25 @@ class control:
         Diameter of both wheels. 
         **Default:** 66 mm, measured and taken from the products website `wheel_robot`_ .
     :param int unitsFC:
-        Units in a full circle. 
-        **Default:** 360, so each wheel is divided into 360 sections/ticks.
+        Units in a full circle, so each wheel is divided into X sections/ticks. 
+        This value should not be changed.
+        **Default:** 360
     :param float dcMin_l:
         Min duty cycle of the left wheel. 
-        **Default:** 27.3, measured with the :meth:`lib_para_360_servo.calibrate_pwm` 
-        method, see :ref:`Examples` .
+        **Default:** 27.3, measured with method :meth:`lib_para_360_servo.calibrate_pwm` , 
+        see :ref:`Examples` .
     :param float dcMax_l:
         Max duty cycle of the left wheel. 
-        **Default:** 969.15, measured with the :meth:`lib_para_360_servo.calibrate_pwm` 
-        method, see :ref:`Examples` .
+        **Default:** 969.15,  measured with method :meth:`lib_para_360_servo.calibrate_pwm` , 
+        see :ref:`Examples` .
     :param float dcMin_r:
         Min duty cycle of the right wheel. 
-        **Default:** 27.3, measured with the :meth:`lib_para_360_servo.calibrate_pwm` 
-        method, see :ref:`Examples` .
+        **Default:** 27.3, measured with method :meth:`lib_para_360_servo.calibrate_pwm` , 
+        see :ref:`Examples` .
     :param float dcMax_r:
         Max duty cycle of the left wheel. 
-        **Default:** 978.25, measured with the :meth:`lib_para_360_servo.calibrate_pwm` 
-        method, see :ref:`Examples` .
+        **Default:** 978.25,  measured with method :meth:`lib_para_360_servo.calibrate_pwm` , 
+        see :ref:`Examples` .
     :param int l_wheel_gpio:
         GPIO identified by their Broadcom number, see elinux.org_ .
         To this GPIO the feedback wire of the left servo has to be connected.
@@ -97,7 +98,7 @@ class control:
         be recognized faster than 1.1 ms. Therefore, it is not needed to run the outer control 
         loop more often and update the speed values which have a 50 Hz (20ms) PWM.
         2. Tests of the runtime of the code including the controller part have shown that
-        writing the pulse_width (pi.set_servo_pulsewidth()) in :ref:`lib_para_360_servo` is 
+        writing the pulsewidth (pi.set_servo_pulsewidth()) in :meth:`lib_para_360_servo.write_pwm.set_pw` is 
         the bottleneck which drastically slows down the code by the factor ~400 
         (0,002 seconds vs 0,000005 seconds; runtime with vs without writing pulsewidth).
         3. For recognizing the RPMs of the wheels 10ms is needed to have enough changes in the
@@ -252,7 +253,7 @@ class control:
 
         This method turns the robot about x degree to the left or to the right. 
         Positive degree values turn the robot to the left,
-        negative degree values to the right, see picture in :ref:`Introduction` , 
+        negative degree values to the right, see picture in :ref:`Used_local_coordinate_system` , 
         where the local coordinate system of the robot is shown. This method calls 
         :meth:`lib_motion.control.move` which controls the movement of the robot.
 
@@ -272,7 +273,7 @@ class control:
 
         This method moves the robot about x mm forward or backward. Positive distance 
         values move the robot forward (regarding the local x-axis), negative distance 
-        values backward (regarding the local x-axis), see picture in :ref:`Introduction` , 
+        values backward (regarding the local x-axis), see picture in :ref:`Used_local_coordinate_system` , 
         where the local coordinate system of the robot is shown. This method calls 
         :meth:`lib_motion.control.move` which controls the movement of the robot.
 
@@ -315,8 +316,8 @@ class control:
         loop is implemented. This adjustments help to make the controllers more stable, e.g. filter out
         outliers while calculating the rotation speed and therefore avoid high value changes/jumps or
         avoid oscillations after reaching the set-point (position). The sample time of the digital PID
-        controllers can also be freely chosen and does not influence the P/I/D parameters nor the rotation
-        speed measurement.
+        controllers can also be freely chosen and does not influence the P/I/D parameters, the rotation
+        speed measurement or the time before the movement is marked as finished.
 
         :param int,float number_ticks:
             Number of ticks the wheels have to move.
