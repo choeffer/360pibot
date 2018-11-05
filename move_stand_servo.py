@@ -7,7 +7,7 @@ import lib_scanner
 pi = pigpio.pi()
 
 servo = lib_scanner.para_standard_servo(pi = pi, gpio = 22)
-    
+
 servo.middle_position()
 time.sleep(2)
 servo.max_right()
