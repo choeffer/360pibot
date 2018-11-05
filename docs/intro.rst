@@ -79,7 +79,7 @@ The following picture shows the local coordinate system which is used in
 Cabling of the demo implementation
 ----------------------------------
 
-Below see a Fritzing sheet which illustrates the cabling of the demo implementation. 
+Below see a Fritzing_ sheet which illustrates the cabling of the demo implementation. 
 The voltage divider is build out of two resistors, blue one with 82 Ohm and gold 
 one with 150 Ohm.
 
@@ -119,3 +119,4 @@ References
 .. _pigpio: https://pypi.org/project/pigpio/
 .. _VNC: https://www.raspberrypi.org/documentation/remote-access/vnc/
 .. _Sphinx: https://www.sphinx-doc.org/
+.. _Fritzing: http://fritzing.org/
