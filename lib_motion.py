@@ -302,7 +302,7 @@ class control:
         both wheels are controlled in the same way. Chosen default: Outer control loop is a PI 
         controller, inner control loop is a P controller. The outer loop is a position controller,
         the inner loop a speed controller. After both wheels have reached their set-point (position), 
-        it is waited one second before the movement is marked as finished. This ensures that 
+        the method waits one second before the movement is marked as finished. This ensures that 
         overshoots/oscillations are possible and that both wheels can independently reach their
         set-point (position). The I part of each PID controller is limited to -1 and 1, so that 
         the sum of the errors is not integrated till infinity which means to very high or low values 
