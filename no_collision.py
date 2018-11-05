@@ -1,5 +1,3 @@
-import time
-
 import pigpio
 
 import lib_motion
@@ -29,7 +27,6 @@ while True:
     list_dist = list(distances.values())
     if any(t<0.4 for t in list_dist):
         robot.turn(45)
-
     else:
         robot.straight(200)
 
