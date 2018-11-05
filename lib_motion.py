@@ -109,7 +109,7 @@ class control:
     :param int,float Ki_p:
         Ki value of the outer PID controllers, see method :meth:`move` 
         for more informations.
-        **Default:** 0.15.
+        **Default:** 0.1.
     :param int,float Kd_p:
         Kd value of the outer PID controllers, see method :meth:`move` 
         for more informations.

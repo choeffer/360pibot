@@ -130,14 +130,25 @@ as ``move_robot.py`` .
 
 .. note::
 
-    Sometimes the end of a movement takes some time because the robot does 
-    not fully reach the set-point directly and therefore has to do a last 
-    very small rotation of a wheel to reach it. So do not be confused 
+    Sometimes the end of a movement takes some time. One reason could be 
+    noise in the position measurement of the wheels and therefore not 
+    correctly recognizing the reached set-point. So do not be confused 
     if this happens and the robot takes some time and seems not to proper 
     function anmyore. Just be patient. This might be solved with increasing 
     the deadband of the outer PID controllers, which on the other hand would 
-    also decrease the accuracy of the movement. At the moment a smaller 
-    deadband is chosen which leads to this behaviour.
+    also decrease the accuracy of the movement. At the moment a rather small 
+    deadband is chosen. A simple but effective workaround is to give the 
+    robot a little poke and let it reach the set-point again.
+
+.. note::
+
+    Sometimes the speed changes abruptly. This might be caused by noise in 
+    the position measurement of the wheels from which the rotation speed 
+    measurement (ticks/s) is calculated indirectly. Increasing the sliding 
+    window size might stabilize it but would also increase the delay between 
+    calculated and real speed of the wheels and therefore also increase the 
+    response time of the speed controllers. At the moment a rather small 
+    window size is chosen.
 
 .. literalinclude:: ../move_robot.py
    :linenos:
