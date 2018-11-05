@@ -6,15 +6,17 @@ Installation
 The following steps to set up a working environment are valid for both, 
 the Raspberry Pi and a laptop/computer. 
 Remember, the modules can be used on a laptop/computer for remote controlling 
-the Raspberry Pis GPIOs or on the Raspberry Pi itself, without any modifications 
+the Raspberry Pis GPIOs or on the Raspberry Pi itself without any modifications 
 of the source code of the modules. On the Raspberry Pi, the latest Raspbian 
-version should be installed, including all available updates afterwards. The 
-image can be downladed from `Raspbian Downloads`_ .
+version and afterwards all available updates should be installed. The latest 
+Raspbian image can be downladed from `Raspbian Downloads`_ . Installing all 
+available updates is described here `Raspbian Update`_ .
 
 Getting files
 -------------
 
-One option is creating a folder named ``360pibot`` in the Raspberry Pis ``home`` folder
+One option is creating a folder named ``360pibot`` in the Raspberry Pis ``home`` 
+folder
 
 .. code-block:: console
 
@@ -27,7 +29,7 @@ folder.
 
 Another option is to clone the git repository to the ``home`` folder. 
 This will automatically create the ``360pibot`` folder and download the project 
-files. First, git will be installed if not already existing, then the repository 
+files. First, git will be installed, then the repository 
 will be cloned.
 
 .. code-block:: console
@@ -44,8 +46,8 @@ Installing needed modules
 
 Next step is to install the needed modules. They can be installed in the global 
 Python 3 environment or in a virtual Python 3 environment. The latter has the 
-advantage that the packages are isolated from other projects (and also from the 
-system wide installed global once) and if things get messed up, the virtual 
+advantage that the packages are isolated from other projects and also from the 
+system wide installed global once. If things get messed up, the virtual 
 environment can just be deleted and created from scratch again. For more 
 informations about virtual environments in Python 3, see venv1_ and venv2_ . 
 First, installing with a virtual environment will be explainend, afterwards 
@@ -79,7 +81,7 @@ is indicated by a ``(venv)`` in the beginning of the terminal prompt.
     python3 -m venv venv
     source venv/bin/activate
 
-With the activated virtual environment install the needed ``pigpio`` module.
+With the activated virtual environment install the needed ``pigpio`` module inside.
 
 .. code-block:: console
 
@@ -94,9 +96,9 @@ Deactivating the acvtivated virtual environment can be done later by just typing
 
 .. note::
 
-    For later using the installed module, the virtual environment has to be activated 
-    each time, because the pigpio package is installed inside and is not callable 
-    from the global Python 3 environment.
+    For later using the installed module, the virtual environment has to be activated, 
+    because the pigpio package is installed inside and is not callable from the 
+    global Python 3 environment.
 
 Without a virtual environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -124,7 +126,7 @@ docstring format (ReStructuredText_ (reST)) is used. The used
 theme is from `Read the Docs`_ where also the documentation is hosted. 
 Therefore, two more modules are needed for beeing able to build or extend/modify 
 the documentation. How to use Sphinx is not part of this documentation. 
-But there are good introductions and tutorials which provide a good starting 
+But there are good introductions and tutorials available which provide a good starting 
 point, see docs1_ , docs2_ , docs3_ and docs4_ .
 
 .. note::
@@ -134,10 +136,10 @@ point, see docs1_ , docs2_ , docs3_ and docs4_ .
 
 .. note::
 
-    The created ``docs/build`` folder is added to the .gitignore file and will therefore 
+    The created ``docs/_build`` folder is added to the .gitignore file and will therefore 
     not be tracked by git. This folder contains the output after building the docs.
 
-If using a virtual environment
+If using a virtual environment to install the two modules
 
 .. code-block:: console
 
@@ -146,7 +148,7 @@ If using a virtual environment
     source venv/bin/activate
     pip3 install sphinx sphinx_rtd_theme
 
-or if installing in the global Python 3 environment.
+or if installing them in the global Python 3 environment.
 
 .. code-block:: console
 
@@ -173,6 +175,9 @@ or if using the global Python 3 environment.
     cd ~
     cd 360pibot/docs
     make html
+
+Sphinx can create the documentation in different formats (e.g. latex, html ,pdf, epub), 
+see `sphinx-build`_ for more informations.
 
 Used module versions
 --------------------
@@ -207,9 +212,9 @@ Raspberry Pi
 The following steps are specific to the Raspberry Pi. It is necessary to install the 
 ``pigpio`` package, enable starting the pigpio daemon at boot and then doing a reboot 
 to activate the pigpio daemon. For more information see `pigpio_download`_  and remote_pin_ . 
-For the demo implementation the package from the Raspbian repository is installed, 
-because it is more guarenteed that it is good integrated in the system, even 
-if the packages might be a bit older.
+For the demo implementation the package from the Raspbian repository is installed. 
+This ensures that the package is good integrated in the system, even if it might be a 
+bit older.
 
 .. code-block:: console
 
@@ -233,15 +238,16 @@ if the packages might be a bit older.
 Hotspot and remote access
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-An important step which improves programming the Raspberry Pi is to make it remotely 
+An important step which improves programming/controlling the Raspberry Pi is to make it remotely 
 accessable. This can be done by connecting the Raspberry Pi to a WLAN network or by 
 enabling a hotspot on it, see pi_hotspot_ . This is recommended 
 before using it. Setting up a hotspot will not be covered here, because the official documentation 
-is good and is updated regularly to match the latest Raspbian changes.
+is good and updated regularly to match the latest Raspbian changes.
 
 Also make yourself familiar with using VNC_ or using remote_pin_ . Latter will again 
-drastically improve the use of the modules, because e.g. IDEs can be used, the robot can 
-freely move around and so on. The latter option is shortly described.
+drastically improve the use of the modules, because then all programming/controlling can 
+be done on a laptop/computer inlcuding using an IDE, having much more system ressources 
+and so on. The latter option is shortly described.
 
 After enabling a hotspot on the Raspberry Pi and beeing connected with your 
 laptop/computer, the following steps are needed to remote control the 
@@ -270,6 +276,7 @@ References
 .. target-notes::
 
 .. _`Raspbian Downloads`: https://www.raspberrypi.org/downloads/raspbian/
+.. _`Raspbian Update`: https://www.raspberrypi.org/documentation/raspbian/updating.md
 .. _venv1: https://docs.python.org/3/tutorial/venv.html
 .. _venv2: https://docs.python.org/3/library/venv.html
 .. _Sphinx: https://www.sphinx-doc.org/
@@ -285,3 +292,4 @@ References
 .. _docs4: https://www.youtube.com/watch?v=hM4I58TA72g
 .. _pigpio_pi: http://abyz.me.uk/rpi/pigpio/python.html#pigpio.pi
 .. _`Read the Docs Webhooks`: https://docs.readthedocs.io/en/latest/webhooks.html
+.. _`sphinx-build`: http://www.sphinx-doc.org/en/master/man/sphinx-build.html#cmdoption-sphinx-build-b
