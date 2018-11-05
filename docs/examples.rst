@@ -138,17 +138,19 @@ as ``move_robot.py`` .
     the deadband of the outer PID controllers, which on the other hand would 
     also decrease the accuracy of the movement. At the moment a rather small 
     deadband is chosen. A simple but effective workaround is to give the 
-    robot a little poke and let it reach the set-point again.
+    robot a little poke and let it reach the set-point again. See 
+    :meth:`lib_motion.control.move` for more informations.
 
 .. note::
 
     Sometimes the speed changes abruptly. This might be caused by noise in 
     the position measurement of the wheels from which the rotation speed 
     measurement (ticks/s) is calculated indirectly. Increasing the sliding 
-    window size might stabilize it but would also increase the delay between 
+    window size might stabilize it. But this would also increase the delay between 
     calculated and real speed of the wheels and therefore also increase the 
     response time of the speed controllers. At the moment a rather small 
-    window size is chosen.
+    window size is chosen. See :meth:`lib_motion.control.move` for more 
+    informations.
 
 .. literalinclude:: ../move_robot.py
    :linenos:
