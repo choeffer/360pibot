@@ -83,7 +83,7 @@ one with 150 Ohm.
 
 .. warning::
 
-    The voltage divider is very important! The ``Echo`` Pin of the `HC-SR04`_ outputs a 
+    The voltage divider is very important. The ``Echo`` Pin of the `HC-SR04`_ outputs a 
     PWM with the same voltage as ``VCC`` Pin (5 V in this case) which needs to be converted 
     to 3.3 V. 3.3 V is the max voltage the Raspberry Pi can handle on a GPIO, otherwise 
     it might get damaged! The chosen resistors for the voltage divider convert 5 V to 
@@ -96,9 +96,9 @@ one with 150 Ohm.
     The 5 V of the USB power supply should be connceted to the 5 V Pin of the Raspberry Pi 
     directly, as shown in the Fritzing sheet, because it does not only power the
     Raspberry Pi itself, also the three servos and maybe more devices, which get added 
-    in the future, are powered over it. Therefore, powering all devices over the micro-USB 
-    port should be avoided, because otherwise all needed current of all devices would be 
-    conducted through the Raspberry Pi.
+    in the future, are powered over it. Therefore, powering all devices over the
+    Raspberry Pis micro-USB port should be avoided, because otherwise all needed 
+    current of all devices would be conducted through the Raspberry Pi.
     
 .. image:: /_static/6.jpg
 
