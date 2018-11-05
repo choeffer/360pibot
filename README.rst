@@ -50,8 +50,7 @@ ultrasonic sensor to build your own chassi/robot.
 Documentation
 -------------
 
-The documentation is hosted on `Read the Docs`_ and is 
-available at https://360pibot.readthedocs.io/ .
+A comprehensive documentation is available at https://360pibot.readthedocs.io/ .
 
 References
 ----------
@@ -68,4 +67,3 @@ References
 .. _pigpio: https://pypi.org/project/pigpio/
 .. _VNC: https://www.raspberrypi.org/documentation/remote-access/vnc/
 .. _Sphinx: https://www.sphinx-doc.org/
-.. _`Read the Docs`: https://readthedocs.org/
