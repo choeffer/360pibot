@@ -141,7 +141,7 @@ class control:
         servo_r_gpio = 27, min_pw_r = 1280, max_pw_r = 1720, min_speed_r = -1, max_speed_r = 1,
         sampling_time = 0.01,
         Kp_p = 0.1, #not too big values, otherwise output of position control would slow down too abrupt
-        Ki_p = 0.15,
+        Ki_p = 0.1,
         Kd_p = 0,
         Kp_s = 0.5,
         Ki_s = 0,
