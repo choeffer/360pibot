@@ -251,7 +251,7 @@ class control:
         """
         Turns the robot about x degree.
 
-        This method turns the robot about x degree to the left or to the right. 
+        This method turns the robot x degree to the left or to the right. 
         Positive degree values turn the robot to the left,
         negative degree values to the right, see picture in :ref:`Used_local_coordinate_system` , 
         where the local coordinate system of the robot is shown. This method calls 
@@ -271,7 +271,7 @@ class control:
         """
         Moves the robot about x mm forward or backward.
 
-        This method moves the robot about x mm forward or backward. Positive distance 
+        This method moves the robot x mm forward or backward. Positive distance 
         values move the robot forward (regarding the local x-axis), negative distance 
         values backward (regarding the local x-axis), see picture in :ref:`Used_local_coordinate_system` , 
         where the local coordinate system of the robot is shown. This method calls 
