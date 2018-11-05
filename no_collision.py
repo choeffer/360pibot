@@ -23,7 +23,6 @@ ranger = lib_scanner.scanner(pi = pi, min_pw=600, max_pw=2350)
 while True:
 
     distances = ranger.read_all_angles()
-    print(distances)
     list_dist = list(distances.values())
     if any(t<0.4 for t in list_dist):
         robot.turn(45)
