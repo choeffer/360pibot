@@ -94,7 +94,7 @@ one with 150 Ohm.
 .. warning::
 
     The 5 V of the USB power supply should be connceted to the 5 V Pin of the Raspberry Pi 
-    directly, as shown in the Fritzing sheet, because it does not only power the
+    directly, as shown in the Fritzing sheet. The USB power supply does not only power the
     Raspberry Pi itself, also the three servos and maybe more devices, which get added 
     in the future, are powered over it. Therefore, powering all devices over the
     Raspberry Pis micro-USB port should be avoided, because otherwise all needed 
