@@ -10,9 +10,9 @@ import pigpio
 
 class write_pwm:
     """
-    Stears a Parallax Feedback 360° High-Speed Servo `360_data_sheet`_ .
+    Steers a Parallax Feedback 360° High-Speed Servo `360_data_sheet`_ .
 
-    This class stears a Parallax Feedback 360° High-Speed Servo. Out of the speed range,
+    This class steers a Parallax Feedback 360° High-Speed Servo. Out of the speed range,
     defined by ``min_speed`` and ``max_speed``, and the range of the pulsewidth, defined 
     by ``min_pw`` and ``max_pw``, the class allows setting the servo speed and automatically
     calculates the appropriate pulsewidth for the chosen speed value.
